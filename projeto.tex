@@ -74,17 +74,19 @@
   
   Finalmente, é preciso descrever as partes do projeto de pesquisa.
   
+  
+  
+  % JUSTIFICATIVA
   \section{JUSTIFICATIVA}
-  Com acúmulo cada vez mais crescente de informações digitalizadas e armazenadas na forma de: artigos, blogs, jornais, e-mails, livros, mensagens instantâneas, redes sociais, entre outros, a tarefa de organizar, indexar e buscar essas informações é fundamental. Para possibilitar usuários navegar por esses documentos e encontrar a informação desejada, utilizamos hoje dois métodos principais, links e busca. Links correlatam trechos de um documento a outro, são muito úteis pois possibilitam uma extensão da leitura e aprofundamento do conhecimento, direcionando o leitor a termos ou assuntos relacionados de alguma forma ao documento original. Apesar de ser uma ótima maneira de fornecer conteúdo diretamente relacionado, encontramos desafios na aplicação em escala, pois muitas vezes, essa ferramenta  é implementada de forma manual pelo o autor. A busca por outro lado, requer um processo que pode ser automatizado de forma efetiva, pois indexando as informações presentes nos documentos, permite ao usuário procurar um documento por palavra chave ou metadados presentes. Esse processo é muito disseminado, e motores de busca utilizam de técnicas sofisticadas em diversas áreas como ranqueamento de resultados e similaridade de palavras para melhorar essa experiência. O trabalho de Mikolov, T. et al. (2013) por exemplo, possibilita em escala, fornecer funcionalidades como sugestões de termos de pesquisa baseado na ordem das palavras digitadas além de extensão de busca utilizando termos similares.
+  Com acúmulo cada vez mais crescente de informações digitalizadas e armazenadas na forma de: artigos, blogs, jornais, e-mails, livros, mensagens instantâneas, redes sociais, entre outros, a tarefa de organizar, indexar e buscar essas informações é fundamental. Para possibilitar usuários navegar por esses documentos e encontrar a informação desejada, utilizamos hoje dois métodos principais, links e busca. Links correlatam trechos de um documento a outro, são muito úteis pois possibilitam uma extensão da leitura e aprofundamento do conhecimento, direcionando o leitor a termos ou assuntos relacionados de alguma forma ao documento original. Apesar de ser uma ótima maneira de fornecer conteúdo diretamente relacionado, encontramos desafios na aplicação em escala, pois muitas vezes, essa ferramenta  é implementada de forma manual pelo o autor. A busca por outro lado, requer um processo que pode ser automatizado de forma efetiva, pois quando informações presentes nos documentos são indexadas, é possibilitado ao usuário procurar um documento por palavra chave ou metadados presentes nele. Esse processo é muito disseminado, e motores de busca utilizam de técnicas sofisticadas em diversas áreas como ranqueamento de resultados e similaridade de palavras para melhorar essa experiência. O trabalho de \citeonline{mikolov2013efficient} por exemplo, possibilita em escala, fornecer funcionalidades como sugestões de termos de pesquisa baseado na ordem das palavras digitadas além de extensão de busca utilizando termos similares.
   
   Essas técnicas são poderosas para interagirmos com nossos documentos, no entanto há uma lacuna, imagine explorar documentos por meio de temas de interesse específico, visualizar as palavras mais relevantes em cada tema e explorar os documentos com a usabilidade de um mapa, com possibilidade de zoom in, zoom out, além de visualizar a relação entre documentos de uma maneira intuitiva, por proximidade. Essa, pode ser uma forma complementar de busca aos métodos citados no parágrafo anterior. A aplicação desse método pode ser em qualquer corpus, no entanto, como exemplo, vamos demonstrar como aplicação em um corpus contendo documentos de e-mail.
   E-mails possuem informações que podem aprimorar ainda mais a experiência de exploração, pois os documentos podem ser exibidos em forma de nós, conectando remetentes a destinatários e aprimorando ainda mais a exibição dos resultados da pesquisa.
   
-  Pesquisas apontam que em 2017 atingiremos uma média de 269 bilhões de e-mails enviados e recebidos diariamente, e é esperado continuar a crescer a uma taxa média de 4.4\% ao ano nos próximos quatro anos, atingindo 319.6 bilhões ao final de 2021 (The Radicati Group, Inc., 2017).
+  Pesquisas apontam que em 2017 atingiremos uma média de 269 bilhões de e-mails enviados e recebidos diariamente, e é esperado continuar a crescer a uma taxa média de 4.4\% ao ano nos próximos quatro anos, atingindo 319.6 bilhões ao final de 2021 \cite{radicati2017}.
   
   \begin{table}[h]
     \centering
-    \caption{Tráfego de Email Mundial Diário  (Bi). The Radicati Group, Inc. Email Statistics Report, 2017-2021, p. 3. (2017)}
     \begin{tabular}{l*{6}{c}r}
     &					2017 &	2018 &	2019 &	2020 &	2021 & \\
     \hline
@@ -92,25 +94,20 @@
     Crescimento(\%) &  	&		4.5\% &	4.4\% &	4.4\% &	4.3\% & \\
     \hline
     \end{tabular}
+    \caption{Tráfego de Email Mundial Diário  (Bi). \cite{radicati2017}}
   \end{table}
   
-  A taxa de crescimento da quantidade de mensagens enviadas e recebidas impressiona, não só por se tratar de uma técnologia dos anos 70, mas principalmente pela forte adoção de novos recursos de comunicação como: mensagem instantânea, redes sociais, videoconferência, chat, etc. A comunicação via e-mail permanece sólida principalmente em empresas, estas, por sua vez, tem a necessidade de aplicar a inteligência nos negócios para manter-se competitivas. O Business Intelligence deve ser utilizado não só em escopos diretamente relacionados ao negócio, como clientes, produtos, etc. mas também nos indiretos, como colaboradores para se obter insights, melhoria dos processos e otimização. Frequentemente, e-mails são deixados fora da equação pela falta de ferramentas específicas e complexidade para tratar de dados não estruturados, neste artigo, queremos promover um método complementar de exploração de documentos, para isso, vamos utilizar um conjunto de documentos de e-mail de uma empresa e fazer uso do modelo generativo probabilístico proposto por Blei et al.(2003), Latent Dirichlet Allocation, além de técnicas de processamento e visualização de conhecimento. Faremos uso das mesmas técnicas, na análise exploratória do conjunto de dados, espera-se também obter informações relevantes que possam ser utilizadas na compreensão no negócio da empresa.
+  A taxa de crescimento da quantidade de mensagens enviadas e recebidas impressiona, não só por se tratar de uma técnologia dos anos 70, mas principalmente pela forte adoção de novos recursos de comunicação como: mensagem instantânea, redes sociais, videoconferência, chat, etc. A comunicação via e-mail permanece sólida principalmente em empresas, estas, por sua vez, tem a necessidade de aplicar a inteligência nos negócios para manter-se competitivas. O Business Intelligence deve ser utilizado não só em escopos diretamente relacionados ao negócio, como clientes, produtos, etc. mas também nos indiretos, como colaboradores para se obter insights, melhoria dos processos e otimização. Frequentemente, e-mails são deixados fora da equação pela falta de ferramentas específicas e complexidade para tratar de dados não estruturados, neste artigo, queremos promover um método complementar de exploração de documentos, para isso, vamos utilizar um conjunto de documentos de e-mail de uma empresa e fazer uso do modelo generativo probabilístico proposto por \citeonline{blei2003latent}, Latent Dirichlet Allocation, além de técnicas de processamento e visualização de conhecimento. Faremos uso das mesmas técnicas, na análise exploratória do conjunto de dados, espera-se também obter informações relevantes que possam ser utilizadas na compreensão do negócio da empresa.
   
-  
+  % REFERENCIAL TEÓRICO
   \section{REFERENCIAL TEÓRICO}
-  
-  
-  % Abaixo encontram-se exemplos de citação:
-  
-  % Citação entre parênteses após paráfrase \cite{andrade99}.
-  
-  % Citação em que o autor \citeonline{gil91} é referenciado durante a explicação.
-  
   No campo de processamento de linguagem natural e recuperação de informação, existem diversas técnicas de agrupamento, análise e extração de sentido de um conjunto de dados de textos. Nesta seção, vamos apresentar as técnicas disponíveis e trabalhos relatos relevantes utilizados neste artigo.
   
-  \subsection{K-MEANS}
   
-  O algoritmo K-Means, assinala a cada objeto de um conjunto de dados à um grupo, foi introduzido inicialmente por J. MacQueen(1967) e é um dos algoritmos mais estudados na literatura. O algoritmo é inicializado com dois parâmetros principais, o número de clusters, ou grupos, disponíveis para os objetos no dataset serem classificados e um vetor de objetos que representa o conjunto de dados. Cada objeto no conjunto de dados pode ser assinalado à um grupo a cada iteração. Primeiro determinamos os centróides iniciais, centróides são a representação de um grupo e seu valor é dado pela média dos objetos desse grupo, são iniciados randomicamente, como proposto  pelo trabalho original, ou utilizando algum algoritmo de otimização, em alguns casos, o K-Means pode convergir para grupos distintos dependendo do valor inicial dos centróides. Existem diversos estudos que adotam diferentes algoritmos e técnicas para inicialização dos centróides, Yuan F. et al.(2004) propuseram um método  para se obter os centróides iniciais de acordo com a distribuição do conjunto de dados, em sua pesquisa obtiveram melhor acurácia com essa técnica quando comparada a inicialização randômica proposta no trabalho original de J. MacQueen(1967).
+  
+  % K-MEANS
+  \subsection{K-MEANS}
+  O algoritmo K-Means, assinala a cada objeto de um conjunto de dados à um grupo, foi introduzido inicialmente por \citeonline{macqueen1967some} e é um dos algoritmos mais estudados na literatura. O algoritmo é inicializado com dois parâmetros principais, o número de clusters, ou grupos, disponíveis para os objetos no dataset serem classificados e um vetor de objetos que representa o conjunto de dados. Cada objeto no conjunto de dados pode ser assinalado à um grupo a cada iteração. Primeiro determinamos os centróides iniciais, centróides são a representação de um grupo e seu valor é dado pela média dos objetos desse grupo, são iniciados randomicamente, como proposto  pelo trabalho original, ou utilizando algum algoritmo de otimização, em alguns casos, o K-Means pode convergir para grupos distintos dependendo do valor inicial dos centróides. Existem diversos estudos que adotam diferentes algoritmos e técnicas para inicialização dos centróides, \citeonline{yuan2004new} propuseram um método  para se obter os centróides iniciais de acordo com a distribuição do conjunto de dados, em sua pesquisa obtiveram melhor acurácia com essa técnica quando comparada a inicialização randômica proposta no trabalho original de \citeonline{macqueen1967some}.
   
   O próximo passo é rodar o algoritmo até que convirja. Para cada iteração, o algoritmo assinala cada objeto ao grupo cujo centróide está mais próximo e calcula a nova média do grupo para então ajustar os valores dos centróides. Para determinar a distância entre um objeto observado e os centróides, K-Means utiliza a distância Euclidiana que calcula a diferença entre um objeto vetor \(X=(x1, x2... x_n)\)e um centróide vetor \(C=(c1, c2... c_n)\) com a seguinte fórmula: 
   
@@ -122,16 +119,18 @@
   
   O algoritmo K-Means assinala cada objeto do conjunto de dados a exatamente um grupo, no entanto, para problemas que objetos podem pertencer a mais de um grupo, ou quando grupos de dados são representados por uma forma não circular, uma vez que é  utilizada a distância Euclidiana para assinalar objetos a grupos, um modelo misto, ou mixture model, podem obter agrupamentos com melhores representações.
   
-  \subsection{LATENT DIRICHLET ALLOCATION}
   
-  Latent Dirichlet Allocation, ou LDA, é um modelo generativo probabilístico proposto por Blei et. al. (2003), esse modelo é usado em diversas áreas como análise de sentimento, classificação de documentos, bioinformática, agrupamento de dados entre outros. LDA sugere que palavras carregam uma forte informação semântica, e que documentos com assuntos similares contém também um grupo de palavras similares. Os tópicos latentes, ou ocultos, são portanto descobertos identificando o grupo de palavras no corpus que co-ocorrem frequentemente dentro dos documentos. A idéia básica do LDA é:
+  
+  %% LATENT DIRICHLET ALLOCATION
+  \subsection{LATENT DIRICHLET ALLOCATION}
+  Latent Dirichlet Allocation, ou LDA, é um modelo generativo probabilístico proposto por \citeonline{blei2003latent}, esse modelo é usado em diversas áreas como análise de sentimento, classificação de documentos, bioinformática, agrupamento de dados entre outros. LDA sugere que palavras carregam uma forte informação semântica, e que documentos com assuntos similares contém também um grupo de palavras similares. Os tópicos latentes, ou ocultos, são portanto descobertos identificando o grupo de palavras no corpus que co-ocorrem frequentemente dentro dos documentos. A idéia básica do LDA é:
   
   \begin{enumerate}
     \item Cada documento é representado por uma mescla de tópicos.
     \item Cada tópico é formado por uma distribuição de palavras.
   \end{enumerate}
   
-  LDA encontra o modelo probabilístico de um conjunto de dados. Enquanto modelos como os de Mistura de Unigramas, assumem que cada documento exibe características de apenas um tópico, o modelo do LDA  permite que documentos contenham múltiplos tópicos ao mesmo tempo e com relevância distintas. Nesta seção, vamos discorrer sobre as principais características do trabalho original de Blei. A pesquisa de D.J. Hu(2009) foi complementar durante essa seção para melhor compreender o trabalho original.
+  LDA encontra o modelo probabilístico de um conjunto de dados. Enquanto modelos como os de Mistura de Unigramas, assumem que cada documento exibe características de apenas um tópico, o modelo do LDA  permite que documentos contenham múltiplos tópicos ao mesmo tempo e com relevância distintas. Nesta seção, vamos discorrer sobre as principais características do trabalho original de \citeonline{blei2003latent}. A pesquisa de \citeonline{hu2009latent} foi complementar durante essa seção para melhor compreender o trabalho original.
   
   Antes de nos aprofundarmos na descrição do algoritmo, façamos uma introdução da terminologia formal e notações usada nesta seção.
   
@@ -141,6 +140,9 @@
     \item Um corpus é uma coleção de $M$ documentos denotados por \(\textbf{ D} = \{\textbf{ w}_1, \textbf{ w}_2, . . ., \textbf{ w}_M\}\).
   \end{enumerate}
   
+  
+  
+  %% PROCESSO GENERATIVO
   \subsection{PROCESSO GENERATIVO}
   O LDA assume que documentos são criados via um processo generativo no qual palavras nos documentos são geradas. Dado o tamanho do documento, nós escolhamos uma mistura de tópicos usando a distribuição multinomial de tópicos para escolher as palavras que devem ser usada para preencher a cota de cada tópico. ex: Temos um grupo de artigos que assumimos que tais artigos podem ser classificados em quatro tópicos, Esportes, Animais, Tecnologia e Artes, cada tópico pode ser definido pela seguinte lista de palavras:
   
@@ -151,7 +153,7 @@
     \item \textbf{ Artes:} cinema, dança, música, canção, pintura, cores, movimento, instrumento.
   \end{itemize}
   
-  Com as informações apresentadas acima, queremos gerar um novo artigo que contenha 75\% artes e 25\% esporte, primeiro determinamos o tamanho do artigo em número de palavras, então para cada tópico escolhido para mistura, selecionamos as palavras de cada tópico proporcionalmente a ele. O LDA usa esse conceito de forma reversa para determinar a distribuição de tópicos por documento e a distribuição de palavras por um tópico. O processo generativo permite diferentes graus de relevância de uma palavra em um tópico, e um tópico em um documento, na teoria da probabilidade isso é chamado permutabilidade, ou exchangeability(Aldous, 1985). O processo generativo pode ser descrito formalmente como:
+  Com as informações apresentadas acima, queremos gerar um novo artigo que contenha 75\% artes e 25\% esporte, primeiro determinamos o tamanho do artigo em número de palavras, então para cada tópico escolhido para mistura, selecionamos as palavras de cada tópico proporcionalmente a ele. O LDA usa esse conceito de forma reversa para determinar a distribuição de tópicos por documento e a distribuição de palavras por um tópico. O processo generativo permite diferentes graus de relevância de uma palavra em um tópico, e um tópico em um documento, na teoria da probabilidade isso é chamado permutabilidade, ou exchangeability \cite{aldous1985exchangeability}. O processo generativo pode ser descrito formalmente como:
   
   Para cada documento indexado por $d \in \{1,. . . , M\}$ em um corpus $D$:
   
@@ -187,7 +189,7 @@
   \begin{figure}[h]
     \centering
       \includegraphics[height=10cm]{images/figure_1.png}
-      \caption{Plate Notation representando o modelo LDA, adaptado de Blei et al. Latent Dirichlet Allocation. Journal of Machine Learning Research, 2003.(p. 1003)}
+      \caption{Plate Notation representando o modelo LDA, adaptado de \citeonline{blei2003latent}}
   \end{figure}
   
   onde $p(z_n | \theta)$é simplesmente $\theta _i$ para cada $i$ único, tal que $z_{ni}=1$. Nós obtemos a distribuição marginal de um documento $d$ integrando sobre $\theta$ e somando sobre $z$.
@@ -202,8 +204,10 @@
   p(D|\alpha,\beta)= \prod_{d=1}^{M} \int{p(\theta _d|\alpha)\Bigg(\prod_{n=1}^{N_d}\sum_{z_{dn}} p(z_{dn}|\theta _d)p(w_{dn}|z_{dn},\beta)\Bigg)d\theta _d}
   \end{equation}
   
-  \subsection{INFERÊNCIA}
   
+  
+  %% INFERÊNCIA
+  \subsection{INFERÊNCIA}
   A Eq.(3) foi baseada nos hiperparâmetros antecedentes $\alpha$ e $\beta$, nesta seção, nós descrevemos o procedimento para inferência.
   
   O problema de inferência principal a se resolver é o de se computar a distribuição posteriori das distribuições latentes:
@@ -212,15 +216,15 @@
   p(\theta,\textbf{z}|\textbf{w},\alpha,\beta) = \frac{p(\theta,\textbf{z},\textbf{w}|\alpha,\beta)}{p(\textbf{w}|\alpha,\beta)}
   \end{equation}
   
-  A distribuição acima é intratável de se computar em geral, o numerador é a distribuição conjunta das variáveis randômicas, que são computáveis para qualquer configuração de variáveis ocultas, o denominador é a distribuição marginal, em teoria, pode ser calculada somando a distribuição conjunta de todas instâncias possíveis, no entanto, o número de estruturas de tópicos é exponencialmente grande, e essa soma é intratável de se computar (Blei, 2012). Para normalizar a distribuição da Eq.(4) é utilizado a distribuição marginal, de todos os documentos em um corpus:
+  A distribuição acima é intratável de se computar em geral, o numerador é a distribuição conjunta das variáveis randômicas, que são computáveis para qualquer configuração de variáveis ocultas, o denominador é a distribuição marginal, em teoria, pode ser calculada somando a distribuição conjunta de todas instâncias possíveis, no entanto, o número de estruturas de tópicos é exponencial e essa soma é intratável de se computar \cite{blei2012probabilistic}. Para normalizar a distribuição da Eq.(4) é utilizado a distribuição marginal, de todos os documentos em um corpus:
   
   \begin{equation}
-  p(\textbf{w}|\alpha,\beta)=\frac{\Gamma(\sum_{i}\alpha_i)}{\prod_{i}\Gamma(\alpha_i)}\int{\Bigg(\prod_{i=1}^{k}\theta_i^{\alpha_i-1}\Bigg)} \Bigg(\prod_{n=1}^{N}\sum_{i=1}^{K}\prod_{j=1}^{V}(\theta_i\beta_{ij})^{w_n^j}\Bigg)d\theta
+  p(\textbf{w}|\alpha,\beta)=\frac{\Gamma(\sum_{i}\alpha_i)}{\prod_{i}\Gamma(\alpha_i)}\int{\Bigg(\prod_{i=1}^{K}\theta_i^{\alpha_i-1}\Bigg)} \Bigg(\prod_{n=1}^{N}\sum_{i=1}^{K}\prod_{j=1}^{V}(\theta_i\beta_{ij})^{w_n^j}\Bigg)d\theta
   \end{equation}
   
   Embora a distribuição posterior é intratável devido ao acoplamento do $\theta$ and $\beta$, existe uma variedade de algoritmos de aproximação de inferência que podem ser usados, os métodos comumente encontrados na literatura são baseados em amostragem ou variação.
   
-  O algoritmo de amostragem mais comum para modelação de tópicos é o Gibbs Sampling, uma instanciação especial da Cadeia de Markov Monte Carlo (MCMC) (Jordan, et al. 1999), uma sequência de variáveis randômicas, uma dependente da anterior. O algoritmo roda coletando amostras da distribuição assintótica e então aproximando a distribuição com as amostras coletadas. O problema reside em não saber ao certo  quando o algoritmo convergiu para solução, além dos seus requisitos de memória, já que escala linearmente com o número de palavras em um corpus, isso torna o algoritmo não adotável em uma conjunto de dados muito grande(Řehůřek, 2011).
+  O algoritmo de amostragem mais comum para modelação de tópicos é o Gibbs Sampling, uma instanciação especial da Cadeia de Markov Monte Carlo (MCMC) \cite{jordan1999introduction}, uma sequência de variáveis randômicas, uma dependente da anterior. O algoritmo roda coletando amostras da distribuição assintótica e então aproximando a distribuição com as amostras coletadas. O problema reside em não saber ao certo  quando o algoritmo convergiu para solução, além dos seus requisitos de memória, já que escala linearmente com o número de palavras em um corpus, isso torna o algoritmo não adotável em uma conjunto de dados muito grande \cite{vrehuuvrek2011scalability}.
   
   O método mais utilizado em modelos de variável latente é o algoritmo variacional Expectation-Maximization(EM), que permite a estimação de parâmetros não supervisionada de maneira computacionalmente eficiente, o método determinístico de aproximação EM resulta em uma estimativa tendenciosa. Em cada iteração é atualizado os parâmetros computando os valores esperados das variáveis sobre a distribuição posterior na Eq.(7).
   
@@ -228,17 +232,107 @@
   \begin{figure}[h]
     \centering
       \includegraphics[height=10cm]{images/figure_2.png}
-      \caption{(a) Representação gráfica do modelo LDA. (b) A aproximação variacional para a distribuição posteriori. Adaptado de Blei et al. Latent Dirichlet Allocation. Journal of Machine Learning Research, 2003.(p. 1003)}
+      \caption{(a) Representação gráfica do modelo LDA. (b) A aproximação variacional para a distribuição posteriori. Adaptado de \citeonline{blei2003latent}}
   \end{figure}
   
-  A idéia de Blei de utilizar inferência variacional baseada na convexidade é de se fazer o uso da desigualdade de Jensen para obter um limite inferior ajustável na verossimilhança(Jordan et al., 1999) onde os parâmetros variacionais são escolhidos através de um processo de otimização, tentando encontrar o limite inferior mais próximo em cada iteração. Considerando a Figura 2(a), a problemática do acoplamento dos parâmetros $\theta$ e $\beta$ surge devido às bordas entre $\theta$, $z$, e nó $w$, removendo-os, também estamos removendo as dependências entre as variáveis que tornam a equação intratável. Com isso, acabamos com um Plate Notation simplificado com parâmetros variacionais livres ilustrados na Figura 2(b), obtendo a família de distribuição de probabilidade nas variáveis ocultas, que é caracterizada pela seguinte distribuição variacional:
+  A idéia do trabalho original de utilizar inferência variacional baseada na convexidade é de se fazer o uso da desigualdade de Jensen para obter um limite inferior ajustável na verossimilhança \cite{jordan1999introduction} onde os parâmetros variacionais são escolhidos através de um processo de otimização, tentando encontrar o limite inferior mais próximo em cada iteração. Considerando a Figura 2(a), a problemática do acoplamento dos parâmetros $\theta$ e $\beta$ surge devido às bordas entre $\theta$, $z$, e nó $w$, removendo-os, as dependências entre as variáveis que tornam a equação intratável também são removidas. Com isso, acabamos com um Plate Notation simplificado com parâmetros variacionais livres ilustrados na Figura 2(b), obtendo a família de distribuição de probabilidade nas variáveis ocultas, que é caracterizada pela seguinte distribuição variacional:
   
   \begin{equation}
-  q(\theta,\textbf{z}|\gamma,\phi)=q(\theta|\gamma)\prod_{n=1}^{N}q(z_n|\phi_n)
+  q(\theta,\textbf{z}|\gamma,\phi)=q(\theta|\gamma)\prod_{n=1}^{N}q(z_n|\phi_n), 
   \end{equation}
   
+  onde a distribuição  $q(\gamma|\phi)$ é a distribuição Dirichlet com parâmetro variacional $\gamma_d$ mostrando a distribuição dos tópicos em cada documento. As distribuições $q(z_n | \phi_n)$ são multinomiais com parâmetros variacionais $\phi_n$ e existem a nível de palavras, onde $\phi_{ni}$ é a probabilidade que a $n_{gesima}$ palavra foi gerada pelo $i_{gesimo}$ tópico oculto.
+  
+  O próximo passo é configurar um problema de otimização que determina os parâmetros $\gamma$ e $\phi$, os valores ideais são encontrados minimizando a divergência Kullback Leibler(KL) entre a distribuição posterior $p(\theta, z|w,\alpha,\beta)$ e a distribuição variacional. O par de equações de atualização resultantes segundo \citeonline{blei2003latent} são:
+  
+  \begin{equation}
+  \phi_{ni} \propto \beta_{iwn} exp\{E_q[log(\theta_i)|\gamma]\}
+  \end{equation}
+  
+  \begin{equation}
+  \gamma_i = \alpha_i + \sum_{n=1}^{N} \phi_{ni}
+  \end{equation}
+  
+  
+  %% ESTIMAçÃO DE PARÂMETROS
+  \subsection{ESTIMAçÃO DE PARÂMETROS}
+  Dado um corpus contendo documentos $\textbf{D} = \{\textbf{w}_1, \textbf{w}_2, . . ., \textbf{w}_M\}$ os valores ideais dos hiperparâmetros $\alpha$ e $\beta$ que maximizam a verossimilhança de todos documentos $\textbf{w}$ em um corpus $D$ é dado por:
+  
+  \begin{equation}
+  l(\alpha|\beta) = \sum_{d=1}^{M} log\ p(\textbf{w}_d|\alpha,\beta)
+  \end{equation}
+  
+  Como descrito acima, $p(w|\alpha,\beta)$ não pode ser computado, então é utilizado o limite inferior na verossimilhança. O EM então estima os hiperparâmetros $\alpha$ e $\beta$ para maximizar esse limite enquanto corrige os parâmetros variacionais $\gamma$ e $\phi$. O algoritmo variacional EM continua iterativamente em dois passos:
+  
+  \begin{enumerate}
+  \item \textbf{Passo-E:} Para cada documento $d \in \{1,. . . , M\}$, os parâmetros variacionais $\gamma_d$ e $\phi_d$ são estimados maximizando a verossimilhança utilizando o limite inferior descrito na seção anterior.
+  \item \textbf{Passo-M:} O limite inferior é maximizado  de acordo com os hiperparâmetros $\alpha$ e $\beta$ do modelo para se obter os novos valores. Isso corresponde a encontrar a máxima verossimilhança com estatísticas suficientes esperadas para cada documento sob a aproximação posteriori.
+  \end{enumerate}
+  
+  Os passos acima são repetidos até que o limite inferior da verossimilhança convirja. Como resultado final obtém-se duas matrizes $V \times K$ e $M \times K$, representando  a distribuição de palavras em cada tópico e a distribuição de tópicos em cada documento, respectivamente.
+  
+  
+  
+  %% METODOLOGIA
   \section{METODOLOGIA}
-  % Descrição detalhada e sequencial dos procedimentos científicos (métodos e técnicas) estabelecidos para atingir os objetivos propostos inicialmente para a pesquisa.
+  O conjunto de dados utilizado é uma coleção de e-mails retirados de um ambiente real de uma empresa provedora de serviços. Para os experimentos realizados neste artigo foram coletados 100.000 mensagens de e-mail, no geral, essas mensagens seguem as RFCs 822, 2045, 2046, 2047, 4288, 4289 e 2049, que são os padrões da indústria para troca de e-mails.
+    Em resumo, as mensagens são formadas por headers contendo informações sobre, assunto, remetente, destinatários e data. Existem também, headers, contento outros tipos de informações como caminho percorrido pela mensagem até o seu destino final, análises de filtro de conteúdo entre outros, esses geralmente relevantes a administradores do serviço. O corpo e-mail contém o conteúdo da mensagem em si, que pode ser segmentado em  partes, cada uma com seu próprio content-type. Os content-types mais comuns entre mensagens de e-mail são: text/plain, text/html, multipart/mixed, application/octet-stream entre outros, esses se referem ao tipo do conteúdo seguinte no corpo do e-mail. Essa informação é utilizada por clientes de e-mail para decodificar a mensagem de acordo, dessa forma é possível realizar o download de arquivos separadamente ou renderizar imagens ou conteúdo html dentro da mensagem.
+  
+  
+  %% PARSER
+  \subsection{PARSER}
+  Cada mensagem processada nessa fase é aplicado um conjunto de filtros, normatizações e presunções com o intúito de se obter a mais fiel e relevante representação vetorial do documento. Para isso, os seguintes processos são realizados:
+  
+  \begin{enumerate}
+  \item \textbf{Pré-processamento:} Nesse passo, utilizamos a biblioteca Flanker para primeira estruturação do documento, é feito o parsing dos headers de interesse. São extraídos os valores dos headers ‘Subject’, ‘Date’, ‘From’, ‘To’, ‘Cc’, ‘X-Spam-Flag’ essas informações não são utilizadas para a geração do modelo, no entanto são informações complementares ao documento e serão úteis na análise exploratória e pesquisa. Se a mensagem for classificada como spam, ou seja, se o valor do header X-Spam-Flag for igual a ‘YES’ ou o assunto da mensagem conter a palavra ‘spam’, case insensitive, a mensagem será descartada e não será utilizada para criação do modelo, uma vez que temos interesse apenas em mensagens legítimas. O body do documento é dividido em múltiplas partes, cada parte possui seu próprio content-type, são processadas as partes com conteúdos de tipo text/html e text/plain, descartando anexos, mensagens criptografadas ou codificadas. Para conteúdos do tipo text/html são removidas todas as tags e propriedades html e css presentes via expressões regulares.
+  \item \textbf{Bag of Words:} Usando o texto extraído do body na etapa acima, é criado a bag of words a partir do documento, que é a representação vetorial desse texto, onde os elementos são as palavras presentes no texto, aqui é desconsiderado ordem ou gramática, no entanto, a multiplicidade é perene.
+  \item \textbf{Stop Words:} Stop words são uma lista de palavras comumente utilizadas em determinada língua, elas não são um indicador relevante na representação de um tópico. Esse passo remove as stop words presentes no dicionário Português e Inglês pois são as línguas presentes na coleção de documentos de e-mail.
+  \item \textbf{Stemming:} Todas as palavras são convertidas para letras minúsculas e é então aplicado o algoritmo de stemming de Porter(1980) na implementação da biblioteca NLTK(Natural Language Toolkit) \citeonline{Bird:2009:NLP:1717171} para remover afixos morfológicos das palavras, reduzindo-as ao seu radical.
+  
+  
+  \begin{table}[h]
+    \centering
+    \begin{tabular}{c c c}
+    Palavra		&Stem &\\
+    \hline
+    copiar		&copi &\\
+    copiando		&copi &\\
+    copiou		&copi &\\
+    \hline
+    \end{tabular}
+    \caption{Palvra original e seu respectivo Steam}
+  \end{table}
+  
+  Na tabela acima, notamos a redução no número de palavras únicas aplicando o steam. O número de palavras únicas em um conjunto de documentos afeta diretamente o tempo de execução na criação do modelo LDA. Por outro lado, a redução pode causar um efeito não desejado distorcendo o sentido das palavras, na seção de resultados vamos apresentar a diferença entre a aplicação ou não desse processo na coleção de documentos de e-mail utilizado.
+  \end{enumerate}
+  
+  O processo acima resulta na mensagem original, seus metadados obtidos pelos headers e a bag of words com os termos do texto. Esses dados são armazenados e indexados no Elasticsearch, um dos motores de busca open-source mais adotados atualmente.
+  
+    Esse processo estrutura um documento originalmente não estruturado, armazenando-o em um componente que possibilita a busca por palavras, frases, destinatários, remetentes e data. O próximo passo é a criação do modelo para representar esse conjunto de dados e aprimorar a representação de um documento.
+  
+  
+  
+  %% CRIAÇÃO DO MODDELO
+  \subsection{CRIAÇÃO DO MODDELO}
+  O conjunto de dados é carregado do Elasticsearch, nessa fase, são requeridos os tokens gerados no processo de parsing, portanto, um filtro é aplicado na query de busca para retornar apenas esse resultado. A coleção de tokens é então convertida em um vetor de contadores. Durante esse processo serão selecionadas as palavras ordenadas pela frequência de cada termo dentro dos tokens.
+  
+  
+  \begin{table}[h]
+    \centering
+    \begin{tabular}{c c c}
+    Tokens		&Vetor &\\
+    \hline
+    Array(‘word1’, ‘word2’,’word3’)						&(3,[0,1,2], [1.0, 1.0, 1.0]) &\\
+    Array(‘word1’, ’word2’, ‘word2’,’word3’, ’word1’)		&(3,[0,1,2], [2.0, 2.0, 1.0]) &\\
+    Array(‘word2’, ‘word3’,’word2’)						&(3,[0,1,2], [0.0, 2.0, 1.0]) &\\
+    \hline
+    \end{tabular}
+    \caption{Conversão de tokens de palavras para vetor de contadores}
+  \end{table}
+  
+  
+  Na tabela acima vemos uma representação da saída esperada. É criado uma matriz de frequência de termos $M \times N$, onde de maneira distinta, as palavras do corpus são mapeadas em um vetor $N$, então, para cada documento $d \in \{1,. . . , M\}$ é criado uma representação vetorial de dimensão $N$ que contém a frequência da palavra no documento em sua respectiva posição nesse vetor.
+  
   
   \section{CRONOGRAMA}
   % O cronograma do projeto de pesquisa deverá apresentar as etapas do trabalho e a previsão do tempo necessário para a realização de cada uma destas fases em um período de 12 meses. Inclusive, é necessário atentar para o fato de que existem partes da atividade científica que podem ser realizadas simultaneamente, enquanto outras possuem uma estrutura hierárquica de dependência.
