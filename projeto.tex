@@ -161,12 +161,12 @@
     \item Escolha um vetor de tópico $\theta _d$ de dimensão $K$ da distribuição $p(\theta|\alpha)=Dirichlet(\alpha)$.
     \item Para cada uma das $N$ palavras($w_n$) dentro de um documento:
     \begin{enumerate}
-      \item Escolha um tópico \(z_n \in \{1,. . . , K\}\) do Multinomio($\theta$).
+      \item Escolha um tópico \(z_n \in \{1,. . . , K\}\) do Multinômio($\theta$).
       \item Da distribuição de probabilidade multinomial \(p(w_n=1| z_n=j,\beta)=\beta _{ij}\)  desenhe uma palavra $w_n$ dado tópico $z_n$.
     \end{enumerate}
   \end{enumerate}
   
-  O  hiperparâmetro $\alpha$ é um vetor de dimensão $K$ com items \(\alpha _i>0\) e é uma distribuição Dirichlet priori da distribuição de tópicos por documento, o hiperparâmetro $\beta$ é uma distribuição Dirichlet priori da distribuição de palavras por tópicos. $\theta _d$ é a distribuição de tópicos para o documento $d$. $Z_{dn}$ e $W_{dn}$ são as variáveis a nível de palavras e são amostradas uma vez para cada palavra em cada documento.
+  O  hiper parâmetro $\alpha$ é um vetor de dimensão $K$ com itens \(\alpha _i>0\) e é uma distribuição Dirichlet priori da distribuição de tópicos por documento, o hiper parâmetro $\beta$ é uma distribuição Dirichlet priori da distribuição de palavras por tópicos. $\theta _d$ é a distribuição de tópicos para o documento $d$. $Z_{dn}$ e $W_{dn}$ são as variáveis a nível de palavras e são amostradas uma vez para cada palavra em cada documento.
   
   Uma variável de distribuição Dirichlet randômica $\theta$ com dimensão $K$ tem como propriedade: $\theta ^i \geq 0, \displaystyle\sum_{i=1}^{K} \theta ^i = 1$ e têm a seguinte densidade probabilística:
   
@@ -176,7 +176,7 @@
   
   A distribuição Dirichlet é utilizada pois possui um conjunto de propriedades importantes que possibilitam um processo de inferência e estimação de parâmetros mais simples. A distribuição é da família exponencial, conjuga com a distribuição multinomial, possui dimensões finitas e possui estatística suficiente. A distribuição  acima dá a cada documento seu próprio vetor de distribuição que indica a relevância de cada tópico $K$ para com aquele documento. O processo generativo acima define a distribuição conjunta para cada documento $\textbf{ w}_d$.
   
-  A distribuição conjunta de uma mistura de tópico $\theta$, um conjunto de $K$ tópicos $z$, e um conjunto de $N$ palavras $w$, dado os hiperparâmetros $\alpha$ e $\beta$ é dado por:
+  A distribuição conjunta de uma mistura de tópico $\theta$, um conjunto de $K$ tópicos $z$, e um conjunto de $N$ palavras $w$, dado os hiper parâmetros $\alpha$ e $\beta$ é dado por:
   
   
   \begin{equation}
@@ -208,7 +208,7 @@
   
   %% INFERÊNCIA
   \subsection{INFERÊNCIA}
-  A Eq.(3) foi baseada nos hiperparâmetros antecedentes $\alpha$ e $\beta$, nesta seção, nós descrevemos o procedimento para inferência.
+  A Eq.(3) foi baseada nos hiper parâmetros antecedentes $\alpha$ e $\beta$, nesta seção, nós descrevemos o procedimento para inferência.
   
   O problema de inferência principal a se resolver é o de se computar a distribuição posteriori das distribuições latentes:
   
@@ -222,7 +222,7 @@
   p(\textbf{w}|\alpha,\beta)=\frac{\Gamma(\sum_{i}\alpha_i)}{\prod_{i}\Gamma(\alpha_i)}\int{\Bigg(\prod_{i=1}^{K}\theta_i^{\alpha_i-1}\Bigg)} \Bigg(\prod_{n=1}^{N}\sum_{i=1}^{K}\prod_{j=1}^{V}(\theta_i\beta_{ij})^{w_n^j}\Bigg)d\theta
   \end{equation}
   
-  Embora a distribuição posterior é intratável devido ao acoplamento do $\theta$ and $\beta$, existe uma variedade de algoritmos de aproximação de inferência que podem ser usados, os métodos comumente encontrados na literatura são baseados em amostragem ou variação.
+  Embora a distribuição posterior é intratável devido ao acoplamento do $\theta$ e $\beta$, existe uma variedade de algoritmos de aproximação de inferência que podem ser usados, os métodos comumente encontrados na literatura são baseados em amostragem ou variação.
   
   O algoritmo de amostragem mais comum para modelação de tópicos é o Gibbs Sampling, uma instanciação especial da Cadeia de Markov Monte Carlo (MCMC) \cite{jordan1999introduction}, uma sequência de variáveis randômicas, uma dependente da anterior. O algoritmo roda coletando amostras da distribuição assintótica e então aproximando a distribuição com as amostras coletadas. O problema reside em não saber ao certo  quando o algoritmo convergiu para solução, além dos seus requisitos de memória, já que escala linearmente com o número de palavras em um corpus, isso torna o algoritmo não adotável em uma conjunto de dados muito grande \cite{vrehuuvrek2011scalability}.
   
@@ -235,7 +235,7 @@
       \caption{(a) Representação gráfica do modelo LDA. (b) A aproximação variacional para a distribuição posteriori. Adaptado de \citeonline{blei2003latent}}
   \end{figure}
   
-  A idéia do trabalho original de utilizar inferência variacional baseada na convexidade é de se fazer o uso da desigualdade de Jensen para obter um limite inferior ajustável na verossimilhança \cite{jordan1999introduction} onde os parâmetros variacionais são escolhidos através de um processo de otimização, tentando encontrar o limite inferior mais próximo em cada iteração. Considerando a Figura 2(a), a problemática do acoplamento dos parâmetros $\theta$ e $\beta$ surge devido às bordas entre $\theta$, $z$, e nó $w$, removendo-os, as dependências entre as variáveis que tornam a equação intratável também são removidas. Com isso, acabamos com um Plate Notation simplificado com parâmetros variacionais livres ilustrados na Figura 2(b), obtendo a família de distribuição de probabilidade nas variáveis ocultas, que é caracterizada pela seguinte distribuição variacional:
+  A ideia do trabalho original de utilizar inferência variacional baseada na convexidade é de se fazer o uso da desigualdade de Jensen para obter um limite inferior ajustável na verossimilhança \cite{jordan1999introduction} onde os parâmetros variacionais são escolhidos através de um processo de otimização, tentando encontrar o limite inferior mais próximo em cada iteração. Considerando a Figura 2(a), a problemática do acoplamento dos parâmetros $\theta$ e $\beta$ surge devido às bordas entre $\theta$, $z$, e nó $w$, removendo-os, as dependências entre as variáveis que tornam a equação intratável também são removidas. Com isso, acabamos com um Plate Notation simplificado com parâmetros variacionais livres ilustrados na Figura 2(b), obtendo a família de distribuição de probabilidade nas variáveis ocultas, que é caracterizada pela seguinte distribuição variacional:
   
   \begin{equation}
   q(\theta,\textbf{z}|\gamma,\phi)=q(\theta|\gamma)\prod_{n=1}^{N}q(z_n|\phi_n), 
@@ -256,17 +256,17 @@
   
   %% ESTIMAçÃO DE PARÂMETROS
   \subsection{ESTIMAçÃO DE PARÂMETROS}
-  Dado um corpus contendo documentos $\textbf{D} = \{\textbf{w}_1, \textbf{w}_2, . . ., \textbf{w}_M\}$ os valores ideais dos hiperparâmetros $\alpha$ e $\beta$ que maximizam a verossimilhança de todos documentos $\textbf{w}$ em um corpus $D$ é dado por:
+  Dado um corpus contendo documentos $\textbf{D} = \{\textbf{w}_1, \textbf{w}_2, . . ., \textbf{w}_M\}$ os valores ideais dos hiper parâmetros $\alpha$ e $\beta$ que maximizam a verossimilhança de todos documentos $\textbf{w}$ em um corpus $D$ é dado por:
   
   \begin{equation}
   l(\alpha|\beta) = \sum_{d=1}^{M} log\ p(\textbf{w}_d|\alpha,\beta)
   \end{equation}
   
-  Como descrito acima, $p(w|\alpha,\beta)$ não pode ser computado, então é utilizado o limite inferior na verossimilhança. O EM então estima os hiperparâmetros $\alpha$ e $\beta$ para maximizar esse limite enquanto corrige os parâmetros variacionais $\gamma$ e $\phi$. O algoritmo variacional EM continua iterativamente em dois passos:
+  Como descrito acima, $p(w|\alpha,\beta)$ não pode ser computado, então é utilizado o limite inferior na verossimilhança. O EM então estima os hiper parâmetros $\alpha$ e $\beta$ para maximizar esse limite enquanto corrige os parâmetros variacionais $\gamma$ e $\phi$. O algoritmo variacional EM continua iterativamente em dois passos:
   
   \begin{enumerate}
   \item \textbf{Passo-E:} Para cada documento $d \in \{1,. . . , M\}$, os parâmetros variacionais $\gamma_d$ e $\phi_d$ são estimados maximizando a verossimilhança utilizando o limite inferior descrito na seção anterior.
-  \item \textbf{Passo-M:} O limite inferior é maximizado  de acordo com os hiperparâmetros $\alpha$ e $\beta$ do modelo para se obter os novos valores. Isso corresponde a encontrar a máxima verossimilhança com estatísticas suficientes esperadas para cada documento sob a aproximação posteriori.
+  \item \textbf{Passo-M:} O limite inferior é maximizado  de acordo com os hiper parâmetros $\alpha$ e $\beta$ do modelo para se obter os novos valores. Isso corresponde a encontrar a máxima verossimilhança com estatísticas suficientes esperadas para cada documento sob a aproximação posteriori.
   \end{enumerate}
   
   Os passos acima são repetidos até que o limite inferior da verossimilhança convirja. Como resultado final obtém-se duas matrizes $V \times K$ e $M \times K$, representando  a distribuição de palavras em cada tópico e a distribuição de tópicos em cada documento, respectivamente.
@@ -281,13 +281,13 @@
   
   %% PARSER
   \subsection{PARSER}
-  Cada mensagem processada nessa fase é aplicado um conjunto de filtros, normatizações e presunções com o intúito de se obter a mais fiel e relevante representação vetorial do documento. Para isso, os seguintes processos são realizados:
+  Cada mensagem processada nessa fase é aplicado um conjunto de filtros, normatizações e presunções com o intuito de se obter a mais fiel e relevante representação vetorial do documento. Para isso, foram adotados processos de mineração comuns, descritos abaixo:
   
   \begin{enumerate}
   \item \textbf{Pré-processamento:} Nesse passo, utilizamos a biblioteca Flanker para primeira estruturação do documento, é feito o parsing dos headers de interesse. São extraídos os valores dos headers ‘Subject’, ‘Date’, ‘From’, ‘To’, ‘Cc’, ‘X-Spam-Flag’ essas informações não são utilizadas para a geração do modelo, no entanto são informações complementares ao documento e serão úteis na análise exploratória e pesquisa. Se a mensagem for classificada como spam, ou seja, se o valor do header X-Spam-Flag for igual a ‘YES’ ou o assunto da mensagem conter a palavra ‘spam’, case insensitive, a mensagem será descartada e não será utilizada para criação do modelo, uma vez que temos interesse apenas em mensagens legítimas. O body do documento é dividido em múltiplas partes, cada parte possui seu próprio content-type, são processadas as partes com conteúdos de tipo text/html e text/plain, descartando anexos, mensagens criptografadas ou codificadas. Para conteúdos do tipo text/html são removidas todas as tags e propriedades html e css presentes via expressões regulares.
   \item \textbf{Bag of Words:} Usando o texto extraído do body na etapa acima, é criado a bag of words a partir do documento, que é a representação vetorial desse texto, onde os elementos são as palavras presentes no texto, aqui é desconsiderado ordem ou gramática, no entanto, a multiplicidade é perene.
   \item \textbf{Stop Words:} Stop words são uma lista de palavras comumente utilizadas em determinada língua, elas não são um indicador relevante na representação de um tópico. Esse passo remove as stop words presentes no dicionário Português e Inglês pois são as línguas presentes na coleção de documentos de e-mail.
-  \item \textbf{Stemming:} Todas as palavras são convertidas para letras minúsculas e é então aplicado o algoritmo de stemming de Porter(1980) na implementação da biblioteca NLTK(Natural Language Toolkit) \citeonline{Bird:2009:NLP:1717171} para remover afixos morfológicos das palavras, reduzindo-as ao seu radical.
+  \item \textbf{Stemming:} Todas as palavras são convertidas para letras minúsculas e é então aplicado o algoritmo de stemming de \citeonline{porter1980algorithm} na implementação da biblioteca NLTK(Natural Language Toolkit) \citeonline{Bird:2009:NLP:1717171} para remover afixos morfológicos das palavras, reduzindo-as ao seu radical.
   
   
   \begin{table}[h]
@@ -306,9 +306,12 @@
   Na tabela acima, notamos a redução no número de palavras únicas aplicando o steam. O número de palavras únicas em um conjunto de documentos afeta diretamente o tempo de execução na criação do modelo LDA. Por outro lado, a redução pode causar um efeito não desejado distorcendo o sentido das palavras, na seção de resultados vamos apresentar a diferença entre a aplicação ou não desse processo na coleção de documentos de e-mail utilizado.
   \end{enumerate}
   
-  O processo acima resulta na mensagem original, seus metadados obtidos pelos headers e a bag of words com os termos do texto. Esses dados são armazenados e indexados no Elasticsearch, um dos motores de busca open-source mais adotados atualmente.
   
-    Esse processo estrutura um documento originalmente não estruturado, armazenando-o em um componente que possibilita a busca por palavras, frases, destinatários, remetentes e data. O próximo passo é a criação do modelo para representar esse conjunto de dados e aprimorar a representação de um documento.
+  O processo acima resulta na mensagem original, seus metadados e a bag of words com os termos presentes no texto. Esses dados são armazenados e indexados no Elasticsearch, um dos motores de busca open-source mais adotados atualmente. Esse processo possibilita a busca por palavras, frases, destinatários, remetentes e data. 
+  
+  Em trabalhos semelhantes como \citeonline{ozcaglar2008classification} é possível notar que muitas técnicas empregadas nessa fase são comuns, porém, uma das principais diferenças, é a aplicação de processos mais detalhados na estruturação e armazenamento dos metadados, pois esses são fundamentais na análise exploratória dos documentos. \citeonline{ozcaglar2008classification} não se aprofunda nesses aspectos, pois tais informações não eram relevantes ao escopo da sua pesquisa, no entanto como trabalhos futuros sugeriu justamente a exploração de comunidades baseada em interesses dos destinatários e remetentes, o que demonstraremos possível na aplicação proposta.
+  
+  O próximo passo é a criação do modelo para representar esse conjunto de dados e aprimorar a representação de um documento.
   
   
   
