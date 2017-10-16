@@ -255,7 +255,7 @@
   
   
   %% ESTIMAçÃO DE PARÂMETROS
-  \subsection{ESTIMAçÃO DE PARÂMETROS}
+  \subsection{ESTIMAÇÃO DE PARÂMETROS}
   Dado um corpus contendo documentos $\textbf{D} = \{\textbf{w}_1, \textbf{w}_2, . . ., \textbf{w}_M\}$ os valores ideais dos hiper parâmetros $\alpha$ e $\beta$ que maximizam a verossimilhança de todos documentos $\textbf{w}$ em um corpus $D$ é dado por:
   
   \begin{equation}
@@ -292,7 +292,7 @@
   
   \begin{table}[h]
     \centering
-    \begin{tabular}{c c c}
+    \begin{tabular}{l l l}
     Palavra		&Stem &\\
     \hline
     copiar		&copi &\\
@@ -317,24 +317,81 @@
   
   %% CRIAÇÃO DO MODDELO
   \subsection{CRIAÇÃO DO MODDELO}
-  O conjunto de dados é carregado do Elasticsearch, nessa fase, são requeridos os tokens gerados no processo de parsing, portanto, um filtro é aplicado na query de busca para retornar apenas esse resultado. A coleção de tokens é então convertida em um vetor de contadores. Durante esse processo serão selecionadas as palavras ordenadas pela frequência de cada termo dentro dos tokens.
+  O conjunto de dados é carregado do Elasticsearch, nessa fase, são requeridos os tokens dos documentos gerados no processo de parsing, portanto, um filtro é aplicado na query de busca para retornar apenas esse resultado. A coleção de tokens é então convertida em uma matriz de contadores de tokens onde o número de features será igual ao tamanho do vocabulário.
   
   
   \begin{table}[h]
     \centering
-    \begin{tabular}{c c c}
+    \begin{tabular}{l l l}
     Tokens		&Vetor &\\
     \hline
-    Array(‘word1’, ‘word2’,’word3’)						&(3,[0,1,2], [1.0, 1.0, 1.0]) &\\
-    Array(‘word1’, ’word2’, ‘word2’,’word3’, ’word1’)		&(3,[0,1,2], [2.0, 2.0, 1.0]) &\\
-    Array(‘word2’, ‘word3’,’word2’)						&(3,[0,1,2], [0.0, 2.0, 1.0]) &\\
+    $Array(word_1, word_2, word_3, word_n)$						&(3,[0,1,2,n], [1.0, 1.0, 1.0, 1.0]) &\\
+    $Array(word_1, word_2, word_2, word_3, word_1)$				&(3,[0,1,2,n], [2.0, 2.0, 1.0, 0.0]) &\\
+    $Array(word_2, word_3, word_2, word_n)$						&(3,[0,1,2,n], [0.0, 2.0, 1.0, 1.0]) &\\
     \hline
     \end{tabular}
     \caption{Conversão de tokens de palavras para vetor de contadores}
   \end{table}
   
   
-  Na tabela acima vemos uma representação da saída esperada. É criado uma matriz de frequência de termos $M \times N$, onde de maneira distinta, as palavras do corpus são mapeadas em um vetor $N$, então, para cada documento $d \in \{1,. . . , M\}$ é criado uma representação vetorial de dimensão $N$ que contém a frequência da palavra no documento em sua respectiva posição nesse vetor.
+  Na tabela acima vemos uma representação da saída esperada. É criado uma matriz de frequência de termos $M \times N$, onde de maneira distinta, as palavras do corpus são mapeadas em um vetor $N$, então, para cada documento $d \in \{1,. . . , M\}$ é criado uma representação vetorial de dimensão $N$ que contém a frequência da palavra no documento em sua respectiva posição nesse vetor. Esse formado é requerido como formato de entrada dos dados para o modelo LDA.
+  
+  Como segundo parâmetro, definimos o número $K$ de tópicos desejados. Existem algumas formas para encontrar o melhor parâmetro $K$, \citeonline{ozcaglar2008classification} por exemplo utilizou o Erro Quadrático para definir seu número otimizado de tópicos, pesquisas recentes no entanto, propõe o uso da medida de coerência proposta por \citeonline{roder2015exploring} para mensurar a qualidade de um tópico. O processo é dado por quatro fases descritas a seguir:
+  \begin{figure}[h]
+    \centering
+      \includegraphics[height=5cm]{images/figure_3.png}
+      \caption{Visão geral do framework de mensuração da coerência dos tópicos. Imagem original \citeonline{roder2015exploring}}
+  \end{figure}
+  
+  
+  \begin{enumerate}
+  \item \textbf{Segmentação:} Para cada tópico $t \in \{1 ... K\}$ é extraído um conjunto de palavras mais relevantes de acordo com o modelo resultante, então é criado pares combinatórios distintos entre essas palavras. Exemplo:
+  
+  \begin{table}[h]
+    \centering
+    \begin{tabular}{l l l l l l l l l}
+    & & &0 &1 &2 &3 &4 &5 \\
+    \hline
+    &Tópico &3 &dados &máquina &mineração &neurais &redes &aprendizagem \\
+    \hline
+    \end{tabular}
+    \caption{Representação de um tópico e suas palavras mais relevantes}
+  \end{table}
+  
+  No exemplo acima, vemos um tópico e as palavras com maior probabilidade de pertencerem a ele. É gerado a partir dessas palavras bigramas de palavras $S_i$:
+  
+  \[\{(maquina, dados),\ (aprendizagem, maquina),\ (neurais, redes),\ ...\}\]
+  
+  Formalmente é dado por:
+  
+  \begin{equation}
+  S_{um}^{um} = \{(W',W^*)|W' = \{w_i\};
+  W^* =  \{w_j\};w_i,w_j \in W; i \neq j\}
+  \end{equation}
+  
+  \begin{equation}
+  S_{anterior}^{um} = \{(W',W^*)|W' = \{w_i\};
+  W^* =  \{w_j\};w_i,w_j \in W; i > j\}
+  \end{equation}
+  
+  \begin{equation}
+  S_{posterior}^{um} = \{(W',W^*)|W' = \{w_i\};
+  W^* =  \{w_j\};w_i,w_j \in W; i < j\}
+  \end{equation}
+  
+  As duas últimas são variações da primeira que requer um conjunto ordenado, elas comparam uma palavra apenas com sua palavra anterior e posterior respectivamente, \cite{roder2015exploring}.
+  
+  \item \textbf{Calculo de Probabilidade:} É calculado a probabilidade dessas palavras ocorrerem de forma conjunta e pode ser calculado por:
+  
+  \[P(w_i,w_j) = \frac{Numero\ de\ documentos\ que\ contem\ palavras\ w_i\ e\ w_j}{Total\ de\ documentos}\]
+  
+  \item \textbf{Medida de Confirmação:} A medida de confirmação recebe um único par $S_i = (W',W^*)$, ou subconjunto de palavras bem como suas respectivas probabilidades para calcular o quão forte o conjunto de palavras condicionais $W^*$ suporta $W'$
+  % \begin{equation}
+  % C_{UMass} = \frac{2}{N(N - 1)} \sum_{i=2}^{N} \sum_{j=1}^{i-1} log\frac{P(w_i,w_j) + \epsilon}{P(w_j)}
+  % \end{equation}
+  \item \textbf{Agregação:} Por fim, todas as confirmações de todos conjuntos de pares $S_i$ são agregados em uma única pontuação de coerência.
+  \end{enumerate}
+  
   
   
   \section{CRONOGRAMA}
