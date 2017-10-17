@@ -336,7 +336,11 @@
   
   Na tabela acima vemos uma representação da saída esperada. É criado uma matriz de frequência de termos $M \times N$, onde de maneira distinta, as palavras do corpus são mapeadas em um vetor $N$, então, para cada documento $d \in \{1,. . . , M\}$ é criado uma representação vetorial de dimensão $N$ que contém a frequência da palavra no documento em sua respectiva posição nesse vetor. Esse formado é requerido como formato de entrada dos dados para o modelo LDA.
   
-  Como segundo parâmetro, definimos o número $K$ de tópicos desejados. Existem algumas formas para encontrar o melhor parâmetro $K$, \citeonline{ozcaglar2008classification} por exemplo utilizou o Erro Quadrático para definir seu número otimizado de tópicos, pesquisas recentes no entanto, propõe o uso da medida de coerência proposta por \citeonline{roder2015exploring} para mensurar a qualidade de um tópico. O processo é dado por quatro fases descritas a seguir:
+  O parâmetro $\alpha$ do algoritmo é a priori da distribuição de tópicos por documento ($\theta$) e o parâmetro $\eta$ é a priori da distribuição de palavras por tópico ($\beta$), através desses parâmetros, é possível  tendenciar o modelo a determinadas palavras serem mais relevantes a alguns tópicos a outros, além de possibilitar que um grupo de documentos com a mesma característica sejam definidos com uma distribuição similar entre si e distintas dos demais, tendenciando-os a uma relevância maior a um ou mais tópicos. De forma a não tendenciarmos o modelo, optamos por uma distribuição uniforme desses parâmetros, para isso normalizamos essas distribuições definindo $\alpha$ e $\beta$ com $\frac{1}{K}$.
+  
+  Como último parâmetro, definimos o número $K$ de tópicos desejados. Existem algumas formas para encontrar o melhor parâmetro $K$, \citeonline{ozcaglar2008classification} por exemplo utilizou o Erro Quadrático para definir seu número otimizado de tópicos, pesquisas recentes no entanto, propõe o uso da medida de coerência proposta por \citeonline{roder2015exploring} para mensurar a qualidade de um tópico. O processo é dado por quatro fases descritas a seguir:
+  
+  
   \begin{figure}[h]
     \centering
       \includegraphics[height=5cm]{images/figure_3.png}
@@ -381,18 +385,21 @@
   
   As duas últimas são variações da primeira que requer um conjunto ordenado, elas comparam uma palavra apenas com sua palavra anterior e posterior respectivamente, \cite{roder2015exploring}.
   
-  \item \textbf{Calculo de Probabilidade:} É calculado a probabilidade dessas palavras ocorrerem de forma conjunta e pode ser calculado por:
+  \item \textbf{Cálculo de Probabilidade:} É calculado a probabilidade dessas palavras ocorrerem de forma conjunta e pode ser calculado por:
   
-  \[P(w_i,w_j) = \frac{Numero\ de\ documentos\ que\ contem\ palavras\ w_i\ e\ w_j}{Total\ de\ documentos}\]
+  \[P(w_i,w_j) = \frac{N\acute{u}mero\ de\ documentos\ que\ cont\acute{e}m palavras\ w_i\ e\ w_j}{Total\ de\ documentos}\]
   
   \item \textbf{Medida de Confirmação:} A medida de confirmação recebe um único par $S_i = (W',W^*)$, ou subconjunto de palavras bem como suas respectivas probabilidades para calcular o quão forte o conjunto de palavras condicionais $W^*$ suporta $W'$
-  % \begin{equation}
-  % C_{UMass} = \frac{2}{N(N - 1)} \sum_{i=2}^{N} \sum_{j=1}^{i-1} log\frac{P(w_i,w_j) + \epsilon}{P(w_j)}
-  % \end{equation}
-  \item \textbf{Agregação:} Por fim, todas as confirmações de todos conjuntos de pares $S_i$ são agregados em uma única pontuação de coerência.
+  
+  \item \textbf{Agregação:} Por fim, todas as confirmações de todos conjuntos de pares $S_i$ são agregados em uma única pontuação de coerência pela sua média.
   \end{enumerate}
   
+  Nós rodamos o LDA no conjunto de dados com 4, 8, 16, 32, 64 e 128 tópicos e parâmetros $\eta$ e $\alpha$ como distribuições uniformes, para cada configuração de parâmetro $K$, obtemos a pontuação de coerência do modelo via processo descrito acima. O valor de $K$ utilizado foi o que obteve maior coerência.
   
+  Selecionamos as distribuições do modelo gerado com a configuração de $K$ otimizada, então adicionamos um novo metadado para cada documento armazenado no Elasticsearch com sua distribuição de tópicos. Também armazenamos em outra estrutura a distribuição de palavras por tópico. Essas informações serão utilizadas no processo de visualização.
+  
+  %% APLICAÇÃO
+  \subsection{APLICAÇÃO}
   
   \section{CRONOGRAMA}
   % O cronograma do projeto de pesquisa deverá apresentar as etapas do trabalho e a previsão do tempo necessário para a realização de cada uma destas fases em um período de 12 meses. Inclusive, é necessário atentar para o fato de que existem partes da atividade científica que podem ser realizadas simultaneamente, enquanto outras possuem uma estrutura hierárquica de dependência.
