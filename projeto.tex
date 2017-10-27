@@ -49,11 +49,15 @@ São Paulo\\
 \textbf{RESUMO}
 \end{center}
 \renewcommand{\baselinestretch}{0.6666666}
-O resumo deve apresentar, em no máximo 250 palavras, o tema da pesquisa, os objetivos, o recorte teórico-metodológico e os resultados almejados. A proposta do projeto de pesquisa é estabelecer uma primeira delimitação do trabalho que será realizado ao longo do Mestrado. Neste sentido, a apresentação do projeto de pesquisa é realizada por meio de um texto que possui a estrutura de divisões deste documento, a formatação de um mínimo de dezessete (17) a vinte (20) laudas de conteúdo em papel A4 branco com espaçamento entre linhas de 1,5.
-\\[0.5cm]
-\begin{flushleft}
-{\bf Palavras-chave:} {\it apresentação, separada por vírgulas, de três a seis unitermos significativos para o trabalho.}
-\end{flushleft}
+Latent Dirichlet Allocation(LDA) é um modelo generativo probabilistico que sumariza uma coleção de documentos em tópicos além de apresentar a relevância de cada tópico a cada
+ documento. A interpretação e exploração de uma coleção de documentos pelo LDA pode ser feita a nível de tópico, palavra ou documento. LDAvis é um sistema para
+ exploração de tópicos e palavras resultantes do modelo LDA, esse trabalho tem o objetivo de extender suas funcionalidades adicionando funcionalidades a nível de documento e relações de redes,
+ promovendo uma ferramenta de busca aprimorada em um corpus.
+
+
+% \begin{flushleft}
+% {\bf Palavras-chave:} {\it apresentação, separada por vírgulas, de três a seis unitermos significativos para o trabalho.}
+% \end{flushleft}
 
 % SUMÁRIO
 \newpage
@@ -67,14 +71,16 @@ O resumo deve apresentar, em no máximo 250 palavras, o tema da pesquisa, os obj
 \renewcommand{\baselinestretch}{1.5}
 \normalsize
 \section{INTRODUÇÃO}
-Ao longo da introdução deve-se desenvolver o tema de forma a construir um cenário que possibilite compreender a delimitação do estudo e o contexto onde este se encontra inserido.
+ Neste trabalho, consideramos o problema de visualização de modelos de tópicos, em particular Latent Dirichlet Allocation,\cite{blei2003latent}.
+ Propomos um aprimoramento da aplicação LDAVis de \citeonline{sievert2014ldavis} para explorar documentos e suas relações. Mostramos que em uma base de dados
+ com documentos contendo metadados e relações de rede, como artígos científicos ou e-mails por exemplo, é possível realizar a busca aprimorada de documentos além de identificar
+ comunidades de redes de sociais através de interesse comum segundo os tópicos criados pelo modelo LDA.
 
-Neste item também é necessário apresentar o objetivo geral da pesquisa, ou seja, a meta proposta para a investigação. De forma complementar, os objetivos específicos, também presentes na introdução, constituem os elementos de trabalho que permitem alcançar o objetivo geral. Como os objetivos traduzem ações que serão executadas ao longo da pesquisa, a apresentação destes no texto requer a utilização de verbos no infinitivo.
-
-Ainda, deve-se colocar a hipótese: uma afirmação provisória que será confirmada ou refutada pelo pesquisador ao longo da investigação.
-
-Finalmente, é preciso descrever as partes do projeto de pesquisa.
-
+ A estrutura organizacaional dessa dissertação consiste em 5 capitulos. O capítulo 1, segue com uma breve introdução e organização do trabalho. No capítulo 2, justificamos a elaboração do trabalho demonstrando
+  que a visualização de modelos de tópicos é uma das áreas em carência de pesquisa atualmente, e que, esse trabalho, busca contribuir com o campo de \textit{Information Retrival} para modelos de tópicos.
+  No capítulo 3, discorremos sobre o referencial teórico presente, é detalhado o funcionamento do modelo probabilístico LDA além da apresentação do algorítmo K-Means como base de comparação.
+  No capítulo 4, mostramos a metodologia adotada, a arquitetura, o processo de mineração de dados, as justificativas de adoção de cada parâmetro livre na criação do modelo além das funcionalidades propostas para
+  aplicação de busca. Por fim, no capítulo 5, apresentamos o cronograma com as tarefas pendêntes para a conclusão do trabalho.
 
 
 % JUSTIFICATIVA
@@ -285,7 +291,7 @@ O conjunto de dados utilizado é uma coleção de e-mails retirados de um ambien
 Cada mensagem processada nessa fase é aplicado um conjunto de filtros, normatizações e presunções com o intuito de se obter a mais fiel e relevante representação vetorial do documento. Para isso, foram adotados processos de mineração comuns, descritos abaixo:
 
 \begin{enumerate}
-\item \textbf{Pré-processamento:} Nesse passo, utilizamos a biblioteca Flanker para primeira estruturação do documento, é feito o parsing dos headers de interesse. São extraídos os valores dos headers ‘Subject’, ‘Date’, ‘From’, ‘To’, ‘Cc’, ‘X-Spam-Flag’ essas informações não são utilizadas para a geração do modelo, no entanto são informações complementares ao documento e serão úteis na análise exploratória e pesquisa. Se a mensagem for classificada como spam, ou seja, se o valor do header X-Spam-Flag for igual a ‘YES’ ou o assunto da mensagem conter a palavra ‘spam’, case insensitive, a mensagem será descartada e não será utilizada para criação do modelo, uma vez que temos interesse apenas em mensagens legítimas. O body do documento é dividido em múltiplas partes, cada parte possui seu próprio content-type, são processadas as partes com conteúdos de tipo text/html e text/plain, descartando anexos, mensagens criptografadas ou codificadas. Para conteúdos do tipo text/html são removidas todas as tags e propriedades html e css presentes via expressões regulares.
+\item \textbf{Pré-processamento:} Nesse passo, utilizamos a biblioteca Flanker para primeira estruturação do documento, é feito o parsing dos headers de interesse. São extraídos os valores dos headers ‘Subject’, ‘Date’, ‘From’, ‘To’, ‘Cc’, ‘X-Spam-Flag’ essas informações não são utilizadas para a geração do modelo, no entanto são informações complementares e serão úteis na análise exploratória e busca dos documentos. Se a mensagem for classificada como spam, ou seja, se o valor do header X-Spam-Flag for igual a ‘YES’ ou o assunto da mensagem conter a palavra ‘spam’, case insensitive, a mensagem será descartada e não será utilizada para criação do modelo, uma vez que temos interesse apenas em mensagens legítimas. O body do documento é dividido em múltiplas partes, cada parte possui seu próprio content-type, são processadas as partes com conteúdos de tipo text/html e text/plain, descartando anexos, mensagens criptografadas e codificadas. Para conteúdos do tipo text/html são removidas todas as tags e propriedades html e css presentes via expressões regulares.
 \item \textbf{Bag of Words:} Usando o texto extraído do body na etapa acima, é criado a bag of words a partir do documento, que é a representação vetorial desse texto, onde os elementos são as palavras presentes no texto, aqui é desconsiderado ordem ou gramática, no entanto, a multiplicidade é perene.
 \item \textbf{Stop Words:} Stop words são uma lista de palavras comumente utilizadas em determinada língua, elas não são um indicador relevante na representação de um tópico. Esse passo remove as stop words presentes no dicionário Português e Inglês pois são as línguas presentes na coleção de documentos de e-mail.
 \item \textbf{Stemming:} Todas as palavras são convertidas para letras minúsculas e é então aplicado o algoritmo de stemming de \citeonline{porter1980algorithm} na implementação da biblioteca NLTK(Natural Language Toolkit) \citeonline{Bird:2009:NLP:1717171} para remover afixos morfológicos das palavras, reduzindo-as ao seu radical.
@@ -388,7 +394,7 @@ As duas últimas são variações da primeira que requer um conjunto ordenado, e
 
 \item \textbf{Cálculo de Probabilidade:} É calculado a probabilidade dessas palavras ocorrerem de forma conjunta e pode ser calculado por:
 
-\[P(w_i,w_j) = \frac{N\acute{u}mero\ de\ documentos\ que\ cont\acute{e}m palavras\ w_i\ e\ w_j}{Total\ de\ documentos}\]
+\[P(w_i,w_j) = \frac{N\acute{u}mero\ de\ documentos\ que\ cont\acute{e}m\ palavras\ w_i\ e\ w_j}{Total\ de\ documentos}\]
 
 \item \textbf{Medida de Confirmação:} A medida de confirmação recebe um único par $S_i = (W',W^*)$, ou subconjunto de palavras bem como suas respectivas probabilidades para calcular o quão forte o conjunto de palavras condicionais $W^*$ suporta $W'$
 
@@ -444,7 +450,7 @@ A proposta é estender a visualização para exploração não apenas dos tópic
 
 Os documentos são indexados e estruturados no Elasticsearch como  descrito na seção 4.1, o próprio motor de busca possui mecanismos para fornecer os tipos de busca e filtros propostos, bem como apresentar os dados quantitativos para análise exploratória e criação de comunidades relacionando destinatários e remetentes a seus tópicos frequentes e relevantes.
 
-Uma comparação entre o modelo LDA e o K-Means será apresentado de forma a demonstrar os benefícios de um modelo misto ao de mistura de unigramas.
+% Uma comparação entre o modelo LDA e o K-Means será apresentado de forma a demonstrar os benefícios de um modelo misto ao de mistura de unigramas.
 
 %% CRONOGRAMA
 \section{CRONOGRAMA}
