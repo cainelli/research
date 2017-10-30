@@ -50,9 +50,9 @@ São Paulo\\
 \textbf{RESUMO}
 \end{center}
 \renewcommand{\baselinestretch}{0.6666666}
-Latent Dirichlet Allocation(LDA) é um modelo generativo probabilistico que sumariza uma coleção de documentos em tópicos além de apresentar a relevância de cada tópico a cada
+Latent Dirichlet Allocation(LDA) é um modelo generativo probabilístico que sumariza uma coleção de documentos em tópicos além de apresentar a relevância de cada tópico a cada
  documento. A interpretação e exploração de uma coleção de documentos pelo LDA pode ser feita a nível de tópico, palavra ou documento. LDAvis é um sistema para
- exploração de tópicos e palavras resultantes do modelo LDA, esse trabalho tem como objetivo extender as suas funcionalidades para exploração do modelo a nível de documento e relações de redes,
+ exploração de tópicos e palavras resultantes do modelo LDA, este trabalho tem como objetivo estender as suas funcionalidades para exploração do modelo a nível de documento e relações de redes,
  promovendo uma ferramenta de busca aprimorada em um corpus.
 
 
@@ -74,15 +74,15 @@ Latent Dirichlet Allocation(LDA) é um modelo generativo probabilistico que suma
 \section{INTRODUÇÃO}
  Neste trabalho, consideramos o problema de visualização de modelos de tópicos, em particular Latent Dirichlet Allocation,\cite{blei2003latent}.
  Propomos um aprimoramento da aplicação LDAVis de \citeonline{sievert2014ldavis} para explorar documentos e suas relações. Mostramos que em uma base de dados
- com documentos contendo metadados e relações de rede, como artígos científicos ou e-mails por exemplo, é possível realizar a busca aprimorada de documentos além de identificar
+ com documentos contendo metadados e relações de rede, como artigos científicos ou e-mails por exemplo, é possível realizar a busca aprimorada de documentos além de identificar
  comunidades de redes de sociais através de interesse comum segundo os tópicos criados pelo modelo LDA.
 
- A estrutura organizacaional dessa dissertação consiste em 5 capitulos. O capítulo 1, segue com uma breve introdução e organização do trabalho. 
+ A estrutura organizacional dessa dissertação consiste em 5 capítulos. O capítulo 1, segue com uma breve introdução e organização do trabalho. 
   No capítulo 2, justificamos a elaboração do trabalho demonstrando que a visualização de modelos de tópicos é uma das áreas em carência de pesquisa atualmente, 
   e como esse trabalho busca contribuir com o campo de \textit{Information Retrival} para modelos de tópicos. No capítulo 3, discorremos sobre o referencial teórico presente, 
-  é detalhado o funcionamento do modelo probabilístico LDA além da apresentação do algorítmo K-Means como base de comparação. No capítulo 4, mostramos a metodologia adotada, 
+  é detalhado o funcionamento do modelo probabilístico LDA além da apresentação do algoritmo K-Means como base de comparação. No capítulo 4, mostramos a metodologia adotada, 
   a arquitetura, o processo de mineração de dados, as justificativas de adoção de cada parâmetro livre na criação do modelo além das funcionalidades propostas para
-  aplicação de busca. Por fim, no capítulo 5, apresentamos o cronograma com as tarefas pendêntes para a conclusão do trabalho.
+  aplicação de busca. Por fim, no capítulo 5, apresentamos o cronograma com as tarefas pendentes para a conclusão do trabalho.
 
 
 % JUSTIFICATIVA
@@ -215,7 +215,7 @@ Para cada documento indexado por $d \in \{1,. . . , M\}$ em um corpus $D$:
   \item Para cada uma das $N$ palavras($w_n$) dentro de um documento:
   \begin{enumerate}
   	\item Escolha um tópico \(z_n \in \{1,. . . , K\}\) do Multinômio($\theta$).
-    \item Escolha uma palavra $w_n$ de \(p(w_n=1| z_n=j,\beta)=\beta _{ij}\), que é a distribuição probabilistica multinomial condicionada ao tópico $z_n$.
+    \item Escolha uma palavra $w_n$ de \(p(w_n=1| z_n=j,\beta)=\beta _{ij}\), que é a distribuição probabilística multinomial condicionada ao tópico $z_n$.
   \end{enumerate}
 \end{enumerate}
 
@@ -306,7 +306,7 @@ O método mais utilizado em modelos de variável latente é o algoritmo variacio
 \end{figure}
 
 A ideia do trabalho original de utilizar inferência variacional baseada na convexidade é de se fazer o uso da desigualdade de Jensen para obter um limite inferior ajustável na verossimilhança \cite{jordan1999introduction} onde os parâmetros variacionais são escolhidos através de um processo de otimização,
- tentando encontrar o limite inferior mais próximo em cada iteração. Considerando a Figura 2(a), a problemática do acoplamento dos parâmetros $\theta$ e $\beta$ surge devido as bordas entre $\theta$, $z$,
+ tentando encontrar o limite inferior mais próximo em cada iteração. Considerando a Figura 2(a), a problemática do acoplamento dos parâmetros $\theta$ e $\beta$ surge devido às bordas entre $\theta$, $z$,
  e nó $w$, removendo-os, as dependências entre as variáveis que tornam a equação intratável também são removidas. Com isso,
  acabamos com um Plate Notation simplificado com parâmetros variacionais livres ilustrados na Figura 2(b), obtendo a família de distribuição de probabilidade nas variáveis ocultas,
  que é caracterizada pela seguinte distribuição variacional:
@@ -365,7 +365,7 @@ O conjunto de dados utilizado é uma coleção de e-mails retirados de um ambien
  Existem também headers contento outros tipos de informações como caminho percorrido pela mensagem até o seu destino final, análises de filtro de conteúdo entre outros,
  esses geralmente relevantes a administradores do serviço. O corpo e-mail contém o conteúdo da mensagem em si, que pode ser segmentado em  partes, cada uma com seu próprio content-type. 
  Os content-types mais comuns entre mensagens de e-mail são: text/plain, text/html, multipart/mixed, application/octet-stream entre outros, esses se referem ao tipo do conteúdo seguinte no corpo do e-mail.
- Essa informação é utilizada por clientes de e-mail para decodificar devidamente a mensagem,
+ Essa informação é utilizada por clientes de e-mail para decodificar adequadamente a mensagem,
  dessa forma, é possível realizar o download de arquivos separadamente ou renderizar imagens ou conteúdo html dentro da mensagem.
 
 
@@ -519,7 +519,7 @@ Selecionamos as distribuições do modelo gerado com a configuração de $K$ oti
 
 %% APLICAÇÃO
 \subsection{APLICAÇÃO}
-A aplicação web interativa é uma extensão do LDAVis \cite{sievert2014ldavis}, o trabalho original tem duas funcionalidades principais
+A aplicação web interativa é uma extensão do LDAvis \cite{sievert2014ldavis}, o trabalho original tem duas funcionalidades principais
 que permitem ao usuário explorar o modelo.
 
 \begin{figure}[H]
