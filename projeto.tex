@@ -136,9 +136,9 @@ No campo de processamento de linguagem natural e recuperação de informação, 
 
 % K-MEANS
 \subsection{K-MEANS}
-O algoritmo K-Means, assinala a cada objeto de um conjunto de dados à um grupo, foi introduzido inicialmente por \citeonline{macqueen1967some} e é um dos algoritmos mais estudados na literatura.
+O algoritmo K-Means, assinala a cada objeto de um conjunto de dados a um grupo, foi introduzido inicialmente por \citeonline{macqueen1967some} e é um dos algoritmos mais estudados na literatura.
  O algoritmo é inicializado com dois parâmetros principais, o número de clusters, ou grupos, disponíveis para os objetos no dataset serem classificados e um vetor de objetos que representa o conjunto de dados.
- Cada objeto no conjunto de dados pode ser assinalado à um grupo a cada iteração. Primeiro determinamos os centróides iniciais,
+ Cada objeto no conjunto de dados pode ser assinalado a um grupo a cada iteração. Primeiro determinamos os centróides iniciais,
  centróides são a representação de um grupo e seu valor é dado pela média dos objetos desse grupo, são iniciados randomicamente, como proposto  pelo trabalho original,
  ou utilizando algum algoritmo de otimização, em alguns casos, o K-Means pode convergir para grupos distintos dependendo do valor inicial dos centróides. 
  Existem diversos estudos que adotam diferentes algoritmos e técnicas para inicialização dos centróides,
@@ -219,8 +219,8 @@ Para cada documento indexado por $d \in \{1,. . . , M\}$ em um corpus $D$:
   \end{enumerate}
 \end{enumerate}
 
-O  hiper parâmetro $\alpha$ é um vetor de dimensão $K$ com itens \(\alpha _i>0\) e é uma distribuição Dirichlet priori da distribuição de tópicos por documento,
- o hiper parâmetro $\beta$ é uma distribuição Dirichlet priori da distribuição de palavras por tópicos. $\theta _d$ é a distribuição de tópicos para o documento $d$. $Z_{dn}$ e $W_{dn}$ são as variáveis a nível de palavras e são amostradas uma vez para cada palavra em cada documento.
+% O  hiper parâmetro $\alpha$ é um vetor de dimensão $K$ com itens \(\alpha _i>0\) e é uma distribuição Dirichlet priori da distribuição de tópicos por documento,
+%  o hiper parâmetro $\beta$ é uma distribuição Dirichlet priori da distribuição de palavras por tópicos. $\theta _d$ é a distribuição de tópicos para o documento $d$. $Z_{dn}$ e $W_{dn}$ são as variáveis a nível de palavras e são amostradas uma vez para cada palavra em cada documento.
 
 Uma variável de distribuição Dirichlet randômica $\theta$ com dimensão $K$ tem como propriedade: $\theta ^i \geq 0, \displaystyle\sum_{i=1}^{K} \theta ^i = 1$ e têm a seguinte densidade probabilística:
 
@@ -239,33 +239,38 @@ Dado os hiper parâmetros $\alpha$ e $\beta$, a distribuição conjunta de uma m
 p(\theta,\textbf{z},\textbf{w}|\alpha,\beta) = p(\theta|\alpha) \prod_{n=1}^{N} p(z_n|\theta)p(w_n|z_n,\beta)
 \end{equation}
 
-
-A Figura 1 ilustra o Plate Notation do modelo LDA, as caixas são pratos representando réplicas,
- o $M$ denota o número de documentos que é associado ao prato externo e o interno representa as palavras dentro de um documento, onde $N$ denota o número de palavras.
-
-\begin{figure}[H]
-	\centering
-    \includegraphics[height=10cm]{images/figure_1.png}
-    \caption{Plate Notation representando o modelo LDA, adaptado de \citeonline{blei2003latent}}
-\end{figure}
-
-onde $p(z_n | \theta)$é simplesmente $\theta _i$ para cada $i$ único, tal que $z_{ni}=1$. Nós obtemos a distribuição marginal de um documento $d$ integrando sobre $\theta$ e somando sobre $z$.
+onde $p(z_n | \theta)$ é simplesmente $\theta _i$ para cada $i$ único,
+ tal que $z_{ni}=1$.
+ 
+ Nós obtemos a distribuição marginal de um documento $\textbf{w}$ integrando sobre $\theta$ e somando sobre $z$:
 
 \begin{equation}
-p(\textbf{w}|\alpha,\beta)=\int{p(\theta|\alpha)\Bigg(\prod_{n=1}^{N}\sum_{z_n} p(z_n|\theta)p(w_n|z_n,\beta)\Bigg)d\theta}
+p(\textbf{w}|\alpha,\beta)=\int{p(\theta|\alpha)\Bigg(\prod_{n=1}^{N}\sum_{z_n} p(z_n|\theta)p(w_n|z_n,\beta)\Bigg)d\theta},
 \end{equation}
 
-A probabilidade de um corpus é obtida com o produto das probabilidades marginais de um documento:
+e finalmente, a distribuição de probabilidade do corpus $D$ é obtida com o produto das probabilidades marginais de um documento:
 
 \begin{equation}
 p(D|\alpha,\beta)= \prod_{d=1}^{M} \int{p(\theta _d|\alpha)\Bigg(\prod_{n=1}^{N_d}\sum_{z_{dn}} p(z_{dn}|\theta _d)p(w_{dn}|z_{dn},\beta)\Bigg)d\theta _d}
 \end{equation}
 
 
+A Figura 1 ilustra o Plate Notation do modelo LDA, as caixas são pratos representando réplicas,
+o $M$ denota o número de documentos que é associado ao prato externo e o interno representa as palavras dentro de um documento, onde $N$ denota o número de palavras.
+
+\begin{figure}[H]
+ \centering
+   \includegraphics[height=10cm]{images/figure_1.png}
+   \caption{Plate Notation representando o modelo LDA, adaptado de \citeonline{blei2003latent}}
+\end{figure}
+
+O hiper parâmetro $\alpha$ é um vetor de dimensão $K$ com itens \(\alpha _i>0\) e é uma distribuição Dirichlet priori da distribuição de tópicos por documento,
+o hiper parâmetro $\beta$ é uma distribuição Dirichlet priori da distribuição de palavras por tópicos. $\theta _d$ é a distribuição de tópicos para o documento $d$. $Z_{dn}$ e $W_{dn}$ são as variáveis a nível de palavras e são amostradas uma vez para cada palavra em cada documento.
+
 
 %% INFERÊNCIA
 \subsection{INFERÊNCIA}
-A Eq.(3) foi baseada nos hiper parâmetros antecedentes $\alpha$ e $\beta$, nesta seção, nós descrevemos o procedimento para inferência.
+A Eq.(3) foi baseada nos hiper parâmetros priori $\alpha$ e $\beta$, nesta seção, nós descrevemos o procedimento para inferência.
 
 O problema de inferência principal a se resolver é o de se computar a distribuição posteriori das distribuições latentes:
 
@@ -301,7 +306,7 @@ O método mais utilizado em modelos de variável latente é o algoritmo variacio
 \end{figure}
 
 A ideia do trabalho original de utilizar inferência variacional baseada na convexidade é de se fazer o uso da desigualdade de Jensen para obter um limite inferior ajustável na verossimilhança \cite{jordan1999introduction} onde os parâmetros variacionais são escolhidos através de um processo de otimização,
- tentando encontrar o limite inferior mais próximo em cada iteração. Considerando a Figura 2(a), a problemática do acoplamento dos parâmetros $\theta$ e $\beta$ surge devido às bordas entre $\theta$, $z$,
+ tentando encontrar o limite inferior mais próximo em cada iteração. Considerando a Figura 2(a), a problemática do acoplamento dos parâmetros $\theta$ e $\beta$ surge devido as bordas entre $\theta$, $z$,
  e nó $w$, removendo-os, as dependências entre as variáveis que tornam a equação intratável também são removidas. Com isso,
  acabamos com um Plate Notation simplificado com parâmetros variacionais livres ilustrados na Figura 2(b), obtendo a família de distribuição de probabilidade nas variáveis ocultas,
  que é caracterizada pela seguinte distribuição variacional:
@@ -325,6 +330,7 @@ O próximo passo é configurar um problema de otimização que determina os par�
 \gamma_i = \alpha_i + \sum_{n=1}^{N} \phi_{ni}
 \end{equation}
 
+As equações acima são utilizadas no algoritmo EM para estimativa dos parâmetros. Esse processo é descrito na sequência.
 
 %% ESTIMAçÃO DE PARÂMETROS
 \subsection{ESTIMAÇÃO DE PARÂMETROS}
@@ -335,7 +341,8 @@ Dado um corpus contendo documentos $\textbf{D} = \{\textbf{w}_1, \textbf{w}_2, .
 l(\alpha|\beta) = \sum_{d=1}^{M} log\ p(\textbf{w}_d|\alpha,\beta)
 \end{equation}
 
-Como descrito acima, $p(w|\alpha,\beta)$ não pode ser computado, então é utilizado o limite inferior na verossimilhança.
+O valor de $l(\alpha, \beta)$ pode ser computado se o valor de $p(\textbf{w}_d|\alpha, \beta)$ é conhecido para cada documento $d$. No entanto,
+ como descrito acima, $p(\textbf{w}|\alpha,\beta)$ não pode ser computado, então é utilizado o limite inferior na função de verossimilhança.
  O EM então estima os hiper parâmetros $\alpha$ e $\beta$ para maximizar esse limite enquanto corrige os parâmetros variacionais $\gamma$ e $\phi$. 
  O algoritmo variacional EM continua iterativamente em dois passos:
 
@@ -354,24 +361,24 @@ Os passos acima são repetidos até que o limite inferior da verossimilhança co
 \section{METODOLOGIA}
 O conjunto de dados utilizado é uma coleção de e-mails retirados de um ambiente real de uma empresa provedora de serviços. 
  Para os experimentos realizados neste artigo foram coletados 100.000 mensagens de e-mail, no geral, essas mensagens seguem as RFCs 822, 2045, 2046, 2047, 4288, 4289 e 2049,
- que são os padrões da indústria para troca de e-mails.	Em resumo, as mensagens são formadas por headers contendo informações sobre, assunto, remetente, destinatários e data.
- Existem também, headers, contento outros tipos de informações como caminho percorrido pela mensagem até o seu destino final, análises de filtro de conteúdo entre outros,
+ que são os padrões da indústria para troca de e-mails.	Em resumo, as mensagens são formadas por headers contendo informações sobre assunto, remetente, destinatários e data.
+ Existem também headers contento outros tipos de informações como caminho percorrido pela mensagem até o seu destino final, análises de filtro de conteúdo entre outros,
  esses geralmente relevantes a administradores do serviço. O corpo e-mail contém o conteúdo da mensagem em si, que pode ser segmentado em  partes, cada uma com seu próprio content-type. 
  Os content-types mais comuns entre mensagens de e-mail são: text/plain, text/html, multipart/mixed, application/octet-stream entre outros, esses se referem ao tipo do conteúdo seguinte no corpo do e-mail.
- Essa informação é utilizada por clientes de e-mail para decodificar a mensagem de acordo,
- dessa forma é possível realizar o download de arquivos separadamente ou renderizar imagens ou conteúdo html dentro da mensagem.
+ Essa informação é utilizada por clientes de e-mail para decodificar devidamente a mensagem,
+ dessa forma, é possível realizar o download de arquivos separadamente ou renderizar imagens ou conteúdo html dentro da mensagem.
 
 
 %% PARSER
 \subsection{PARSER}
-Cada mensagem processada nessa fase é aplicado um conjunto de filtros, normatizações e presunções com o intuito de se obter a mais fiel e relevante representação vetorial do documento.
+Para cada mensagem processada é aplicado um conjunto de filtros, normatizações e presunções com o intuito de se obter a mais fiel e relevante representação vetorial do documento.
  Para isso, foram adotados processos de mineração comuns, descritos abaixo:
 
 \begin{enumerate}
-\item \textbf{Pré-processamento:} Nesse passo, utilizamos a biblioteca Flanker para primeira estruturação do documento, é feito o parsing dos headers de interesse.
+\item \textbf{Pré-processamento:} Nesse passo, utilizamos a biblioteca Flanker, \citeonline{flanker2017}, para primeira estruturação do documento, é feito o parsing dos headers de interesse.
  São extraídos os valores dos headers ‘Subject’, ‘Date’, ‘From’, ‘To’, ‘Cc’, ‘X-Spam-Flag’ essas informações não são utilizadas para a geração do modelo,
  no entanto são informações complementares e serão úteis na análise exploratória e busca dos documentos. Se a mensagem for classificada como spam, ou seja, 
- se o valor do header X-Spam-Flag for igual a ‘YES’ ou o assunto da mensagem conter a palavra ‘spam’, case insensitive, a mensagem será descartada e não será utilizada para criação do modelo,
+ se o valor do header X-Spam-Flag for igual a ‘YES’ ou o assunto da mensagem conter a palavra ‘spam’, \textit{case insensitive}, a mensagem será descartada e não será utilizada para criação do modelo,
  uma vez que temos interesse apenas em mensagens legítimas. O body do documento é dividido em múltiplas partes, cada parte possui seu próprio content-type,
  são processadas as partes com conteúdos de tipo text/html e text/plain, descartando anexos, mensagens criptografadas e codificadas. 
  Para conteúdos do tipo text/html são removidas todas as tags e propriedades html e css presentes via expressões regulares.
@@ -408,7 +415,7 @@ O processo acima resulta na mensagem original, seus metadados e a bag of words c
 Em trabalhos semelhantes como \citeonline{ozcaglar2008classification} é possível notar que muitas técnicas empregadas nessa fase são comuns, porém, uma das principais diferenças,
  é a aplicação de processos mais detalhados na estruturação e armazenamento dos metadados, pois esses são fundamentais na análise exploratória dos documentos.
  \citeonline{ozcaglar2008classification} não se aprofunda nesses aspectos, pois tais informações não eram relevantes ao escopo da sua pesquisa,
- no entanto como trabalhos futuros sugeriu justamente a exploração de comunidades baseada em interesses dos destinatários e remetentes, o que demonstraremos possível na aplicação proposta.
+ porém, como trabalhos futuros sugeriu justamente a exploração de comunidades baseada em interesses dos destinatários e remetentes, o que demonstraremos possível na aplicação proposta.
 
 O próximo passo é a criação do modelo para representar esse conjunto de dados e aprimorar a representação de um documento.
 
@@ -416,8 +423,8 @@ O próximo passo é a criação do modelo para representar esse conjunto de dado
 
 %% CRIAÇÃO DO MODELO
 \subsection{CRIAÇÃO DO MODELO}
-O conjunto de dados é carregado do Elasticsearch, nessa fase, são requeridos os tokens dos documentos gerados no processo de parsing, portanto,
- um filtro é aplicado na query de busca para retornar apenas esse resultado. A coleção de tokens é então convertida em uma matriz de contadores de tokens onde o número de features será igual ao tamanho do vocabulário.
+O conjunto de dados é carregado do Elasticsearch, nessa fase, são requeridos os tokens dos documentos gerados no processo de parsing, então
+ um filtro é aplicado na query de busca para retornar apenas esses resultados. A coleção de tokens é convertida em uma matriz de contadores de tokens onde o número de features será igual ao tamanho do vocabulário.
 
 
 \begin{table}[h]
@@ -425,24 +432,24 @@ O conjunto de dados é carregado do Elasticsearch, nessa fase, são requeridos o
   \begin{tabular}{l l l}
   Tokens		&Vetor &\\
   \hline
-  $Array(word_1, word_2, word_3, word_n)$						&(3,[0,1,2,n], [1.0, 1.0, 1.0, 1.0]) &\\
-  $Array(word_1, word_2, word_2, word_3, word_1)$				&(3,[0,1,2,n], [2.0, 2.0, 1.0, 0.0]) &\\
-  $Array(word_2, word_3, word_2, word_n)$						&(3,[0,1,2,n], [0.0, 2.0, 1.0, 1.0]) &\\
+  $Array(word_1, word_2, word_3, word_n)$						&(n,[0,1,2,n], [1.0, 1.0, 1.0, 1.0]) &\\
+  $Array(word_1, word_2, word_2, word_3, word_1)$				&(n,[0,1,2,n], [2.0, 2.0, 1.0, 0.0]) &\\
+  $Array(word_2, word_3, word_2, word_n)$						&(n,[0,1,2,n], [0.0, 2.0, 1.0, 1.0]) &\\
   \hline
   \end{tabular}
   \caption{Conversão de tokens de palavras para vetor de contadores}
 \end{table}
 
 
-Na tabela acima vemos uma representação da saída esperada. É criado uma matriz de frequência de termos $M \times N$, onde de maneira distinta, as palavras do corpus são mapeadas em um vetor $N$,
- então, para cada documento $d \in \{1,. . . , M\}$ é criado uma representação vetorial de dimensão $N$ que contém a frequência da palavra no documento em sua respectiva posição nesse vetor.
+Na tabela acima vemos uma representação da saída esperada. É criado uma matriz de frequência de termos $M \times N$, para cada documento,
+ $d \in \{1,. . . , M\}$ é criado uma representação vetorial do vocabulário do corpus($N$), que contém a frequência da palavra no documento em sua respectiva posição nesse vetor.
  Esse formato é requerido como formato de entrada dos dados para o modelo LDA.
 
 O parâmetro $\alpha$ do algoritmo é a priori da distribuição de tópicos por documento ($\theta$) e o parâmetro $\eta$ é a priori da distribuição de palavras por tópico ($\beta$),
- através desses parâmetros, é possível  tendenciar o modelo a determinadas palavras serem mais relevantes a alguns tópicos a outros,
+ através desses parâmetros, é possível tendenciar o modelo para que determinadas palavras sejam mais relevantes a alguns tópicos à outros,
  além de possibilitar que um grupo de documentos com a mesma característica sejam definidos com uma distribuição similar entre si e distintas dos demais,
  tendenciando-os a uma relevância maior a um ou mais tópicos. De forma a não tendenciar o modelo, optamos por uma distribuição uniforme desses parâmetros,
- para isso normalizamos essas distribuições definindo $\alpha$ e $\beta$ com $\frac{1}{K}$.
+ para isso normalizamos essas distribuições definindo $\alpha$ e $\beta$ como $\frac{1}{K}$.
 
 Como último parâmetro, definimos o número $K$ de tópicos desejados. Existem algumas formas para encontrar o melhor parâmetro $K$,
  \citeonline{ozcaglar2008classification} por exemplo utilizou o Erro Quadrático para definir seu número otimizado de tópicos, pesquisas recentes no entanto,
@@ -555,8 +562,6 @@ A proposta é estender a visualização para exploração não apenas dos tópic
 
 Os documentos são indexados e estruturados no Elasticsearch como  descrito na seção 4.1, o próprio motor de busca possui mecanismos para fornecer os tipos de busca e filtros propostos,
  bem como apresentar os dados quantitativos para análise exploratória e criação de comunidades relacionando destinatários e remetentes a seus tópicos frequentes e relevantes.
-
-% Uma comparação entre o modelo LDA e o K-Means será apresentado de forma a demonstrar os benefícios de um modelo misto ao de mistura de unigramas.
 
 %% CRONOGRAMA
 \section{CRONOGRAMA}
