@@ -192,10 +192,24 @@
   %% PROCESSO GENERATIVO
   \subsection{PROCESSO GENERATIVO}
   
-  Em uma análise textual, que é mais ampla a análise de  tópicos, uma $palavra$ é a unidade mais básica de dado, definida com um item de um vocabulário indexado por \(w \in \{1,. . . , V\}\)  , onde $V$ é o número de palavras únicas dentro de um corpus, também denominado vocabulário. As palavras são representadas como um vetor de base unitária.Assim, um documento é uma sequência de $N$ palavras denotadas por \(\textbf{ w} = (w_1, w_2,. . . ,  w_N)\). Por fim, um corpus é uma coleção de $M$ documentos denotados por \(\textbf{ D} = \{\textbf{ w}_1, \textbf{ w}_2, . . ., \textbf{ w}_M\}\).
+  Em uma análise textual, que é mais ampla a análise de  tópicos, uma $palavra$ é a unidade mais básica de dado, definida com um item de um vocabulário indexado por \(w \in \{1,. . . , V\}\)  , onde $V$ é o número de palavras únicas dentro de um corpus, também denominado vocabulário. As palavras são representadas como um vetor de base unitária. Assim, um documento é uma sequência de $N$ palavras denotadas por \(\textbf{ w} = (w_1, w_2,. . . ,  w_N)\). Por fim, um corpus é uma coleção de $M$ documentos denotados por \(\textbf{ D} = \{\textbf{ w}_1, \textbf{ w}_2, . . ., \textbf{ w}_M\}\).
   
-  \underline{O LDA assume que documentos são criados via um processo generativo no qual palavras nos documentos são geradas. Com base no tamanho do documento,
-   nós escolhamos uma mistura de tópicos usando a distribuição multinomial de tópicos para escolher as palavras que devem ser usadas para preencher a cota de cada tópico}. Por exemplo, dado um conjunto de documentos que podem ser classificados em quatro tópicos: Esportes, Animais, Tecnologia e Artes. Cada tópico poderá ser definido pela seguinte lista de palavras:
+   O LDA assume que documentos são criados via um processo generativo dado a seguir:
+
+   \begin{itemize}
+     \item Determine o número de palavras em um documento.
+     \item Escolha uma mistura de tópicos para o documento sobre um conjunto fixo de tópicos. Ex. 20\% tópico $A$, 30\% tópico $B$ e 50\% tópico $C$.
+     \item Determine as palavras no documento:
+     \begin{itemize}
+       \item Selecione um tópico baseado na distribuição multinomial dos documentos.
+       \item Selecione uma palavra baseado na distribuição multinomial dos tópicos.
+     \end{itemize}
+   \end{itemize}
+
+   Por exemplo, dado um conjunto de documentos que podem ser classificados em quatro tópicos: Esportes, Animais, Tecnologia e Artes. 
+   Cada tópico poderá ser definido pela seguinte lista de palavras:
+   % \underline{O LDA assume que documentos são criados via um processo generativo no qual palavras nos documentos são geradas. Com base no tamanho do documento,
+  %  nós escolhamos uma mistura de tópicos usando a distribuição multinomial de tópicos para escolher as palavras que devem ser usadas para preencher a cota de cada tópico}. 
   
   \begin{itemize}
     \item \textbf{ Esportes:} bola, futebol, basquete, gol, pontos, corrida, natação.
