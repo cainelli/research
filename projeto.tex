@@ -184,7 +184,8 @@
   
   O objetivo do algoritmo LDA é encontrar o modelo probabilístico de um conjunto de dados. Essa característica o difere das abosrdagens de Mistura de Unigramas, os quais assumem que cada documento exibe características de apenas um tópico. Ou seja, o modelo resultante do LDA  permite que documentos contenham múltiplos tópicos ao mesmo tempo e com relevância distintas. Nesta seção, discorre-se sobre as principais características do trabalho original de \citeonline{blei2003latent}.
    
-   A pesquisa de \citeonline{hu2009latent} foi complementar durante essa seção para melhor compreender o trabalho original.
+  %  A pesquisa de \citeonline{hu2009latent} foi complementar durante essa seção para melhor compreender o trabalho original.
+
   
   %Antes de nos aprofundarmos na descrição do algoritmo, façamos uma introdução da terminologia formal e notações usada nesta seção.
   
@@ -194,17 +195,10 @@
   
   Em uma análise textual, que é mais ampla a análise de  tópicos, uma $palavra$ é a unidade mais básica de dado, definida com um item de um vocabulário indexado por \(w \in \{1,. . . , V\}\)  , onde $V$ é o número de palavras únicas dentro de um corpus, também denominado vocabulário. As palavras são representadas como um vetor de base unitária. Assim, um documento é uma sequência de $N$ palavras denotadas por \(\textbf{ w} = (w_1, w_2,. . . ,  w_N)\). Por fim, um corpus é uma coleção de $M$ documentos denotados por \(\textbf{ D} = \{\textbf{ w}_1, \textbf{ w}_2, . . ., \textbf{ w}_M\}\).
   
-   O LDA assume que documentos são criados via um processo generativo dado a seguir:
-
-   \begin{itemize}
-     \item Determine o número de palavras em um documento.
-     \item Escolha uma mistura de tópicos para o documento sobre um conjunto fixo de tópicos. Ex. 20\% tópico $A$, 30\% tópico $B$ e 50\% tópico $C$.
-     \item Determine as palavras no documento:
-     \begin{itemize}
-       \item Selecione um tópico baseado na distribuição multinomial dos documentos.
-       \item Selecione uma palavra baseado na distribuição multinomial dos tópicos.
-     \end{itemize}
-   \end{itemize}
+   O LDA assume que documentos são criados via um processo generativo. Primeiro, extraímos um vetor de pesos de tópicos que determina
+   quais tópicos são mais prováveis de aparecer em um documento. Em seguida, para cada palavra que aparece em um documento, escolhemos um tópico
+   único do vetor de pesos de tópicos. Para gerar a palavra, então, extraímos da distribuição de probabilidade condicinada ao tópico escolhido.
+   Desse processo, nós vemos que cada palavra em um documento é gerada por um tópico diferente escolhido randômicamente.
 
    Por exemplo, dado um conjunto de documentos que podem ser classificados em quatro tópicos: Esportes, Animais, Tecnologia e Artes. 
    Cada tópico poderá ser definido pela seguinte lista de palavras:
