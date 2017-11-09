@@ -54,7 +54,7 @@ São Paulo\\
 
 Considerando a quantidade de dados que se gera na atualidade e, que desse volume, grande parte está em formato de texto como e-mail, mensagens intântaneas, mídias sociais, websites e etc, há um crescente interesse  em nível tecnológico na interpretação desse tipo informação  que está disponível em um formato não estruturado. A interpretação consiste na elaboração estratégica para a descoberta de informação relevante nesse tipo de dado para uso em tomada de decisões. Uma abordagem para esta descoberta é com o uso do Latent Dirichlet Allocation (LDA), o qual consiste de um modelo generativo probabilístico que sumariza uma coleção de documentos em tópicos além de apresentar a relevância de cada tópico a cada
  documento. A interpretação e exploração de uma coleção de documentos pelo LDA pode ser feita a nível de tópico, palavra ou documento. LDAvis, por outro lado, consiste de um sistema para
- exploração de tópicos e palavras resultantes do modelo LDA. Este trabalho tem como objetivo estender as  funcionalidades do LDA para exploração do modelo a nível de documento e criação de relações de redes em mensagens de e-mail,
+ exploração de tópicos e palavras resultantes do modelo LDA. Este trabalho tem como objetivo estender as  funcionalidades do LDAVis para exploração do modelo a nível de documento e criação de relações de redes em mensagens de e-mail,
  promovendo uma ferramenta de busca aprimorada em um corpus.
 
 
@@ -81,7 +81,6 @@ Considerando a quantidade de dados que se gera na atualidade e, que desse volume
  Para se ter como exemplo, pesquisas apontam que em 2017 uma média de 269 bilhões de e-mails serão enviados e recebidos diariamente, e espera-se continuar a crescer a uma taxa média de 4.4\% ao ano nos próximos quatro anos, atingindo 319.6 bilhões ao final de 2021 como mostra a Tabela \ref{tb_email} \cite{radicati2017}.
 
 \begin{table}[h]
-\label{tb_email}
   \centering
   \begin{tabular}{l*{6}{c}r}
   &					2017 &	2018 &	2019 &	2020 &	2021 & \\
@@ -91,6 +90,7 @@ Considerando a quantidade de dados que se gera na atualidade e, que desse volume
   \hline
   \end{tabular}
   \caption{Tráfego de Email Mundial Diário  (Bi). \cite{radicati2017}}
+  \label{tb_email}
 \end{table}
 
 A taxa de crescimento da quantidade de mensagens enviadas e recebidas impressiona, não só por se tratar de uma técnologia dos anos 70,
@@ -113,7 +113,7 @@ Frequentemente, e-mails são deixados fora da equação pela falta de ferramenta
 
  O trabalho de \citeonline{mikolov2013efficient}, por exemplo, possibilita em um grande volume de documentos, fornecer funcionalidades como sugestões de termos de pesquisa baseados na ordem das palavras digitadas, além de extensão de busca utilizando termos similares.
 
-Ambos os métodos têm a capacidade de uso na interação com os documentos, no entanto há uma lacuna quado se deseja explorar documentos por meio de temas de interesse específico,
+Ambos os métodos têm a capacidade de uso na interação com os documentos, no entanto há uma lacuna quando se deseja explorar documentos por meio de temas de interesse específico,
  visualizar as palavras mais relevantes em cada tema e explorar os documentos com a usabilidade de um mapa, com possibilidade de ampliar a visualização com uso de zoom, além de visualizar a relação entre documentos de uma maneira intuitiva como pela proximidade. Estes exemplos de uso podem ser uma forma complementar ao métodos de links ou busca. E ainda, estes exemplos de aplicação podem ser feitos em qualquer corpus.
  
  %, no entanto, como exemplo,
@@ -122,7 +122,7 @@ Ambos os métodos têm a capacidade de uso na interação com os documentos, no 
 
 \subsection{OBJETIVOS}
 
-Neste trabalho propõe-se como objetivo o uso de um algoritmo chamado Latent Dirichlet Allocation (LDA) para uso em problemas de visualização de modelos de tópicos \cite{blei2003latent}. A proposta consite em um aprimoramento da aplicação LDAVis de \citeonline{sievert2014ldavis} para explorar documentos e suas relações. O estudo de caso será feito em uma base de dados de e-mails e, após descoberta de tópicos, realizar a busca aprimorada de documentos, além de identificar  comunidades de redes de sociais através de interesse comum segundo os tópicos criados pelo modelo LDA. Além das técnicas de processamento e visualização de conhecimento, como objetivo secundário propõe-se realizar análise exploratória do conjunto de dados para obter informações relevantes e que possam ser utilizadas na compreensão do negócio da empresa.
+Neste trabalho propõe-se como objetivo o uso de um algoritmo chamado Latent Dirichlet Allocation (LDA) \cite{blei2003latent} para modelagem de tópicos e melhoria de sua visualização. A proposta consite em um aprimoramento da aplicação LDAVis de \citeonline{sievert2014ldavis} para explorar documentos e suas relações. O estudo de caso será feito em uma base de dados de e-mails e, após descoberta de tópicos, realizar a busca aprimorada de documentos, além de identificar  comunidades de redes de sociais através de interesse comum segundo os tópicos criados pelo modelo LDA. Além das técnicas de processamento e visualização de conhecimento, como objetivo secundário propõe-se realizar análise exploratória do conjunto de dados para obter informações relevantes e que possam ser utilizadas na compreensão do negócio da empresa.
 
 
 \subsection{ORGANIZAÇÃO DO TRABALHO}
@@ -181,7 +181,7 @@ Latent Dirichlet Allocation, ou LDA, é um modelo generativo probabilístico pro
   \item cada tópico é formado por uma distribuição de palavras.
 \end{enumerate}
 
-O objetivo do algoritmo LDA é encontrar o modelo probabilístico de um conjunto de dados. Essa característica o difere das abosrdagens de Mistura de Unigramas, os quais assumem que cada documento exibe características de apenas um tópico. Ou seja, o modelo resultante do LDA  permite que documentos contenham múltiplos tópicos ao mesmo tempo e com relevância distintas. Nesta seção, discorre-se sobre as principais características do trabalho original de \citeonline{blei2003latent}.
+O objetivo do algoritmo LDA é encontrar o modelo probabilístico de um conjunto de dados. Essa característica o difere das abordagens de Mistura de Unigramas, os quais assumem que cada documento exibe características de apenas um tópico. Ou seja, o modelo resultante do LDA  permite que documentos contenham múltiplos tópicos ao mesmo tempo e com relevância distintas. Nesta seção, discorre-se sobre as principais características do trabalho original de \citeonline{blei2003latent}.
  
 %  A pesquisa de \citeonline{hu2009latent} foi complementar durante essa seção para melhor compreender o trabalho original.
 
@@ -409,7 +409,8 @@ Para cada mensagem processada é aplicado um conjunto de filtros, normatizaçõe
 \end{table}
 
 Na Tabela \ref{tab-stem}, nota-se a redução no número de palavras únicas aplicando o steam. O número de palavras únicas em um conjunto de documentos afeta diretamente o tempo de execução na criação do modelo LDA.
- Por outro lado, a redução pode causar um efeito não desejado distorcendo o sentido das palavra. Na seção de resultados apresenta-se a diferença entre a aplicação ou não desse processo na coleção de documentos de e-mail utilizado.
+ Por outro lado, a redução pode causar um efeito não desejado distorcendo o sentido das palavra. Esse passo é opcional.
+%  Na seção de resultados apresenta-se a diferença entre a aplicação ou não desse processo na coleção de documentos de e-mail utilizado.
 \end{enumerate}
 
 
@@ -573,7 +574,7 @@ Os documentos são indexados e estruturados no Elasticsearch como descrito na se
 
 \subsection{NÚMERO DE TÓPICOS}
 
-O LDA não possui conhecimento prévio sobre o número de tópicos otimizado para o conjunto de dados apresentado ao modelo. Dessa forma,
+O LDA não possui conhecimento prévio sobre o número de tópicos otimizado para o conjunto de dados entregue ao modelo. Dessa forma,
  é esperado como parâmetro de entrada a definição prévia do valor de $K$. Como descrito no capítulo 3.2, foi proposto uma série de valores
  de tópicos para se obter o valor de $K$ otimizado para o conjunto de dados via medida de coerência.
 
@@ -585,7 +586,7 @@ O LDA não possui conhecimento prévio sobre o número de tópicos otimizado par
 \end{figure}
 
 Na Figura \ref{fig-cm-4-to-64}, vemos a sensitividade da medida de coerência para cada valor de K. Nota-se que a maior coerência, dados esses 
-valores de $K$ é 8. No entanto, 8 não necessáriamente é o valor ideal de tópicos, com o experimento acima sabemos que o valor ideal está entre 4 e 16.
+valores de $K$ é 8. No entanto, 8 não necessáriamente é o valor ideal de tópicos, com o experimento acima sabemos apenas que o valor ideal está entre 4 e 16.
 
 \begin{figure}[H]
 	\centering
@@ -689,7 +690,7 @@ A Tabela \ref{tab-nich-documents} foi gerada pela distribuição $\theta$ e foi 
 
 Os documentos classificados são armazenados no Elasticsearch para exploração e análise baseada 
  nos rótulos e distribuições providos pelo LDA. Com a estruturação dos documentos e classificação via LDA é possível extrair informações como 
- a apresentada na Figura \ref{fig-documents-over-2015}.
+ dado pela Figura \ref{fig-documents-over-2015}.
 
 \begin{figure}[H]
 	\centering
@@ -741,11 +742,11 @@ Para a funcionalidade de busca com os critérios propostos no capítulo 4, foi i
 
 
 A aplicação ilustrada na Figura \ref{fig-search-explorer} possibilita a busca de documentos por termo, data,
- destinatários, remetente e tópico mais relevante. A apresentação dos resultados contanto é dada pela conexão entre os
- endereços de e-mail presentes nos documentos.
+ destinatários, remetente e tópico mais relevante. Os resultados são apresentados pela conexão entre os
+ endereços de e-mail presentes nos documentos, ao invés dos documentos em sí. Na proposta final pretende-se implementar ambos.
 
 Na Figura \ref{fig-search-filtered} vemos que o termo 'autenticidade' foi utilizado para buscar documentos no corpus,
-foi apresentado então a conexão entre os remetentes e destinatários presentes no resultado da busca.
+ obteve-se então a conexão entre os remetentes e destinatários presentes no resultado da busca.
 
 \begin{table}[H]
   \centering
