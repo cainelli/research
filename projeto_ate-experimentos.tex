@@ -3,7 +3,6 @@
 \usepackage[brazil]{babel}
 \usepackage[table]{xcolor}
 \usepackage{graphicx}
-\usepackage{subcaption}
 \usepackage{color}
 \usepackage{hyperref}
 \usepackage{abnt-alf}
@@ -23,7 +22,7 @@
 \textbf{\large Fernando Cainelli Tolentino}\\
 \vskip 4.0cm
 \setlength{\baselineskip}{1.5\baselineskip}
-\textbf{\large Latent Dirichlet Allocation: Visualizando e Explorando Documentos modelo generativo probabilístico}\\
+\textbf{\large Latent Dirichlet Allocation: Visualizando e Explorando Documentos   modelo generativo probabilístico}\\
 \vskip 4.5cm
 \end{center}
 \hfill{\vbox{\hsize=8.5cm\noindent\strut
@@ -183,7 +182,7 @@ Latent Dirichlet Allocation, ou LDA, é um modelo generativo probabilístico pro
 
 O objetivo do algoritmo LDA é encontrar o modelo probabilístico de um conjunto de dados. Essa característica o difere das abosrdagens de Mistura de Unigramas, os quais assumem que cada documento exibe características de apenas um tópico. Ou seja, o modelo resultante do LDA  permite que documentos contenham múltiplos tópicos ao mesmo tempo e com relevância distintas. Nesta seção, discorre-se sobre as principais características do trabalho original de \citeonline{blei2003latent}.
  
-%  A pesquisa de \citeonline{hu2009latent} foi complementar durante essa seção para melhor compreender o trabalho original.
+ A pesquisa de \citeonline{hu2009latent} foi complementar durante essa seção para melhor compreender o trabalho original.
 
 %Antes de nos aprofundarmos na descrição do algoritmo, façamos uma introdução da terminologia formal e notações usada nesta seção.
 
@@ -191,17 +190,10 @@ O objetivo do algoritmo LDA é encontrar o modelo probabilístico de um conjunto
 %% PROCESSO GENERATIVO
 \subsection{PROCESSO GENERATIVO}
 
-Em uma análise textual, que é mais ampla a análise de  tópicos, uma $palavra$ é a unidade mais básica de dado, definida com um item de um vocabulário indexado por \(w \in \{1,. . . , V\}\)  , onde $V$ é o número de palavras únicas dentro de um corpus, também denominado vocabulário. As palavras são representadas como um vetor de base unitária. Assim, um documento é uma sequência de $N$ palavras denotadas por \(\textbf{ w} = (w_1, w_2,. . . ,  w_N)\). Por fim, um corpus é uma coleção de $M$ documentos denotados por \(\textbf{ D} = \{\textbf{ w}_1, \textbf{ w}_2, . . ., \textbf{ w}_M\}\).
+Em uma análise textual, que é mais ampla a análise de  tópicos, uma $palavra$ é a unidade mais básica de dado, definida com um item de um vocabulário indexado por \(w \in \{1,. . . , V\}\)  , onde $V$ é o número de palavras únicas dentro de um corpus, também denominado vocabulário. As palavras são representadas como um vetor de base unitária.Assim, um documento é uma sequência de $N$ palavras denotadas por \(\textbf{ w} = (w_1, w_2,. . . ,  w_N)\). Por fim, um corpus é uma coleção de $M$ documentos denotados por \(\textbf{ D} = \{\textbf{ w}_1, \textbf{ w}_2, . . ., \textbf{ w}_M\}\).
 
- O LDA assume que documentos são criados via um processo generativo. Primeiro, extraímos um vetor de pesos de tópicos que determina
- quais tópicos são mais prováveis de aparecer em um documento. Em seguida, para cada palavra que aparece em um documento, escolhemos um tópico
- único do vetor de pesos de tópicos. Para gerar a palavra, então, extraímos da distribuição de probabilidade condicinada ao tópico escolhido.
- Desse processo, nós vemos que cada palavra em um documento é gerada por um tópico diferente escolhido randômicamente, \cite{hu2009latent}.
-
- Por exemplo, dado um conjunto de documentos que podem ser classificados em quatro tópicos: Esportes, Animais, Tecnologia e Artes. 
- Cada tópico poderá ser definido pela seguinte lista de palavras:
- % \underline{O LDA assume que documentos são criados via um processo generativo no qual palavras nos documentos são geradas. Com base no tamanho do documento,
-%  nós escolhamos uma mistura de tópicos usando a distribuição multinomial de tópicos para escolher as palavras que devem ser usadas para preencher a cota de cada tópico}. 
+\underline{O LDA assume que documentos são criados via um processo generativo no qual palavras nos documentos são geradas. Com base no tamanho do documento,
+ nós escolhamos uma mistura de tópicos usando a distribuição multinomial de tópicos para escolher as palavras que devem ser usadas para preencher a cota de cada tópico}. Por exemplo, dado um conjunto de documentos que podem ser classificados em quatro tópicos: Esportes, Animais, Tecnologia e Artes. Cada tópico poderá ser definido pela seguinte lista de palavras:
 
 \begin{itemize}
   \item \textbf{ Esportes:} bola, futebol, basquete, gol, pontos, corrida, natação.
@@ -269,7 +261,7 @@ o $M$ denota o número de documentos que é associado ao prato externo e o inter
 
 \begin{figure}[H]
  \centering
-   \includegraphics[height=5cm]{images/figure_1.png}
+   \includegraphics[height=10cm]{images/figure_1.png}
    \caption{Plate Notation representando o modelo LDA, adaptado de \citeonline{blei2003latent}}
    \label{fig-plate}
 \end{figure}
@@ -309,7 +301,7 @@ O método mais utilizado em modelos de variável latente é o algoritmo variacio
 
 \begin{figure}[H]
 	\centering
-    \includegraphics[height=6cm]{images/figure_2.png}
+    \includegraphics[height=10cm]{images/figure_2.png}
     \caption{(a) Representação gráfica do modelo LDA. (b) A aproximação variacional para a distribuição posteriori. Adaptado de \citeonline{blei2003latent}}
 \end{figure}
 
@@ -377,7 +369,7 @@ O conjunto de dados utilizado a ser utilizado neste trabalho trata-se de uma col
 %% PARSER
 \subsection{PARSER}
 Para cada mensagem processada é aplicado um conjunto de filtros, normatizações e presunções com o intuito de se obter a mais fiel e relevante representação vetorial do documento.
- Para isso, foram aplicados processos adotados em mineração de textos, descritos abaixo:
+ Para isso, foram adotados processos adotados em mineração de textos, descritos abaixo:
 
 \begin{enumerate}
 \item \textbf{Pré-processamento:} Nesse passo, utilizou-se a biblioteca Flanker, \citeonline{flanker2017}, para primeira estruturação do documento, fazendo o parsing dos headers de interesse. Nesse passo são extraídos os valores dos headers ‘Subject’, ‘Date’, ‘From’, ‘To’, ‘Cc’, ‘X-Spam-Flag’ essas informações não são utilizadas para a geração do modelo,
@@ -482,7 +474,7 @@ Como último parâmetro, precisa-se definir o número $K$ de tópicos desejados.
   &Tópico &3 &dados &máquina &mineração &neurais &redes &aprendizagem \\
   \hline
   \end{tabular}
-  \caption{Representação de um tópico de exemplo e suas palavras mais relevantes}
+  \caption{Representação de um tópico e suas palavras mais relevantes}
   \label{fig-exe}
 \end{table}
 
@@ -519,14 +511,14 @@ As duas últimas são variações da primeira que requer um conjunto ordenado, e
 \item \textbf{Agregação:} Por fim, todas as confirmações de todos conjuntos de pares $S_i$ são agregados em uma única pontuação de coerência pela sua média.
 \end{enumerate}
 
-O LDA foi inicialmente experimentado em conjuntos de dados com 4, 8, 16, 32 e 64 tópicos e parâmetros $\eta$ e $\alpha$ com distribuições uniformes. Para cada configuração de parâmetro $K$,
+O LDA foi inicialmente experimentado em conjuntos de dados com 4, 8, 16, 32, 64 e 128 tópicos e parâmetros $\eta$ e $\alpha$ com distribuições uniformes. Para cada configuração de parâmetro $K$,
  obteve-se a pontuação de coerência do modelo via processo descrito acima. O valor de $K$ utilizado foi o que obteve maior coerência.
 
 Por fim, selecionou-se as distribuições do modelo gerado com a configuração de $K$ otimizada, e então adicionou-se um novo metadado para cada documento armazenado no Elasticsearch com sua distribuição de tópicos.
  Também foi armazenado em uma outra estrutura a distribuição de palavras por tópico. Essas informações serão utilizadas no processo de visualização.
 
-%% EXPERIMENTOS
-\section{EXPERIMENTOS}
+%% APLICAÇÃO
+\subsection{APLICAÇÃO}
 A aplicação web interativa é uma extensão do LDAvis \cite{sievert2014ldavis}, o trabalho original tem duas funcionalidades principais
 que permitem ao usuário explorar o modelo.
 
@@ -568,208 +560,13 @@ A proposta é estender a visualização para exploração não apenas dos tópic
   \end{enumerate}
 \end{enumerate}
 
-Os documentos são indexados e estruturados no Elasticsearch como descrito na seção 3.1, o próprio motor de busca possui mecanismos para fornecer os tipos de busca e filtros propostos,
+Os documentos são indexados e estruturados no Elasticsearch como  descrito na seção 4.1, o próprio motor de busca possui mecanismos para fornecer os tipos de busca e filtros propostos,
  bem como apresentar os dados quantitativos para análise exploratória e criação de comunidades relacionando destinatários e remetentes a seus tópicos frequentes e relevantes.
-
-\subsection{NÚMERO DE TÓPICOS}
-
-O LDA não possui conhecimento prévio sobre o número de tópicos otimizado para o conjunto de dados apresentado ao modelo. Dessa forma,
- é esperado como parâmetro de entrada a definição prévia do valor de $K$. Como descrito no capítulo 3.2, foi proposto uma série de valores
- de tópicos para se obter o valor de $K$ otimizado para o conjunto de dados via medida de coerência.
-
-\begin{figure}[H]
-	\centering
-    \includegraphics[height=8cm]{images/figure_5.png}
-    \caption{Medida de Coerência alterando $K$}
-    \label{fig-cm-4-to-64}
-\end{figure}
-
-Na Figura \ref{fig-cm-4-to-64}, vemos a sensitividade da medida de coerência para cada valor de K. Nota-se que a maior coerência, dados esses 
-valores de $K$ é 8. No entanto, 8 não necessáriamente é o valor ideal de tópicos, com o experimento acima sabemos que o valor ideal está entre 4 e 16.
-
-\begin{figure}[H]
-	\centering
-    \includegraphics[height=8cm]{images/figure_6.png}
-    \caption{Medida de Coerência alterando $K$}
-    \label{fig-cm-4-to-16}
-\end{figure}
-
-Rodando o modelo novamente com diferentes números de tópicos nessa faixa, nota-se pela medida de coerência que o valor ideal de tópicos para esse 
- conjunto de dados é 15, como apresentado na Figura \ref{fig-cm-4-to-64}.
-
-\subsection{RESULTADOS INICIAIS}
-
-Neste capítulo, são apresentados os resultados iniciais com bases reduzidas. Para cada experimento são executados todos os processos citados
- neste trabalho, inclusive definições de parâmetros, o que pode afetar o número de tópicos dependendo da base utilizada.
-
-No experimento seguinte, a base foi amostrada com 10\% dos documentos, esse corpus teve valor otimizado do parâmetro $K=5$.
-Os rótulos dos tópicos apresentados foram criados com base na interpretação do autor.
-
-\begin{table}[h]
-  \centering
-  \begin{tabular}{ll}
-  Tópico                   & Palavras relevantes \\
-  \hline
-  'Tecnologia'               & intel, inside, acesso, quarentena, dado, deletar, privacidade \\
-  'Comercial'                & produto, venda, ano, juro, mercado, cliente, empresa \\
-  'Viagem'                   & oferta, contato, valor, partir, voo, azul, horario \\
-  'Cobrança'                 & anexo, boleto, nf, pagamento, nota, fiscal, omie \\
-  'Governo'                  & edital, objeto, conlicitacao, servico, licitacao, gov, contratacao \\
-  \hline
-  \end{tabular}
-  \caption{Tópicos e suas palavras mais relevantes.}
-  \label{tab-global-topics}
-\end{table}
-
-
-Outro experimento realizado, foi a criação de um modelo alimentado apenas com mensagens de um único departamento.
- Quando executado o processo descrito na seção 4.1 para escolha de número de tópicos na base reduzida obteve-se o valor otimizado de $K=6$.
-
-\begin{table}[H]
-  \centering
-  \begin{tabular}{ll}
-  Tópico                   & Palavras relevantes \\
-  \hline
-  'Abuse'                    & csi, rbl, cloudmark, progress, rbldns, lib \\
-  'Administrativo'           & servico, cliente, conta, enviado, assunto, dado, suporte \\
-  'Backup'                   & full, ticket, use, backup, zimbra, server, completed  \\
-  'Automação'                & lda, cron, catalog, puppet, run, hour, second \\
-  'Monitoração'              & host, time, type, problem, nagios, state, critical \\
-  'Segurança'                & syncert, ldap, upgrade, method, unattend, package \\
-  \hline
-  \end{tabular}
-  \caption{Tópicos e suas palavras mais relevantes. Base de documentos do departamento de TI.}
-  \label{tab-nich-topics}
-\end{table}
-
-As distribuições de palavras por tópico($\phi$) amostrada na tabela acima é coerente quando observamos por exemplo, um documento classificado com maior
- probabilidade de pertencer ao tópico rotulado como 'Monitoração'. Notamos que as palavras contidas no documento abaixo tem muita relevância a esse tópico.
-
-
-\begin{figure}[H]
-  \scriptsize
-  \begin{verbatim}
-  ***** Alert *****
-  Notification Type: PROBLEM
-
-  Service: CHECK_BACKUP_ZIMBRA
-  Host: r-zu8
-  Address: 192.168.6.77
-  State: CRITICAL
-
-  Date/Time: Sat May 6 09:03:06 BRT 2017
-
-  Additional Info:
-
-  Accounts XML empty!
-  \end{verbatim}
-  \normalsize
-  \caption{Conteúdo de um documento classificado com maior probabilidade de pertencer ao tópico 'Monitoração'.}
-  \label{mo}
-\end{figure}
-
-Outra saída do modelo, é a distribuição $\theta$, que é a distribuição probabilística de tópicos por documento.
-
-\begin{table}[H]
-  \centering
-  \begin{tabular}{lll}
-  Assunto                               & Tópico mais relevante \\
-  \hline
-  PROBLEM Service Alert: mxcorp2...     & 'Monitoração' \\
-  Cron root@vm-vale1 /usr/loca...       & 'Automação' \\
-  ZCS Backup Report: FAIL               & 'Backup' \\
-  \hline
-  \end{tabular}
-  \caption{Documentos e seus tópicos mais relevantes. Base de documentos do departamento de TI.}
-  \label{tab-nich-documents}
-\end{table}
-
-A Tabela \ref{tab-nich-documents} foi gerada pela distribuição $\theta$ e foi reduzida com a classificação de maior 
- probabilidade.
-
-Os documentos classificados são armazenados no Elasticsearch para exploração e análise baseada 
- nos rótulos e distribuições providos pelo LDA. Com a estruturação dos documentos e classificação via LDA é possível extrair informações como 
- a apresentada na Figura \ref{fig-documents-over-2015}.
-
-\begin{figure}[H]
-	\centering
-    \includegraphics[height=9cm]{images/figure_7.png}
-    \caption{Documentos por tópico ao longo de 2015. Base de documentos do deparamenteo de TI.}
-    \label{fig-documents-over-2015}
-\end{figure}
- 
-Notamos um pico em Fevereiro de mensagens classificadas
- com o rótulo 'Monitoração', isso se deu pois um incidente em um dos datacenters da empresa resultou em
- um envio em massa de mensagens de monitoração sobre falha de serviços.
-
-\subsection{VISUALIZAÇÃO}
-
-No experimento inicial, são apresentadas duas aplicações desenvolvidas neste trabalho que serviram de prova de conceito.
- O objetivo final é integrar tais funcionalidades ao trabalho de \citeonline{sievert2014ldavis}.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[height=9cm]{images/figure_8.png}
-  \caption{Aplicação conceito para navegação de documentos.}
-  \label{fig-doc-explorer}
-\end{figure}
-
-Ilustrada na Figura \ref{fig-doc-explorer}, a primeira aplicação é utilizada para navegação e leitura os documentos
- indexados. Essa funcionalidade não existe no trabalho de \citeonline{sievert2014ldavis} e é útil para exploração e navegação do corpus.
- Ao final do trabalho, os documentos resultantes das buscas serão apresentadas de forma similar dentro do LDAVis. 
-
-Para a funcionalidade de busca com os critérios propostos no capítulo 4, foi implementada na segunda aplicação conceito:
-
-\begin{figure}[H]
-  \centering
-  \begin{subfigure}[b]{0.48\textwidth}
-      \includegraphics[width=\textwidth]{images/figure_9.png}
-      \caption{Todos documentos}
-      \label{fig-search-all}
-  \end{subfigure}
-  ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
-    %(or a blank line to force the subfigure onto a new line)
-  \begin{subfigure}[b]{0.48\textwidth}
-      \includegraphics[width=\textwidth]{images/figure_10.png}
-      \caption{Filtrado por termo}
-      \label{fig-search-filtered}
-  \end{subfigure}
-  \caption{Aplicação conceito para busca de documentos e visualização de comunidades.}
-  \label{fig-search-explorer}
-\end{figure}
-
-
-
-A aplicação ilustrada na Figura \ref{fig-search-explorer} possibilita a busca de documentos por termo, data,
- destinatários, remetente e tópico mais relevante. A apresentação dos resultados contanto é dada pela conexão entre os
- endereços de e-mail presentes nos documentos.
-
-Na Figura \ref{fig-search-filtered} vemos que o termo 'autenticidade' foi utilizado para buscar documentos no corpus,
-foi apresentado então a conexão entre os remetentes e destinatários presentes no resultado da busca.
-
-\begin{table}[H]
-  \centering
-  \begin{tabular}{llll}
-  Documento     & From                       & To                         & Cc         \\
-  \hline
-  1             & usuario 1                  & usuario 2                  &            \\
-  2             & usuario 3                  & usuario 4                  &            \\
-  3             & usuario 4                  & usuario 3, usuario 5       &             \\
-  4             & usuario 3                  & usuario 4                  & usuario 5             \\
-  \hline
-  \end{tabular}
-  \caption{Possível resultado da busca para Figura \ref{fig-search-filtered}.}
-  \label{tab-nich-documents}
-\end{table}
-
-Na Tabela acima vemos um possível resultado de busca que possa gerar as conexões presentes na Figura \ref{fig-search-filtered}.
- Com esse conceito, é possível identificar comunidades em diferentes níveis, uma vez que os usuários não necessáriamente precisam ter trocado mensagens entre sí. Tais 
- comunidades são encontradas por termos, tópicos de interesse, e outros critérios de busca mencionados neste capítulo.
 
 %% CRONOGRAMA
 \section{CRONOGRAMA}
 
-\begin{center}
+\begin{center}  
   \begin{tabular}{llllllllll}
                            & Out                    & Nov                    & Dez                      & Jan                    & Fev                    & Mar                     & Abr                    & Mai                     & Jun \\
                            \hline
@@ -784,7 +581,7 @@ Na Tabela acima vemos um possível resultado de busca que possa gerar as conexõ
   \hline
   \end{tabular}
 \end{center}
-
+  
 
 \def\refname{REFERÊNCIAS BIBLIOGRÁFICAS}
 \bibliography{biblproj}
