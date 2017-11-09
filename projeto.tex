@@ -187,7 +187,24 @@ O objetivo do algoritmo LDA é encontrar o modelo probabilístico de um conjunto
 
 %Antes de nos aprofundarmos na descrição do algoritmo, façamos uma introdução da terminologia formal e notações usada nesta seção.
 
+\subsection{TRABALHOS RELACIONADOS}
 
+Diversos métodos probabilísticos e não-probabilísticos foram propostos para resolver o problema de modelagem de texto. O objetivo
+ principal de ambos métodos é o de encontrar uma maneira de classificar cada documento utilizando descrições curtas que preservem
+ seu sentido.
+
+Métodos não probabilísticos como \textit{tf-idf} \cite{salton1983introduction}, por exemplo, utilizam contadores de palavras para descrever um documento.
+ Em seguida o modelo LSI de \citeonline{Deerwester90indexingby} utiliza a decomposição em valores singulares(\textit{singular-value decomposition, SVD}) da
+ matriz $Palavra \times Documento$ do \textit{tf-idf} para identificar um conjunto de características que captura uma maior variância.
+
+Por outro lado, modelos probabilísticos caem em uma categoria de variáveis latentes e introduzem o conceito de tópicos. O pLSI, proposto por \citeonline{{hofmann1999probabilistic}}, 
+ mapeia documentos e palavras à tópicos e, portanto, cada documento é reduzido à uma distribuição de probabilidade em um conjunto de tópicos.
+ Todos os métodos citados não levam em consideração a ordem das palavras em um documento. \citeonline{blei2003latent} propõe então o
+ LDA, onde leva em consideração a ordem das palavras e utiliza um modelo misto, ou \textit{mixture model}, para permutabilidade de palavras e documentos. Tal
+ modelo generativo probabilistico representa documentos como uma mistura de tópicos e tópicos como uma mistura de palavras.
+
+Outras variações do modelo geral do LDA vem sendo criadas, é o caso de \citeonline{Rosen-Zvi:2004:AMA:1036843.1036902}
+ que incorpora metadados como autores, titulo, localização geográfica, links, etc. ao modelo.
 %% PROCESSO GENERATIVO
 \subsection{PROCESSO GENERATIVO}
 
