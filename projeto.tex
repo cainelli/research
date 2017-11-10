@@ -544,66 +544,67 @@ Por fim, selecionou-se as distribuições do modelo gerado com a configuração 
  Também foi armazenado em uma outra estrutura a distribuição de palavras por tópico. Essas informações serão utilizadas no processo de visualização.
 
 %% EXPERIMENTOS
-\section{EXPERIMENTOS}
-A aplicação web interativa é uma extensão do LDAvis \cite{sievert2014ldavis}, o trabalho original tem duas funcionalidades principais
-que permitem ao usuário explorar o modelo.
+\section{EXPERIMENTOS PRELIMINARES}
 
-\begin{figure}[H]
-	\centering
-    \includegraphics[height=10cm]{images/figure_4.png}
-    \caption{Layout do LDAvis. A esquerda a visualização de tópicos e a direita o gráfico de barras com o tópico 34 selecionado. Imagem do trabalho original \cite{sievert2014ldavis}}
-\end{figure}
-
+A aplicação web interativa é uma extensão do LDAvis \cite{sievert2014ldavis}. O trabalho original têm as seguintes duas funcionalidades principais que permitem ao usuário explorar o modelo, conforme ilustrado na Figura \ref{fig-ldavis}:
 
 \begin{enumerate}
-  \item Possibilita o usuário selecionar um tópico e visualizar os termos mais relevantes dentro dele.
+  \item Possibilita o usuário selecionar um tópico e visualizar os termos mais relevantes dentro do mesmo;
   \item Possibilita o usuário selecionar um termo para revelar sua distribuição condicional sobre os tópicos. Essa distribuição
   é visualizada alterando a área dos círculos tal que seja proporcional a frequência do termo selecionado.
 \end{enumerate}
 
-A proposta é estender a visualização para exploração não apenas dos tópicos e palavras mas também dos documentos. Ao final do desenvolvimento esperamos entregar as seguintes funcionalidades extras:
+\begin{figure}[H]
+	\centering
+    \includegraphics[height=10cm]{images/figure_4.png}
+    \caption{Layout do LDAvis. A esquerda a visualização de tópicos e a direita o gráfico de barras com o tópico 34 selecionado. Adaptado de \cite{sievert2014ldavis}}.
+    \label{fig-ldavis}
+\end{figure}
+
+
+A proposta deste trabalho é estender a aplicação e funcionalidades descritas acima para exploração não apenas dos tópicos e palavras, mas também dos documentos. Dessa maneira, ao final do desenvolvimento espera-se apresentar as seguintes funcionalidades adicionais, com ênfase a dados de e-mails:
 
 \begin{enumerate}
-  \item Busca de documentos:
+  \item Buscar documentos por:
   \begin{enumerate}
-    \item Por palavra.
-    \item Por trechos de palavras.
-    \item Por data.
-    \item Por remetente.
-    \item Por destinatários.
-    \item Por tópico mais relevante.
+    \item palavra;
+    \item trechos de palavras;
+    \item data;
+    \item remetente;
+    \item destinatários;
+    \item tópico mais relevante.
   \end{enumerate}
-  \item Visualização de comunidades:
+  \item Visualização de comunidades por:
   \begin{enumerate}
-    \item Por interesse em tópicos comuns.
-    \item Por interesse em documentos comuns.
+    \item interesse em tópicos comuns;
+    \item interesse em documentos comuns.
   \end{enumerate}
-  \item Análise exploratória do conjunto de dados.
+  \item Análise exploratória do conjunto de dados:
   \begin{enumerate}
-    \item Quantidade de documentos por tópico.
-    \item Quantidade de usuários.
-    \item Usuários mais relevantes por tópico
+    \item Quantidade de documentos por tópico;
+    \item Quantidade de usuários;
+    \item Usuários mais relevantes por tópico.
   \end{enumerate}
 \end{enumerate}
 
-Os documentos são indexados e estruturados no Elasticsearch como descrito na seção 3.1, o próprio motor de busca possui mecanismos para fornecer os tipos de busca e filtros propostos,
- bem como apresentar os dados quantitativos para análise exploratória e criação de comunidades relacionando destinatários e remetentes a seus tópicos frequentes e relevantes.
+Os documentos são indexados e estruturados no Elasticsearch como descrito na seção 3.1, a própria ferramenta oferece mecanismos de consulta que possibilita realizar diferentes tipos de busca e a implementação dos filtros propostos, bem como apresentar os dados quantitativos para análise exploratória e criação de comunidades, relacionando destinatários e remetentes a seus tópicos frequêntes e relevantes.
 
 \subsection{NÚMERO DE TÓPICOS}
 
-O LDA não possui conhecimento prévio sobre o número de tópicos otimizado para o conjunto de dados entregue ao modelo. Dessa forma,
- é esperado como parâmetro de entrada a definição prévia do valor de $K$. Como descrito no capítulo 3.2, foi proposto uma série de valores
- de tópicos para se obter o valor de $K$ otimizado para o conjunto de dados via medida de coerência.
+O LDA não faz descoberta automática  sobre o número de tópicos existente no conjunto de dados entregue ao modelo. Dessa forma,
+ é esperado como parâmetro de entrada a definição prévia do valor de tópicos a ser descoberto, o número de $K$. Como descrito no capítulo 3.2, como estratégia de encontrar o melhor valor para o parâmetro, é comum explorar uma série de valores de tópicos, analisando  a medida de coerência com a finalidade de se obter o valor de $K$ otimizado para o conjunto de dados em análise.
+
+Na Figura \ref{fig-cm-4-to-64}, apresenta-se a sensitividade da medida de coerência para cada valor de $K$. Nota-se por essa figura que a maior coerência é encontrada quando o valor de $K$ é igual a 8. No entanto, 8 não necessáriamente é o valor ideal de tópicos, com o experimento acima sabe-se apenas que o valor ideal está entre 4 e 16.
 
 \begin{figure}[H]
 	\centering
     \includegraphics[height=8cm]{images/figure_5.png}
-    \caption{Medida de Coerência alterando $K$}
+    \caption{Medida de Coerência para cada valor de $K$.}
     \label{fig-cm-4-to-64}
 \end{figure}
 
-Na Figura \ref{fig-cm-4-to-64}, vemos a sensitividade da medida de coerência para cada valor de K. Nota-se que a maior coerência, dados esses 
-valores de $K$ é 8. No entanto, 8 não necessáriamente é o valor ideal de tópicos, com o experimento acima sabemos apenas que o valor ideal está entre 4 e 16.
+Refazendo os experimento acima com diferentes números de tópicos com valores de $K$ na faixa entre 4 e 16, nota-se pela medida de coerência que o valor ideal de tópicos para esse 
+ conjunto de dados é 15, como apresentado na Figura \ref{fig-cm-4-to-64}.
 
 \begin{figure}[H]
 	\centering
@@ -612,16 +613,15 @@ valores de $K$ é 8. No entanto, 8 não necessáriamente é o valor ideal de tó
     \label{fig-cm-4-to-16}
 \end{figure}
 
-Rodando o modelo novamente com diferentes números de tópicos nessa faixa, nota-se pela medida de coerência que o valor ideal de tópicos para esse 
- conjunto de dados é 15, como apresentado na Figura \ref{fig-cm-4-to-64}.
+
 
 \subsection{RESULTADOS INICIAIS}
 
-Neste capítulo, são apresentados os resultados iniciais com bases reduzidas. Para cada experimento são executados todos os processos citados
+Neste capítulo,  os resultados iniciais são apresentados a partir de um conjunto de dados reduzido. Para cada experimento são executados todos os processos citados
  neste trabalho, inclusive definições de parâmetros, o que pode afetar o número de tópicos dependendo da base utilizada.
 
-No experimento seguinte, a base foi amostrada com 10\% dos documentos, esse corpus teve valor otimizado do parâmetro $K=5$.
-Os rótulos dos tópicos apresentados foram criados com base na interpretação do autor.
+No experimento seguinte, a base foi amostrada com 10\% dos documentos disponíveis, esse corpus teve valor otimizado do parâmetro $K=5$.
+Os rótulos dos tópicos apresentados foram criados com base na interpretação das mensagens originais feita pelo autor.
 
 \begin{table}[h]
   \centering
@@ -640,7 +640,7 @@ Os rótulos dos tópicos apresentados foram criados com base na interpretação 
 \end{table}
 
 
-Outro experimento realizado, foi a criação de um modelo alimentado apenas com mensagens de um único departamento.
+Outro experimento realizado foi a criação de um modelo alimentado apenas com mensagens de um único departamento.
  Quando executado o processo descrito na seção 4.1 para escolha de número de tópicos na base reduzida obteve-se o valor otimizado de $K=6$.
 
 \begin{table}[H]
