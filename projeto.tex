@@ -389,13 +389,16 @@ A seguir apresenta-se a metodologia adotada para realização do trabalho, descr
 \subsection{BASE DE DADOS} \label{sec:base-de-dados}
 
 O conjunto de dados utilizado a ser utilizado neste trabalho trata-se de uma coleção de e-mails retirados de um ambiente real de uma empresa provedora de serviços. 
- Para os experimentos realizados neste trabalho foram coletados 4 milhões de mensagens de e-mail. No geral, essas mensagens de e-mail seguem as RFCs 822, 2045, 2046, 2047, 4288, 4289 e 2049,
+ Para os experimentos realizados neste trabalho foram coletados mais de 4 milhões de mensagens de e-mail. No geral, essas mensagens de e-mail seguem as RFCs 822, 2045, 2046, 2047, 4288, 4289 e 2049,
  que são os padrões da indústria para troca de e-mails.	Em resumo, as mensagens são formadas por headers contendo informações sobre assunto, remetente, destinatários e data.
  Existem também headers contento outros tipos de informações como caminho percorrido pela mensagem até o seu destino final, análises de filtro de conteúdo entre outros. Esses geralmente relevantes a administradores do serviço. O corpo e-mail contém o conteúdo da mensagem em si, que pode ser segmentado em  partes, cada uma com seu próprio content-type. 
  Os content-types mais comuns entre mensagens de e-mail são: text/plain, text/html, multipart/mixed, application/octet-stream entre outros, esses se referem ao tipo do conteúdo seguinte no corpo do e-mail.
  Essa informação é utilizada por clientes de e-mail para decodificar adequadamente a mensagem. Dessa forma é possível realizar o download de arquivos separadamente ou renderizar imagens ou conteúdo html dentro da mensagem.
 
-Para os experimentos realizados no Capítulo \ref{sec:experimentos} a base total foi segmentada nos seguintes sub-conjunto de dados:
+Nota-se presente no conteúdo dos documentos da base de dados utilizada temas como: propostas e cotações comerciais, suporte técnico,
+ e-mail marketing, cobrança, notificações de sistema, SPAM e phishing, editais de governo, entre outros.
+
+Para os experimentos realizados no Capítulo \ref{sec:experimentos} a base total foi segmentada em sub-conjuntos de dados que podem ser observados abaixo:
 
 \begin{table}[H]
   \centering
@@ -415,7 +418,7 @@ Para os experimentos realizados no Capítulo \ref{sec:experimentos} a base total
 Na Tabela \ref{tab-base-de-dados} vemos a descrição das bases utilizadas neste trabalho. A $Amostra\ Reduzida$ extraída da base $Total$ foi utilizada para determiar o número ideal de tópicos
  descrita no Capítulo \ref{sec:n-topicos} uma vez que é necessário rodar o algoritmo diversas vezes para se encontrar número de tópicos otimizado para 
  o corpus. A base $Amostra\ Departamento\ de\ T.I$ são documentos de e-mail de remetentes ou destinatários apenas desse departamento dentro da empresa provedora
- de serviços. Essa abordagem foi proposta pois o autor possui domínio sobre o conteúdo dessa base. Em mineração de dados é comum a utilização de especialistas
+ de serviços. Essa abordagem foi proposta pois o autor possui domínio sobre o conteúdo desse sub conjunto e em mineração de dados é comum a utilização de especialistas
  no assunto explorado ou na base de dados utilizada para auxiliar na compreensão resultados das análises.
 
  \subsection{ARQUITETURA} \label{sec:arquitetura}
@@ -430,8 +433,8 @@ Na Tabela \ref{tab-base-de-dados} vemos a descrição das bases utilizadas neste
 \end{figure}
 
 Notamos na Figura \ref{fig-framework-lda} os principais componentes envolvidos na criação do modelo. A primeira caixa representa o servidor de 
- e-mail onde as mensagens são armazenadas como arquivos de texto em um filesystem \textit{block storage} convencional. É realizado um processo de
- estruturação dos documentos de e-mail descritos no Capítulo \ref{sec:coletor}. Esses documentos são armazenados e indexados no Elasticsearch para
+ e-mail onde as mensagens são armazenadas como arquivos de texto em um filesystem \textit{block storage} convencional. Esses arquivos são coletados e então
+ processados para estruturação, como descrito no Capítulo \ref{sec:coletor}. Em seguida, os documentos são armazenados e indexados no Elasticsearch para
  posterior consulta e para criação do modelo, esse processo é detalhado no Capítulo \ref{sec:criacao-modelo}. Finalmente, com os dados estruturados
  e indexados, apresentamos no Capítulo \ref{sec:experimentos} a proposta para aprimoramento da visualização do LDAVis.
 
@@ -446,18 +449,18 @@ O Elasticsearch é um dos motores de busca open-source mais adotados, atualmente
 
 Possui uma API RESTful de busca e análise e diversos métodos de ingestão, via API ou SDKs suportadas em diversas linguagens:
  Java, C\#, Python , JavaScript, PHP, .Net, Groovy, Perl e Ruby. Pode ser integrado à \textit{pipelines} de \textit{Big Data} através
- de um conector para Haddop, popular Framework para \textit{Big Data}, fornecendo integrações com outras ferramentas conhecidas como Spark, Spark Streeming, Spark SQL,
- Hive, Pig, Storm, Cascading e MapReduce. Neste trabalho foi utilizado a versão em container do Elasticsearch pela sua facilidade de implementação e utilização e o SDK em Python como cliente para interagir com o componente. 
+ de um conector para Haddop, um popular Framework para \textit{Big Data}, fornecendo integrações com outras ferramentas conhecidas como Spark, Spark Streeming, Spark SQL,
+ Hive, Pig, Storm, Cascading e MapReduce. Neste trabalho foi utilizado a versão 5.6 do Elasticsearch em container pela sua facilidade de implementação e utilização e o SDK em Python como cliente para interagir com o componente. 
 
 Abaixo, alguns conceitos importantes do Elasticsearch que devem ser abordados:
 
  \begin{itemize}
    \item \textbf{index:} Uma coleção de documentos que possuem características similares.
    \item \textbf{tokenizer:} Recebem uma stream de caracteres e os quebra seguindo determinado critério de configuração.
-   \item \textbf{documento:} Unidade básica de informação que pode ser indexada. É expessado na forma de um objeto JSON(JavaScript Object Notation).
+   \item \textbf{documento:} Unidade básica de informação que pode ser indexada. É expressado na forma de um objeto JSON(JavaScript Object Notation).
  \end{itemize}
 
-Antes do envio dos $documentos$ é necessário criar um $index$ no Elasticsearch, para nosso caso de uso cria-se apenas um com a configuração
+Antes do envio dos $documentos$ é necessário criar um $index$ no Elasticsearch. Para nosso caso de uso cria-se apenas um com a configuração
 de $tokenizer$ de \textit{3-gramas}, ou seja, quando um documento é indexado o Elasticsearch vai quebrar o texto em \textit{3-gramas}. Isso
 possibilita que um documento contendo o texto \textit{'...Infelizmente temos que postergar a visita, devido à...'} possa ser encontrada passando
 apenas como query de busca \textit{'pos'} ou \textit{'vis'} por exemplo.
@@ -671,7 +674,9 @@ O LDA não faz descoberta automática  sobre o número de tópicos existente no 
  é esperado como parâmetro de entrada a definição prévia do valor de tópicos a ser descoberto, o número de $K$. Como descrito no Capítulo \ref{sec:criacao-modelo}, como estratégia de encontrar o melhor valor para o parâmetro, é comum explorar uma série de valores de tópicos, analisando  a medida de coerência com a finalidade de se obter o valor de $K$ otimizado para o conjunto de dados em análise. Foi utilizado a 
  base de $Amostra\ Reduzida$ para esse propósito.
 
-Na Figura \ref{fig-cm-4-to-64}, apresenta-se a sensitividade da medida de coerência para cada valor de $K$. Nota-se por essa figura que a maior coerência é encontrada quando o valor de $K$ é igual a 8. No entanto, 8 não necessáriamente é o valor ideal de tópicos, com o experimento acima sabe-se apenas que o valor ideal está entre 4 e 16.
+Rodamos o algoritmo com $K=4,\ 8,\ 16,\ 32\ e\ 64$ e $\eta=\frac{1}{K}$ e os resultados presentes na Figura \ref{fig-cm-4-to-64}
+ mostram que a maior coerência é encontrada quando o valor de $K$ é 8. No entanto, isso implica apenas que o verdadeiro 
+ valor otimizado está no intervalo de 4 à 16, podendo, mas não necessáriamente ser 8.
 
 \begin{figure}[H]
 	\centering
@@ -680,7 +685,7 @@ Na Figura \ref{fig-cm-4-to-64}, apresenta-se a sensitividade da medida de coerê
     \label{fig-cm-4-to-64}
 \end{figure}
 
-Refazendo os experimento acima com diferentes números de tópicos com valores de $K$ na faixa entre 4 e 16, nota-se pela medida de coerência que o valor ideal de tópicos para esse 
+Rodando o algoritmo, agora com valores de $K$ no intervalo entre 4 e 16, nota-se que o verdadeiro número de tópicos otimizado para esse 
  conjunto de dados é 15, como apresentado na Figura \ref{fig-cm-4-to-64}.
 
 \begin{figure}[H]
@@ -690,7 +695,9 @@ Refazendo os experimento acima com diferentes números de tópicos com valores d
     \label{fig-cm-4-to-16}
 \end{figure}
 
-
+Essa mesma metodologia foi utilizado por \citeonline{ozcaglar2008classification} em seu trabalho também para encontrar o melhor valor de K. Isso otimiza
+ o processo para se encontrar o valor otimizado, do contrário a complexidade seria linear de acordo com o range desejado para avaliação de
+ tópicos. No exemplo acima rodamos o modelo 21 vezes, ao invés de 64, para obtermos o número ótimizado de $K$.
 
 \subsection{RESULTADOS INICIAIS}
 
