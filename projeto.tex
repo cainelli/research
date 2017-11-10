@@ -73,7 +73,7 @@ Considerando a quantidade de dados que se gera na atualidade e, que desse volume
 \pagenumbering{arabic}
 \renewcommand{\baselinestretch}{1.5}
 \normalsize
-\section{INTRODUÇÃO}
+\section{INTRODUÇÃO} \label{sec:introducao}
  
  Com acúmulo cada vez mais crescente de informações digitalizadas e armazenadas na forma de artigos, blogs, jornais, e-mails, livros, mensagens instantâneas, redes sociais, entre outros, 
  a tarefa de organizar, indexar e buscar esses tipos de informações torna-se uma tarefa fundamental para os usuários que precisam manipulá-las em um processo de tomada de decisão. 
@@ -120,12 +120,12 @@ Ambos os métodos têm a capacidade de uso na interação com os documentos, no 
  %vamos demonstrar como aplicação em um corpus contendo documentos de e-mail. E-mails possuem informações que podem aprimorar ainda mais a experiência de exploração,
  %pois os documentos podem ser exibidos em forma de nós, conectando remetentes a destinatários e aprimorando ainda mais a exibição dos resultados da pesquisa.
 
-\subsection{OBJETIVOS}
+\subsection{OBJETIVOS} \label{sec:objetivo}
 
 Neste trabalho propõe-se como objetivo o uso de um algoritmo chamado Latent Dirichlet Allocation (LDA) \cite{blei2003latent} para modelagem de tópicos e melhoria de sua visualização. A proposta consite em um aprimoramento da aplicação LDAVis de \citeonline{sievert2014ldavis} para explorar documentos e suas relações. O estudo de caso será feito em uma base de dados de e-mails e, após descoberta de tópicos, realizar a busca aprimorada de documentos, além de identificar  comunidades de redes de sociais através de interesse comum segundo os tópicos criados pelo modelo LDA. Além das técnicas de processamento e visualização de conhecimento, como objetivo secundário propõe-se realizar análise exploratória do conjunto de dados para obter informações relevantes e que possam ser utilizadas na compreensão do negócio da empresa.
 
 
-\subsection{ORGANIZAÇÃO DO TRABALHO}
+\subsection{ORGANIZAÇÃO DO TRABALHO} \label{sec:organizacao}
 
  A estrutura organizacional dessa dissertação consiste em 5 capítulos. O capítulo 1, segue com uma breve introdução e organização do trabalho. 
   No capítulo 2, justificamos a elaboração do trabalho demonstrando que a visualização de modelos de tópicos é uma das áreas em carência de pesquisa atualmente, 
@@ -168,7 +168,7 @@ Neste trabalho propõe-se como objetivo o uso de um algoritmo chamado Latent Dir
 
 %% LATENT DIRICHLET ALLOCATION
 %\subsection{LATENT DIRICHLET ALLOCATION}
-\section{LATENT DIRICHLET ALLOCATION}
+\section{LATENT DIRICHLET ALLOCATION} \label{sec:lda}
 Latent Dirichlet Allocation, ou LDA, é um modelo generativo probabilístico proposto por \citeonline{blei2003latent} e usado em diversas áreas como análise de sentimento,
  classificação de documentos, bioinformática, agrupamento de dados entre outros. 
  
@@ -181,13 +181,13 @@ Latent Dirichlet Allocation, ou LDA, é um modelo generativo probabilístico pro
   \item cada tópico é formado por uma distribuição de palavras.
 \end{enumerate}
 
-O objetivo do algoritmo LDA é encontrar o modelo probabilístico de um conjunto de dados. Essa característica o difere das abordagens de Mistura de Unigramas, os quais assumem que cada documento exibe características de apenas um tópico. Ou seja, o modelo resultante do LDA  permite que documentos contenham múltiplos tópicos ao mesmo tempo e com relevância distintas. Nesta seção, discorre-se sobre as principais características do trabalho original de \citeonline{blei2003latent}.
+O objetivo do algoritmo LDA é encontrar o modelo probabilístico de um conjunto de dados. Essa característica o difere das abordagens de Mistura de Unigramas, os quais assumem que cada documento exibe características de apenas um tópico. Ou seja, o modelo resultante do LDA  permite que documentos contenham múltiplos tópicos ao mesmo tempo e com relevância distintas. Neste capítulo, discorre-se sobre as principais características do trabalho original de \citeonline{blei2003latent}.
  
 %  A pesquisa de \citeonline{hu2009latent} foi complementar durante essa seção para melhor compreender o trabalho original.
 
 %Antes de nos aprofundarmos na descrição do algoritmo, façamos uma introdução da terminologia formal e notações usada nesta seção.
 
-\subsection{TRABALHOS RELACIONADOS}
+\subsection{TRABALHOS RELACIONADOS} \label{sec:trabalhos-relacionados}
 
 Diversos métodos probabilísticos e não-probabilísticos foram propostos para resolver o problema de modelagem de texto. O objetivo
  principal de ambos métodos é o de encontrar uma maneira de classificar cada documento utilizando descrições curtas que preservem
@@ -206,7 +206,7 @@ Por outro lado, modelos probabilísticos caem em uma categoria de variáveis lat
 Outras variações do modelo geral do LDA vem sendo criadas, é o caso de \citeonline{Rosen-Zvi:2004:AMA:1036843.1036902}
  que incorpora metadados como autores, titulo, localização geográfica, links, etc. ao modelo.
 %% PROCESSO GENERATIVO
-\subsection{PROCESSO GENERATIVO}
+\subsection{PROCESSO GENERATIVO} \label{sec:processo-generativo}
 
 Em uma análise textual, que é mais ampla a análise de  tópicos, uma $palavra$ é a unidade mais básica de dado, definida com um item de um vocabulário indexado por \(w \in \{1,. . . , V\}\)  , onde $V$ é o número de palavras únicas dentro de um corpus, também denominado vocabulário. As palavras são representadas como um vetor de base unitária. Assim, um documento é uma sequência de $N$ palavras denotadas por \(\textbf{ w} = (w_1, w_2,. . . ,  w_N)\). Por fim, um corpus é uma coleção de $M$ documentos denotados por \(\textbf{ D} = \{\textbf{ w}_1, \textbf{ w}_2, . . ., \textbf{ w}_M\}\).
 
@@ -296,8 +296,8 @@ o hiper parâmetro $\beta$ é uma distribuição Dirichlet apriori da distribui�
 
 
 %% INFERÊNCIA
-\subsection{INFERÊNCIA}
-A Eq.(3) baseia-se nos hiper parâmetros apriori $\alpha$ e $\beta$, nesta seção, descreve-se o procedimento para inferência com o LDA.
+\subsection{INFERÊNCIA} \label{sec:inferencia}
+A Eq.(3) baseia-se nos hiper parâmetros apriori $\alpha$ e $\beta$, neste capítulo, descreve-se o procedimento para inferência com o LDA.
 
 O problema de inferência principal a se resolver é o de se computar a distribuição posteriori das distribuições latentes:
 
@@ -357,7 +357,7 @@ O próximo passo é configurar um problema de otimização que determina os par�
 As equações acima são utilizadas no algoritmo EM para estimativa dos parâmetros. Esse processo é descrito na sequência.
 
 %% ESTIMAçÃO DE PARÂMETROS
-\subsection{ESTIMAÇÃO DE PARÂMETROS}
+\subsection{ESTIMAÇÃO DE PARÂMETROS} \label{sec:estimacao-parametros}
 Dado um corpus contendo documentos $\textbf{D} = \{\textbf{w}_1, \textbf{w}_2, . . ., \textbf{w}_M\}$ os valores ideais dos hiper parâmetros $\alpha$ e $\beta$
  que maximizam a verossimilhança de todos documentos $\textbf{w}$ em um corpus $D$ é dado por:
 
@@ -371,7 +371,7 @@ O valor de $l(\alpha, \beta)$ pode ser computado se o valor de $p(\textbf{w}_d|\
  O algoritmo variacional EM continua iterativamente em dois passos:
 
 \begin{enumerate}
-\item \textbf{Passo-E:} Para cada documento $d \in \{1,. . . , M\}$, os parâmetros variacionais $\gamma_d$ e $\phi_d$ são estimados maximizando a verossimilhança utilizando o limite inferior descrito na seção anterior.
+\item \textbf{Passo-E:} Para cada documento $d \in \{1,. . . , M\}$, os parâmetros variacionais $\gamma_d$ e $\phi_d$ são estimados maximizando a verossimilhança utilizando o limite inferior descrito no capítulo anterior.
 \item \textbf{Passo-M:} O limite inferior é maximizado  de acordo com os hiper parâmetros $\alpha$ e $\beta$ do modelo para se obter os novos valores. 
  Isso corresponde a encontrar a máxima verossimilhança com estatísticas suficientes esperadas para cada documento sob a aproximação posteriori.
 \end{enumerate}
@@ -382,7 +382,7 @@ Os passos acima são repetidos até que o limite inferior da verossimilhança co
 
 
 %% METODOLOGIA
-\section{METODOLOGIA}
+\section{METODOLOGIA} \label{sec:metodologia}
 O conjunto de dados utilizado a ser utilizado neste trabalho trata-se de uma coleção de e-mails retirados de um ambiente real de uma empresa provedora de serviços. 
  Para os experimentos realizados neste trabalho foram coletados 100.000 mensagens de e-mail. No geral, essas mensagens de e-mail seguem as RFCs 822, 2045, 2046, 2047, 4288, 4289 e 2049,
  que são os padrões da indústria para troca de e-mails.	Em resumo, as mensagens são formadas por headers contendo informações sobre assunto, remetente, destinatários e data.
@@ -390,9 +390,23 @@ O conjunto de dados utilizado a ser utilizado neste trabalho trata-se de uma col
  Os content-types mais comuns entre mensagens de e-mail são: text/plain, text/html, multipart/mixed, application/octet-stream entre outros, esses se referem ao tipo do conteúdo seguinte no corpo do e-mail.
  Essa informação é utilizada por clientes de e-mail para decodificar adequadamente a mensagem. Dessa forma é possível realizar o download de arquivos separadamente ou renderizar imagens ou conteúdo html dentro da mensagem.
 
+ A figura abaixo ilustra o fluxo do processo desde a coleta das mensagens na origem até a criação do modelo e armazenamento dos resultados no Elasticsearch.
 
-%% PARSER
-\subsection{PARSER}
+ \begin{figure}[H]
+	\centering
+    \includegraphics[height=6cm]{images/figure_11.jpg}
+    \caption{Arquitetura e fluxo para criação do modelo.}
+    \label{fig-framework-lda}
+\end{figure}
+
+Notamos na Figura \ref{fig-framework-lda} os principais componentes envolvidos na criação do modelo. A primeira caixa representa o servidor de 
+ e-mail onde as mensagens são armazenadas como arquivos de texto em um filesystem \textit{block storage} convencional. É realizado um processo de
+ estruturação dos documentos de e-mail descritos no Capítulo \ref{sec:coletor}. Esses documentos são armazenados e indexados no Elasticsearch para
+ posterior consulta e para criação do modelo, esse processo é detalhado no Capítulo \ref{sec:criacao-modelo}. Finalmente, com os dados estruturados
+ e indexados, apresentamos no Capítulo \ref{sec:experimentos} a proposta para aprimoramento da visualização do LDAVis.
+
+%% COLETOR
+\subsection{COLETOR} \label{sec:coletor}
 Para cada mensagem processada é aplicado um conjunto de filtros, normatizações e presunções com o intuito de se obter a mais fiel e relevante representação vetorial do documento.
  Para isso, foram aplicados processos adotados em mineração de textos, descritos abaixo:
 
@@ -404,7 +418,7 @@ Para cada mensagem processada é aplicado um conjunto de filtros, normatizaçõe
  são processadas as partes com conteúdos de tipo text/html e text/plain, descartando anexos, mensagens criptografadas e codificadas. 
  Para conteúdos do tipo text/html são removidas todas as tags e propriedades html e css presentes via expressões regulares.
 \item \textbf{Bag of Words:} Usando o texto extraído do body na etapa acima é criado uma bag of words a partir do documento, que é a representação vetorial desse texto,
- onde os elementos são as palavras presentes no texto, aqui é desconsiderado ordem ou gramática, no entanto, a multiplicidade é perene.
+ onde os elementos são as palavras presentes no texto.
 \item \textbf{Stop Words:} Stop words são uma lista de palavras comumente utilizadas em determinada língua, elas não são um indicador relevante na representação de um tópico.
  Esse passo remove as stop words presentes no dicionário Português e Inglês pois são as línguas presentes na coleção de documentos de e-mail.
 \item \textbf{Stemming:} Todas as palavras são convertidas para letras minúsculas e é então aplicado o algoritmo de stemming de \citeonline{porter1980algorithm}
@@ -444,7 +458,7 @@ O próximo passo é a criação do modelo para representar esse conjunto de dado
 
 
 %% CRIAÇÃO DO MODELO
-\subsection{CRIAÇÃO DO MODELO}
+\subsection{CRIAÇÃO DO MODELO} \label{sec:criacao-modelo}
 O conjunto de dados é carregado do Elasticsearch, nessa fase, são requeridos os tokens dos documentos gerados no processo de parsing, então
  um filtro é aplicado na query de busca para retornar apenas esses resultados. A coleção de tokens é convertida em uma matriz de contadores de tokens onde o número de features será igual ao tamanho do vocabulário, como se pode verificar na Tabela \ref{tab-voc}.
 
@@ -544,7 +558,7 @@ Por fim, selecionou-se as distribuições do modelo gerado com a configuração 
  Também foi armazenado em uma outra estrutura a distribuição de palavras por tópico. Essas informações serão utilizadas no processo de visualização.
 
 %% EXPERIMENTOS
-\section{EXPERIMENTOS PRELIMINARES}
+\section{EXPERIMENTOS PRELIMINARES} \label{sec:experimentos}
 
 A aplicação web interativa é uma extensão do LDAvis \cite{sievert2014ldavis}. O trabalho original têm as seguintes duas funcionalidades principais que permitem ao usuário explorar o modelo, conforme ilustrado na Figura \ref{fig-ldavis}:
 
@@ -587,12 +601,12 @@ A proposta deste trabalho é estender a aplicação e funcionalidades descritas 
   \end{enumerate}
 \end{enumerate}
 
-Os documentos são indexados e estruturados no Elasticsearch como descrito na seção 3.1, a própria ferramenta oferece mecanismos de consulta que possibilita realizar diferentes tipos de busca e a implementação dos filtros propostos, bem como apresentar os dados quantitativos para análise exploratória e criação de comunidades, relacionando destinatários e remetentes a seus tópicos frequêntes e relevantes.
+Os documentos são indexados e estruturados no Elasticsearch como descrito no Capítulo \ref{sec:coletor}, a própria ferramenta oferece mecanismos de consulta que possibilita realizar diferentes tipos de busca e a implementação dos filtros propostos, bem como apresentar os dados quantitativos para análise exploratória e criação de comunidades, relacionando destinatários e remetentes a seus tópicos frequêntes e relevantes.
 
-\subsection{NÚMERO DE TÓPICOS}
+\subsection{NÚMERO DE TÓPICOS} \label{sec:n-topicos}
 
 O LDA não faz descoberta automática  sobre o número de tópicos existente no conjunto de dados entregue ao modelo. Dessa forma,
- é esperado como parâmetro de entrada a definição prévia do valor de tópicos a ser descoberto, o número de $K$. Como descrito no capítulo 3.2, como estratégia de encontrar o melhor valor para o parâmetro, é comum explorar uma série de valores de tópicos, analisando  a medida de coerência com a finalidade de se obter o valor de $K$ otimizado para o conjunto de dados em análise.
+ é esperado como parâmetro de entrada a definição prévia do valor de tópicos a ser descoberto, o número de $K$. Como descrito no Capítulo \ref{sec:criacao-modelo}, como estratégia de encontrar o melhor valor para o parâmetro, é comum explorar uma série de valores de tópicos, analisando  a medida de coerência com a finalidade de se obter o valor de $K$ otimizado para o conjunto de dados em análise.
 
 Na Figura \ref{fig-cm-4-to-64}, apresenta-se a sensitividade da medida de coerência para cada valor de $K$. Nota-se por essa figura que a maior coerência é encontrada quando o valor de $K$ é igual a 8. No entanto, 8 não necessáriamente é o valor ideal de tópicos, com o experimento acima sabe-se apenas que o valor ideal está entre 4 e 16.
 
@@ -641,7 +655,7 @@ Os rótulos dos tópicos apresentados foram criados com base na interpretação 
 
 
 Outro experimento realizado foi a criação de um modelo alimentado apenas com mensagens de um único departamento.
- Quando executado o processo descrito na seção 4.1 para escolha de número de tópicos na base reduzida obteve-se o valor otimizado de $K=6$.
+ Quando executado o processo descrito no Capítulo \ref{sec:n-topicos} para escolha de número de tópicos na base reduzida obteve-se o valor otimizado de $K=6$.
 
 \begin{table}[H]
   \centering
@@ -720,7 +734,7 @@ Notamos um pico em Fevereiro de mensagens classificadas
  com o rótulo 'Monitoração', isso se deu pois um incidente em um dos datacenters da empresa resultou em
  um envio em massa de mensagens de monitoração sobre falha de serviços.
 
-\subsection{VISUALIZAÇÃO}
+\subsection{VISUALIZAÇÃO} \label{sec:visualizacao}
 
 No experimento inicial, são apresentadas duas aplicações desenvolvidas neste trabalho que serviram de prova de conceito.
  O objetivo final é integrar tais funcionalidades ao trabalho de \citeonline{sievert2014ldavis}.
@@ -736,7 +750,7 @@ Ilustrada na Figura \ref{fig-doc-explorer}, a primeira aplicação é utilizada 
  indexados. Essa funcionalidade não existe no trabalho de \citeonline{sievert2014ldavis} e é útil para exploração e navegação do corpus.
  Ao final do trabalho, os documentos resultantes das buscas serão apresentadas de forma similar dentro do LDAVis. 
 
-Para a funcionalidade de busca com os critérios propostos no capítulo 4, foi implementada na segunda aplicação conceito:
+Para a funcionalidade de busca com os critérios propostos no capítulo \ref{sec:experimentos}, foi implementada na segunda aplicação conceito:
 
 \begin{figure}[H]
   \centering
@@ -785,7 +799,7 @@ Na Tabela acima vemos um possível resultado de busca que possa gerar as conexõ
  comunidades são encontradas por termos, tópicos de interesse, e outros critérios de busca mencionados neste capítulo.
 
 %% CRONOGRAMA
-\section{CRONOGRAMA}
+\section{CRONOGRAMA} \label{sec:cronograma}
 
 \begin{center}
   \begin{tabular}{llllllllll}
