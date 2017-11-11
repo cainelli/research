@@ -179,39 +179,39 @@ Latent Dirichlet Allocation, ou LDA, é um modelo generativo probabilístico pro
   \item cada tópico é formado por uma distribuição de palavras.
 \end{enumerate}
 
-O objetivo do algoritmo LDA é encontrar o modelo probabilístico de um conjunto de dados. Essa característica o difere das abordagens de Mistura de Unigramas, os quais assumem que cada documento exibe características de apenas um tópico. Ou seja, o modelo resultante do LDA  permite que documentos contenham múltiplos tópicos ao mesmo tempo e com relevância distintas. Neste capítulo, discorre-se sobre as principais características do trabalho original de \citeonline{blei2003latent}.
+O objetivo do algoritmo LDA é encontrar o modelo probabilístico de um conjunto de dados. Essa característica o difere das abordagens de Mistura de Unigramas, os quais assumem que cada documento exibe características de apenas um tópico. Ou seja, o modelo resultante do LDA  permite que documentos contenham múltiplos tópicos ao mesmo tempo e com relevância distintas. Neste capítulo, discorre-se sobre as principais características do trabalho original de \citeonline{blei2003latent}, contudo, inicia-se por uma apresentação de métodos relacionados ao LDA para modelagem de tópicos.
  
 %  A pesquisa de \citeonline{hu2009latent} foi complementar durante essa seção para melhor compreender o trabalho original.
 
 %Antes de nos aprofundarmos na descrição do algoritmo, façamos uma introdução da terminologia formal e notações usada nesta seção.
 
-\subsection{TRABALHOS RELACIONADOS} \label{sec:trabalhos-relacionados}
+\subsection{METÓDOS ANALÍTICOS PARA MODELAGEM DE TÓPICOS} \label{sec:trabalhos-relacionados}
 
 Diversos métodos probabilísticos e não-probabilísticos foram propostos para resolver o problema de modelagem de texto. O objetivo
- principal de ambos métodos é o de encontrar uma maneira de classificar cada documento utilizando descrições curtas que preservem
- seu sentido.
+ principal de ambos os métodos é o de encontrar uma maneira de classificar cada documento, utilizando descrições curtas que preservem
+ seu sentido semântico.
 
 Métodos não probabilísticos como \textit{tf-idf} \cite{salton1983introduction}, por exemplo, utilizam contadores de palavras para descrever um documento.
- Em seguida o modelo LSI de \citeonline{Deerwester90indexingby} utiliza a decomposição em valores singulares(\textit{singular-value decomposition, SVD}) da
+ Por sua vez, o modelo LSI de \citeonline{Deerwester90indexingby} utiliza a decomposição em valores singulares(\textit{singular-value decomposition, SVD}) da
  matriz $Palavra \times Documento$ do \textit{tf-idf} para identificar um conjunto de características que captura uma maior variância.
 
-Por outro lado, modelos probabilísticos caem em uma categoria de variáveis latentes e introduzem o conceito de tópicos. O pLSI, proposto por \citeonline{{hofmann1999probabilistic}}, 
+Por outro lado, modelos probabilísticos exploram uma outra abordagem de análise de documentos, caracterizando-se como uma categoria de variáveis latentes, a qual pode ser entendida como uma introdução ao conceito de tópicos. O pLSI, proposto por \citeonline{{hofmann1999probabilistic}}, 
  mapeia documentos e palavras à tópicos e, portanto, cada documento é reduzido à uma distribuição de probabilidade em um conjunto de tópicos.
  Todos os métodos citados não levam em consideração a ordem das palavras em um documento. \citeonline{blei2003latent} propõe então o
  LDA, onde leva em consideração a ordem das palavras e utiliza um modelo misto, ou \textit{mixture model}, para permutabilidade de palavras e documentos. Tal
  modelo generativo probabilistico representa documentos como uma mistura de tópicos e tópicos como uma mistura de palavras.
 
 Outras variações do modelo geral do LDA vem sendo criadas, é o caso de \citeonline{Rosen-Zvi:2004:AMA:1036843.1036902}
- que incorpora metadados como autores, titulo, localização geográfica, links, etc. ao modelo.
+ que incorpora metadados como autores, titulo, localização geográfica, links e etc ao modelo.
 %% PROCESSO GENERATIVO
 \subsection{PROCESSO GENERATIVO} \label{sec:processo-generativo}
 
 Em uma análise textual, que é mais ampla a análise de  tópicos, uma $palavra$ é a unidade mais básica de dado, definida com um item de um vocabulário indexado por \(w \in \{1,. . . , V\}\)  , onde $V$ é o número de palavras únicas dentro de um corpus, também denominado vocabulário. As palavras são representadas como um vetor de base unitária. Assim, um documento é uma sequência de $N$ palavras denotadas por \(\textbf{ w} = (w_1, w_2,. . . ,  w_N)\). Por fim, um corpus é uma coleção de $M$ documentos denotados por \(\textbf{ D} = \{\textbf{ w}_1, \textbf{ w}_2, . . ., \textbf{ w}_M\}\).
 
- O LDA assume que documentos são criados via um processo generativo. Primeiro, extraímos um vetor de pesos de tópicos que determina
- quais tópicos são mais prováveis de aparecer em um documento. Em seguida, para cada palavra que aparece em um documento, escolhemos um tópico
- único do vetor de pesos de tópicos. Para gerar a palavra, então, extraímos da distribuição de probabilidade condicinada ao tópico escolhido.
- Desse processo, nós vemos que cada palavra em um documento é gerada por um tópico diferente escolhido randômicamente, \cite{hu2009latent}.
+ O LDA assume que documentos são criados via um processo generativo. Primeiro, um vetor de pesos de tópicos é extraído, o qual determina
+ quais tópicos são mais prováveis de aparecer em um documento. Em seguida, para cada palavra que aparece em um documento, escolhe-se um tópico
+ único do vetor de pesos de tópicos. Para gerar a palavra, a distribuição de probabilidade condicinada ao tópico escolhido deve ser extraída.
+ Desse processo, pode-se perceber que cada palavra em um documento é gerada por um tópico diferente, escolhido randômicamente \cite{hu2009latent}.
 
  Por exemplo, dado um conjunto de documentos que podem ser classificados em quatro tópicos: Esportes, Animais, Tecnologia e Artes. 
  Cada tópico poderá ser definido pela seguinte lista de palavras:
@@ -225,11 +225,11 @@ Em uma análise textual, que é mais ampla a análise de  tópicos, uma $palavra
   \item \textbf{ Artes:} cinema, dança, música, canção, pintura, cores, movimento, instrumento.
 \end{itemize}
 
-O processo generativo consiste em uma mistura de tópicos com base em uma parametrização feita pelo usuário. No caso do exemplo acima, suponha-se que há um desejo em gerar um novo documento que contenha os seguintes tópicos nas respctivas proporções: 75\% Artes e 25\% Esporte. A geração inicia-se com a parametrização do tamanho do documento a ser gerado pelo número de palavras. Consequentemente, para cada tópico escolhido na mistura, seleciona-se as palavras de cada tópico proporcionalmente, gerando o novo documento.
+O processo generativo consiste em uma mistura de tópicos com base em uma parametrização feita pelo usuário. No caso do exemplo acima, suponha-se que há um desejo em gerar um novo documento que contenha os seguintes tópicos nas respctivas proporções: 75\% Artes e 25\% Esporte. A geração inicia-se com a parametrização do tamanho do documento a ser gerado pelo número de palavras. Consequentemente, para cada tópico escolhido na mistura, seleciona-se as palavras de cada tópico proporcionalmente, gerando um novo documento.
 
  O LDA usa esse conceito de processo generativo de forma reversa para determinar a distribuição de tópicos por documento e a distribuição de palavras por um tópico. 
  O processo generativo permite diferentes graus de relevância de uma palavra em um tópico, e um tópico em um documento. Na teoria da probabilidade isso é chamado como permutabilidade,
- ou exchangeability \cite{aldous1985exchangeability}. 
+ ou \textit{exchangeability} \cite{aldous1985exchangeability}. 
  
  Para cada documento indexado por $d \in \{1,. . . , M\}$ em um corpus $D$, o processo generativo pode ser formalmente descrito da seguinte maneira:
 
@@ -252,7 +252,7 @@ Uma variável de distribuição Dirichlet randômica $\theta$ com dimensão $K$ 
 p(\theta|\alpha) = \frac{\Gamma(\displaystyle\sum_{i=1}^{K} \alpha _i)}{\displaystyle\prod_{i=1}^{K} \Gamma(\alpha _i)} \theta _1 ^{\alpha _i - 1} ...  \theta _K ^{\alpha _K - 1}
 \end{equation}
 
-A distribuição Dirichlet é utilizada por essa possuir um conjunto de propriedades importantes que possibilita um processo de inferência e estimação de parâmetros mais simples.
+A distribuição Dirichlet é utilizada pelo motivo dessa mesma possuir um conjunto de propriedades importantes que possibilita um processo de inferência e estimação de parâmetros mais simples.
  A distribuição é da família exponencial, conjuga com a distribuição multinomial, possui dimensões finitas e possui estatística suficiente.
  A distribuição  acima dá a cada documento seu próprio vetor de distribuição que indica a relevância de cada tópico $K$ a aquele documento.
  Assim, o processo generativo descrito acima define a distribuição conjunta para cada documento $\textbf{ w}_d$.
@@ -295,17 +295,16 @@ o hiper parâmetro $\beta$ é uma distribuição Dirichlet apriori da distribui�
 
 %% INFERÊNCIA
 \subsection{INFERÊNCIA} \label{sec:inferencia}
-A Eq.(3) baseia-se nos hiper parâmetros apriori $\alpha$ e $\beta$, neste capítulo, descreve-se o procedimento para inferência com o LDA.
+A Eq.(3) baseia-se nos hiper parâmetros apriori $\alpha$ e $\beta$, neste subcapítulo, descreve-se o procedimento para inferência com o LDA.
 
-O problema de inferência principal a se resolver é o de se computar a distribuição posteriori das distribuições latentes:
+O problema de inferência principal a se resolver é o de  computar a distribuição posteriori das distribuições latentes:
 
 \begin{equation}
 p(\theta,\textbf{z}|\textbf{w},\alpha,\beta) = \frac{p(\theta,\textbf{z},\textbf{w}|\alpha,\beta)}{p(\textbf{w}|\alpha,\beta)}
 \end{equation}
 
-A distribuição acima é intratável de se computar em geral, o numerador é a distribuição conjunta das variáveis randômicas, que são computáveis para qualquer configuração de variáveis ocultas,
- o denominador é a distribuição marginal, em teoria, pode ser calculada somando a distribuição conjunta de todas instâncias possíveis. No entanto,
- o número de estruturas de tópicos é exponencial e essa soma é intratável de se computar \cite{blei2012probabilistic}. Para normalizar a distribuição da Eq.(4) é utilizado a distribuição marginal,
+A distribuição acima, em geral, é intratável de se computar, pois o numerador é a distribuição conjunta das variáveis randômicas, que são computáveis para qualquer configuração de variáveis ocultas, e
+ o denominador é a distribuição marginal, em teoria, pode ser calculada somando a distribuição conjunta de todas instâncias possíveis. Como o número de estruturas de tópicos é exponencial, a soma da operação acima torna-se intratável de se computar \cite{blei2012probabilistic}. Para normalizar a distribuição da Eq.(4) é utilizado a distribuição marginal,
  de todos os documentos em um corpus:
 
 \begin{equation}
@@ -319,7 +318,7 @@ O algoritmo de amostragem mais comum para modelação de tópicos é o Gibbs Sam
  O problema reside em não saber ao certo  quando o algoritmo convergiu para solução, além dos seus requisitos de memória, já que escala linearmente com o número de palavras em um corpus,
  isso torna o algoritmo não adotável em uma conjunto de dados muito grande \cite{vrehuuvrek2011scalability}.
 
-O método mais utilizado em modelos de variável latente é o algoritmo variacional Expectation-Maximization(EM), que permite a estimação de parâmetros não supervisionada de maneira computacionalmente eficiente. O método determinístico de aproximação EM resulta em uma estimativa tendenciosa. Em cada iteração é atualizado os parâmetros computando os valores esperados das variáveis sobre a distribuição posterior na Eq.(7).
+O método mais utilizado em modelos de variável latente é o algoritmo variacional Expectation-Maximization (EM), que permite a estimação de parâmetros não supervisionada de maneira computacionalmente eficiente. O método determinístico de aproximação EM resulta em uma estimativa tendenciosa. Em cada iteração é atualizado os parâmetros computando os valores esperados das variáveis sobre a distribuição posterior na Eq.(7).
 
 
 \begin{figure}[H]
@@ -341,7 +340,7 @@ q(\theta,\textbf{z}|\gamma,\phi)=q(\theta|\gamma)\prod_{n=1}^{N}q(z_n|\phi_n),
 onde a distribuição  $q(\gamma|\phi)$ é a distribuição Dirichlet com parâmetro variacional $\gamma_d$, mostrando a distribuição dos tópicos em cada documento.
  As distribuições $q(z_n | \phi_n)$ são multinomiais com parâmetros variacionais $\phi_n$ e existem a nível de palavras, onde $\phi_{ni}$ é a probabilidade que a $n_{gesima}$ palavra foi gerada pelo $i_{gesimo}$ tópico oculto.
 
-O próximo passo é configurar um problema de otimização que determina os parâmetros $\gamma$ e $\phi$. Os valores ideais são encontrados minimizando a divergência Kullback Leibler(KL) entre a distribuição posterior $p(\theta, z|w,\alpha,\beta)$ e a distribuição variacional.
+O próximo passo é configurar um problema de otimização que determina os parâmetros $\gamma$ e $\phi$. Os valores ideais são encontrados minimizando a divergência Kullback Leibler (KL) entre a distribuição posterior $p(\theta, z|w,\alpha,\beta)$ e a distribuição variacional.
  O par de equações de atualização resultantes segundo \citeonline{blei2003latent} são:
 
 \begin{equation}
@@ -387,14 +386,14 @@ A seguir apresenta-se a metodologia adotada para realização do trabalho, descr
 
 \subsection{BASE DE DADOS} \label{sec:base-de-dados}
 
-O conjunto de dados utilizado a ser utilizado neste trabalho trata-se de uma coleção de e-mails retirados de um ambiente real de uma empresa provedora de serviços. 
+O conjunto de dados utilizado neste trabalho trata-se de uma coleção de e-mails retirados de um ambiente real de uma empresa provedora desse tipo de serviço. 
  Para os experimentos realizados neste trabalho foram coletados mais de 4 milhões de mensagens de e-mail. No geral, essas mensagens de e-mail seguem as RFCs 822, 2045, 2046, 2047, 4288, 4289 e 2049,
  que são os padrões da indústria para troca de e-mails.	Em resumo, as mensagens são formadas por headers contendo informações sobre assunto, remetente, destinatários e data.
  Existem também headers contento outros tipos de informações como caminho percorrido pela mensagem até o seu destino final, análises de filtro de conteúdo entre outros. Esses geralmente relevantes a administradores do serviço. O corpo e-mail contém o conteúdo da mensagem em si, que pode ser segmentado em  partes, cada uma com seu próprio content-type. 
  Os content-types mais comuns entre mensagens de e-mail são: text/plain, text/html, multipart/mixed, application/octet-stream entre outros, esses se referem ao tipo do conteúdo seguinte no corpo do e-mail.
  Essa informação é utilizada por clientes de e-mail para decodificar adequadamente a mensagem. Dessa forma é possível realizar o download de arquivos separadamente ou renderizar imagens ou conteúdo html dentro da mensagem.
 
-Nota-se presente no conteúdo dos documentos da base de dados utilizada temas como: propostas e cotações comerciais, suporte técnico,
+Nota-se no conteúdo dos documentos da base de dados utilizada temas como: propostas e cotações comerciais, suporte técnico,
  e-mail marketing, cobrança, notificações de sistema, SPAM e phishing, editais de governo, entre outros.
 
 Para os experimentos realizados no Capítulo \ref{sec:experimentos} a base total foi segmentada em sub-conjuntos de dados que podem ser observados abaixo:
@@ -415,14 +414,14 @@ Para os experimentos realizados no Capítulo \ref{sec:experimentos} a base total
 \end{table}
 
 Na Tabela \ref{tab-base-de-dados} vemos a descrição das bases utilizadas neste trabalho. A $Amostra\ Reduzida$ extraída da base $Total$ foi utilizada para determiar o número ideal de tópicos
- descrita no Capítulo \ref{sec:n-topicos} uma vez que é necessário rodar o algoritmo diversas vezes para se encontrar número de tópicos otimizado para 
+ descrita no Capítulo \ref{sec:n-topicos} uma vez que é necessário rodar o algoritmo diversas vezes para se encontrar o número de tópicos otimizado para 
  o corpus. A base $Amostra\ Departamento\ de\ T.I$ são documentos de e-mail de remetentes ou destinatários apenas desse departamento dentro da empresa provedora
- de serviços. Essa abordagem foi proposta pois o autor possui domínio sobre o conteúdo desse sub conjunto e em mineração de dados é comum a utilização de especialistas
- no assunto explorado ou na base de dados utilizada para auxiliar na compreensão resultados das análises.
+ de serviços. Essa abordagem foi proposta, pois o autor possui domínio sobre o conteúdo desse subconjunto de dado para a análise de dados é importante trabalhar próximo ao especialista
+ no assunto explorado ou na base de dados utilizada, auxiliando principalmente na compreensão dos resultados das análises.
 
  \subsection{ARQUITETURA} \label{sec:arquitetura}
 
- A figura abaixo ilustra o fluxo do processo desde a coleta das mensagens na origem até a criação do modelo e armazenamento dos resultados no Elasticsearch.
+ A Figura \ref{fig-framework-lda} ilustra o fluxo do processo deste trabalho, desde a coleta das mensagens na origem até a criação do modelo e armazenamento dos resultados no Elasticsearch.
 
  \begin{figure}[H]
 	\centering
@@ -440,9 +439,9 @@ Notamos na Figura \ref{fig-framework-lda} os principais componentes envolvidos n
  %% ELASTICSEARCH
 \subsection{ELASTICSEARCH} \label{sec:elasticsearch}
 
-O Elasticsearch é um dos motores de busca open-source mais adotados, atualmente, o projeto possui mais de 900 contribuidores, 29.000
- contribuições e 200 versões. É um sistema de busca distribuido NRT, ou \textit{Near Realtime}, possuí latência normalmente de um segundo
- do momento que é indexado um documento ao momento que se torna dispnível para busca. É capaz de resolver uma variedade de problemas que requerem ou não escala,
+O Elasticsearch é um dos motores de busca open-source mais adotados atualmente. O projeto possui mais de 900 contribuidores, 29.000
+ contribuições e 200 versões. É um sistema de busca distribuido  e de NRT, ou \textit{Near Realtime}, possuí latência normalmente de um segundo
+ do momento que é indexado um documento ao momento que se torna disponível para busca. É capaz de resolver uma variedade de problemas que requerem ou não escala,
  possui diversas maneiras de implementação, \textit{single-server} ou em cluster, em núvem, como serviço, em servidores físicos, virtuais ou como containers.
  Além de suportar diversos sistemas operacionais como Windows e Linux.
 
@@ -456,13 +455,13 @@ Abaixo, alguns conceitos importantes do Elasticsearch que devem ser abordados:
  \begin{itemize}
    \item \textbf{index:} Uma coleção de documentos que possuem características similares.
    \item \textbf{tokenizer:} Recebem uma stream de caracteres e os quebra seguindo determinado critério de configuração.
-   \item \textbf{documento:} Unidade básica de informação que pode ser indexada. É expressado na forma de um objeto JSON(JavaScript Object Notation).
+   \item \textbf{documento:} Unidade básica de informação que pode ser indexada. É expressado na forma de um objeto JSON (JavaScript Object Notation).
  \end{itemize}
 
-Antes do envio dos $documentos$ é necessário criar um $index$ no Elasticsearch. Para nosso caso de uso cria-se apenas um com a configuração
+Antes do envio dos $documentos$ ao ambiente é necessário criar um $index$ no Elasticsearch. Para o caso deste trabalho cria-se apenas um index com a configuração
 de $tokenizer$ de \textit{3-gramas}, ou seja, quando um documento é indexado o Elasticsearch vai quebrar o texto em \textit{3-gramas}. Isso
-possibilita que um documento contendo o texto \textit{'...Infelizmente temos que postergar a visita, devido à...'} possa ser encontrada passando
-apenas como query de busca \textit{'pos'} ou \textit{'vis'} por exemplo.
+possibilita que um documento contendo, por exemplo, o texto \textit{``...Infelizmente temos que postergar a visita, devido à...''} possa ser encontrada passando
+apenas como query de busca \textit{``pos''} ou \textit{``vis''}.
 
 Com as configurações definidas acima, o Elasticsearch pode ser utilizado através das interfaces descritas neste capítulo.
 
@@ -482,10 +481,11 @@ Para cada mensagem processada é aplicado um conjunto de filtros, normatizaçõe
 \item \textbf{Bag of Words:} Usando o texto extraído do body na etapa acima é criado uma bag of words a partir do documento, que é a representação vetorial desse texto,
  onde os elementos são as palavras presentes no texto.
 \item \textbf{Stop Words:} Stop words são uma lista de palavras comumente utilizadas em determinada língua, elas não são um indicador relevante na representação de um tópico.
- Esse passo remove as stop words presentes no dicionário Português e Inglês pois são as línguas presentes na coleção de documentos de e-mail.
+ Esse passo remove as stop words presentes no dicionário Português e Inglês, pois são as línguas presentes na coleção de documentos de e-mail.
 \item \textbf{Stemming:} Todas as palavras são convertidas para letras minúsculas e é então aplicado o algoritmo de stemming de \citeonline{porter1980algorithm}
- na implementação da biblioteca NLTK(Natural Language Toolkit) \citeonline{Bird:2009:NLP:1717171} para remover afixos morfológicos das palavras, reduzindo-as ao seu radical, como exemplificado na Tabela \ref{tab-stem}.
+ na implementação da biblioteca NLTK (Natural Language Toolkit) \citeonline{Bird:2009:NLP:1717171} para remover afixos morfológicos das palavras, reduzindo-as ao seu radical, como exemplificado na Tabela \ref{tab-stem}.
 
+\end{enumerate}
 
 \begin{table}[H]
   \centering
@@ -497,20 +497,19 @@ Para cada mensagem processada é aplicado um conjunto de filtros, normatizaçõe
   copiou		&copi \\
   \hline
   \end{tabular}
-  \caption{Palavra original e seu respectivo Steam}
+  \caption{Palavra original e seu respectivo Steam.}
   \label{tab-stem}
 \end{table}
 
 Na Tabela \ref{tab-stem}, nota-se a redução no número de palavras únicas aplicando o steam. O número de palavras únicas em um conjunto de documentos afeta diretamente o tempo de execução na criação do modelo LDA.
  Por outro lado, a redução pode causar um efeito não desejado distorcendo o sentido das palavra. Esse passo é opcional.
 %  Na seção de resultados apresenta-se a diferença entre a aplicação ou não desse processo na coleção de documentos de e-mail utilizado.
-\end{enumerate}
 
 
-O processo acima resulta na mensagem original, seus metadados e a bag of words com os termos presentes no texto. Esses dados são armazenados e indexados no Elasticsearch,
- um dos motores de busca open-source mais adotados atualmente. Esse processo possibilita a busca por palavras, frases, destinatários, remetentes e data. 
 
-Em trabalhos semelhantes como \citeonline{ozcaglar2008classification} é possível notar que muitas técnicas empregadas nessa fase são comuns, porém, uma das principais diferenças,
+O processo acima resulta na mensagem original, seus metadados e a bag of words com os termos presentes no texto. Esses dados são armazenados e indexados no Elasticsearch. Esse processo possibilita a busca por palavras, frases, destinatários, remetentes e data. 
+
+Em trabalhos semelhantes como \citeonline{ozcaglar2008classification} é possível notar que muitas técnicas empregadas nessa fase são comuns, porém uma das principais diferenças
  é a aplicação de processos mais detalhados na estruturação e armazenamento dos metadados, pois esses são fundamentais na análise exploratória dos documentos.
  \citeonline{ozcaglar2008classification} não se aprofunda nesses aspectos, pois tais informações não eram relevantes ao escopo da sua pesquisa,
  porém, como trabalhos futuros, sugeriu justamente a exploração de comunidades baseada em interesses dos destinatários e remetentes, o que demonstraremos possível na aplicação proposta.
@@ -537,13 +536,13 @@ O conjunto de dados é carregado do Elasticsearch, nessa fase, são requeridos o
   \hline
   \end{tabular}
   
-  \caption{Conversão de tokens de palavras para vetor de contadores}
+  \caption{Conversão de tokens de palavras para vetor de contadores.}
   \label{tab-voc}
 \end{table}
 
 
 Na Tabela \ref{tab-voc} pode-se ver uma representação da saída esperada. É criado uma matriz de frequência de termos $M \times N$, para cada documento,
- $d \in \{1,. . . , M\}$ é criado uma representação vetorial do vocabulário do corpus($N$), que contém a frequência da palavra no documento em sua respectiva posição nesse vetor.
+ $d \in \{1,. . . , M\}$ é criado uma representação vetorial do vocabulário do corpus ($N$), que contém a frequência da palavra no documento em sua respectiva posição nesse vetor.
  Esse formato é requerido como formato de entrada dos dados para o modelo LDA.
 
 O parâmetro $\alpha$ do algoritmo é a priori da distribuição de tópicos por documento ($\theta$) e o parâmetro $\eta$ é a priori da distribuição de palavras por tópico ($\beta$),
@@ -559,7 +558,7 @@ Como último parâmetro, precisa-se definir o número $K$ de tópicos desejados.
 \begin{figure}[H]
 	\centering
     \includegraphics[height=5cm]{images/figure_3.png}
-    \caption{Visão geral do framework de mensuração da coerência dos tópicos. Imagem original \citeonline{roder2015exploring}}
+    \caption{Visão geral do framework de mensuração da coerência dos tópicos. Imagem original \citeonline{roder2015exploring}.}
     \label{fig-proc}
 
 \end{figure}
@@ -624,7 +623,7 @@ Por fim, selecionou-se as distribuições do modelo gerado com a configuração 
 %% EXPERIMENTOS PRELIMINARES
 \section{EXPERIMENTOS PRELIMINARES} \label{sec:experimentos}
 
-A aplicação web interativa é uma extensão do LDAvis \cite{sievert2014ldavis}. O trabalho original têm as seguintes duas funcionalidades principais que permitem ao usuário explorar o modelo, conforme ilustrado na Figura \ref{fig-ldavis}:
+A aplicação web interativa desenvolvida neste trabalho é uma extensão do LDAvis \cite{sievert2014ldavis}. O trabalho original têm as seguintes duas funcionalidades principais que permitem ao usuário explorar o modelo, conforme ilustrado na Figura \ref{fig-ldavis}:
 
 \begin{enumerate}
   \item Possibilita o usuário selecionar um tópico e visualizar os termos mais relevantes dentro do mesmo;
@@ -635,7 +634,7 @@ A aplicação web interativa é uma extensão do LDAvis \cite{sievert2014ldavis}
 \begin{figure}[H]
 	\centering
     \includegraphics[height=10cm]{images/figure_4.png}
-    \caption{Layout do LDAvis. A esquerda a visualização de tópicos e a direita o gráfico de barras com o tópico 34 selecionado. Adaptado de \cite{sievert2014ldavis}}.
+    \caption{Layout do LDAvis. A esquerda a visualização de tópicos e a direita o gráfico de barras com o tópico 34 selecionado. Adaptado de \cite{sievert2014ldavis}.}.
     \label{fig-ldavis}
 \end{figure}
 
@@ -706,18 +705,18 @@ Neste capítulo, os resultados iniciais são apresentados a partir dos conjuntos
 
 
 No experimento com a base de $Amostra\ Reduzida$ vemos os tópicos com maior medida de coerência.
- Os tópicos abaixo foram rotuládos pela interpretação das mensagens originais feita pelo autor.
+ Os tópicos abaixo foram rotulados pela interpretação das mensagens originais feita pelo autor.
 
 \begin{table}[H]
   \centering
   \begin{tabular}{ll}
   Tópico                   & Palavras relevantes \\
   \hline
-  'Tecnologia'               & intel, inside, acesso, quarentena, dado, deletar, privacidade \\
-  'Comercial'                & produto, venda, ano, juro, mercado, cliente, empresa \\
-  'Viagem'                   & oferta, contato, valor, partir, voo, azul, horario \\
-  'Cobrança'                 & anexo, boleto, nf, pagamento, nota, fiscal, omie \\
-  'Governo'                  & edital, objeto, conlicitacao, servico, licitacao, gov, contratacao \\
+  Tecnologia               & intel, inside, acesso, quarentena, dado, deletar, privacidade \\
+  Comercial                & produto, venda, ano, juro, mercado, cliente, empresa \\
+  Viagem                   & oferta, contato, valor, partir, voo, azul, horario \\
+  Cobrança                 & anexo, boleto, nf, pagamento, nota, fiscal, omie \\
+  Governo                  & edital, objeto, conlicitacao, servico, licitacao, gov, contratacao \\
   ...                        & ... \\
   \hline
   \end{tabular}
@@ -733,20 +732,20 @@ Outro experimento realizado foi com a base $Amostra\ Departamento\ de\ T.I$. Qua
   \begin{tabular}{ll}
   Tópico                   & Palavras relevantes \\
   \hline
-  'Abuse'                    & csi, rbl, cloudmark, progress, rbldns, lib \\
-  'Administrativo'           & servico, cliente, conta, enviado, assunto, dado, suporte \\
-  'Backup'                   & full, ticket, use, backup, zimbra, server, completed  \\
-  'Automação'                & lda, cron, catalog, puppet, run, hour, second \\
-  'Monitoração'              & host, time, type, problem, nagios, state, critical \\
-  'Segurança'                & syncert, ldap, upgrade, method, unattend, package \\
+  Abuse                    & csi, rbl, cloudmark, progress, rbldns, lib \\
+  Administrativo           & servico, cliente, conta, enviado, assunto, dado, suporte \\
+  Backup                   & full, ticket, use, backup, zimbra, server, completed  \\
+  Automação'                & lda, cron, catalog, puppet, run, hour, second \\
+  Monitoração              & host, time, type, problem, nagios, state, critical \\
+  Segurança                & syncert, ldap, upgrade, method, unattend, package \\
   \hline
   \end{tabular}
   \caption{Tópicos e suas palavras mais relevantes. Base de documentos do departamento de T.I.}
   \label{tab-nich-topics}
 \end{table}
 
-As distribuições de palavras por tópico($\phi$) amostrada na tabela acima é coerente quando observamos por exemplo, um documento classificado com maior
- probabilidade de pertencer ao tópico rotulado como 'Monitoração'. Notamos que as palavras contidas no documento abaixo tem muita relevância a esse tópico.
+As distribuições de palavras por tópico ($\phi$) amostrada na tabela acima é coerente quando observamos por exemplo, um documento classificado com maior
+ probabilidade de pertencer ao tópico rotulado como ``Monitoração''. Nota-se que as palavras contidas no documento ilustrado na Figura \ref{mo} tem muita relevância a esse tópico.
 
 
 \begin{figure}[H]
@@ -771,24 +770,24 @@ As distribuições de palavras por tópico($\phi$) amostrada na tabela acima é 
   \label{mo}
 \end{figure}
 
-Outra saída do modelo, é a distribuição $\theta$, que é a distribuição probabilística de tópicos por documento.
+Outra saída do modelo é a distribuição $\theta$, que é a distribuição probabilística de tópicos por documento. A Tabela \ref{tab-nich-documents2} foi gerada pela distribuição $\theta$ e foi reduzida com a classificação de maior 
+ probabilidade.
 
 \begin{table}[H]
   \centering
   \begin{tabular}{lll}
   Assunto                               & Tópico mais relevante \\
   \hline
-  PROBLEM Service Alert: mxcorp2...     & 'Monitoração' \\
-  Cron root@vm-vale1 /usr/loca...       & 'Automação' \\
-  ZCS Backup Report: FAIL               & 'Backup' \\
+  PROBLEM Service Alert: mxcorp2...     & Monitoração \\
+  Cron root@vm-vale1 /usr/loca...       & Automação \\
+  ZCS Backup Report: FAIL               & Backup \\
   \hline
   \end{tabular}
   \caption{Documentos e seus tópicos mais relevantes. Base $Amostra\ Departamento\ de\ T.I$}
-  \label{tab-nich-documents}
+  \label{tab-nich-documents2}
 \end{table}
 
-A Tabela \ref{tab-nich-documents} foi gerada pela distribuição $\theta$ e foi reduzida com a classificação de maior 
- probabilidade.
+
 
 Os documentos classificados são armazenados no Elasticsearch para exploração e análise baseada 
  nos rótulos e distribuições providos pelo LDA. Com a estruturação dos documentos e classificação via LDA é possível extrair informações como 
@@ -802,7 +801,7 @@ Os documentos classificados são armazenados no Elasticsearch para exploração 
 \end{figure}
  
 Notamos um pico em Fevereiro de mensagens classificadas
- com o rótulo 'Monitoração', isso se deu pois um incidente em um dos datacenters da empresa resultou em
+ com o rótulo ``Monitoração'', isso deve-se devido a um incidente em um dos datacenters da empresa e que resultou em
  um envio em massa de mensagens de monitoração sobre falha de serviços.
 
 \subsection{VISUALIZAÇÃO} \label{sec:visualizacao}
@@ -813,15 +812,15 @@ No experimento inicial, são apresentadas duas aplicações desenvolvidas neste 
 \begin{figure}[H]
   \centering
   \includegraphics[height=9cm]{images/figure_8.png}
-  \caption{Aplicação conceito para navegação de documentos.}
+  \caption{Aplicação do conceito para navegação de documentos.}
   \label{fig-doc-explorer}
 \end{figure}
 
-Ilustrada na Figura \ref{fig-doc-explorer}, a primeira aplicação é utilizada para navegação e leitura os documentos
+Conforme ilustrado na Figura \ref{fig-doc-explorer}, a primeira aplicação é utilizada para navegação e leitura dos documentos
  indexados. Essa funcionalidade não existe no trabalho de \citeonline{sievert2014ldavis} e é útil para exploração e navegação do corpus.
- Ao final do trabalho, os documentos resultantes das buscas serão apresentadas de forma similar dentro do LDAVis. 
+ Ao final do trabalho, os documentos resultantes das buscas serão apresentadas de forma similar e dentro do LDAVis. 
 
-Para a funcionalidade de busca com os critérios propostos no capítulo \ref{sec:experimentos}, foi implementada na segunda aplicação conceito:
+Para a funcionalidade de busca com os critérios propostos no capítulo \ref{sec:experimentos}, foi implementada a segunda aplicação que é uma outra proposta deste trabalho e está ilustrada na Figura \ref{fig-search-all}.
 
 \begin{figure}[H]
   \centering
@@ -844,10 +843,10 @@ Para a funcionalidade de busca com os critérios propostos no capítulo \ref{sec
 
 
 A aplicação ilustrada na Figura \ref{fig-search-explorer} possibilita a busca de documentos por termo, data,
- destinatários, remetente e tópico mais relevante. Os resultados são apresentados pela conexão entre os
+ destinatários, remetente e tópico mais relevantes. Os resultados são apresentados pela conexão entre os
  endereços de e-mail presentes nos documentos, ao invés dos documentos em sí. Na proposta final pretende-se implementar ambos.
 
-Na Figura \ref{fig-search-filtered} vemos que o termo 'autenticidade' foi utilizado para buscar documentos no corpus,
+Na Figura \ref{fig-search-filtered} pode-se ver que o termo ``autenticidade'' foi utilizado para buscar documentos no corpus e, por sua vez,
  obteve-se então a conexão entre os remetentes e destinatários presentes no resultado da busca.
 
 \begin{table}[H]
@@ -862,10 +861,10 @@ Na Figura \ref{fig-search-filtered} vemos que o termo 'autenticidade' foi utiliz
   \hline
   \end{tabular}
   \caption{Possível resultado da busca para Figura \ref{fig-search-filtered}.}
-  \label{tab-nich-documents}
+  \label{tab-nich-documents3}
 \end{table}
 
-Na Tabela acima vemos um possível resultado de busca que possa gerar as conexões presentes na Figura \ref{fig-search-filtered}.
+Na Tabela  \ref{tab-nich-documents3} pode-se perceber um possível resultado de busca e que pode gerar as conexões presentes na Figura \ref{fig-search-filtered}.
  Com esse conceito, é possível identificar comunidades em diferentes níveis, uma vez que os usuários não necessáriamente precisam ter trocado mensagens entre sí. Tais 
  comunidades são encontradas por termos, tópicos de interesse, e outros critérios de busca mencionados neste capítulo.
 
