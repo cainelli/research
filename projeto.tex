@@ -52,8 +52,8 @@ São Paulo\\
 \renewcommand{\baselinestretch}{0.6666666}
 
 Considerando a quantidade de dados que se gera na atualidade e, que desse volume, grande parte está em formato de texto como e-mail, mensagens intântaneas, mídias sociais, websites e etc, há um crescente interesse  em nível tecnológico na interpretação desse tipo informação  que está disponível em um formato não estruturado. A interpretação consiste na elaboração estratégica para a descoberta de informação relevante nesse tipo de dado para uso em tomada de decisões. Uma abordagem para esta descoberta é com o uso do Latent Dirichlet Allocation (LDA), o qual consiste de um modelo generativo probabilístico que sumariza uma coleção de documentos em tópicos além de apresentar a relevância de cada tópico a cada
- documento. A interpretação e exploração de uma coleção de documentos pelo LDA pode ser feita a nível de tópico, palavra ou documento. LDAvis, por outro lado, consiste de um sistema para
- exploração de tópicos e palavras resultantes do modelo LDA. Este trabalho tem como objetivo estender as  funcionalidades do LDAVis para exploração do modelo a nível de documento e criação de relações de redes em mensagens de e-mail,
+ documento. A interpretação e exploração de uma coleção de documentos pelo LDA podem ser feitas a nível de tópico, palavra ou documento. LDAvis, por outro lado, consiste de uma estensão do LDA, cuja proposta é a de um sistema para
+ exploração visual de tópicos e palavras resultantes do modelo LDA. Este trabalho tem como objetivo ampliar as  funcionalidades do LDAVis para exploração do modelo a nível de documento e criação de relações de redes em mensagens de e-mail,
  promovendo uma ferramenta de busca aprimorada em um corpus.
 
 
@@ -74,10 +74,10 @@ Considerando a quantidade de dados que se gera na atualidade e, que desse volume
 \normalsize
 \section{INTRODUÇÃO} \label{sec:introducao}
  
- Com acúmulo cada vez mais crescente de informações digitalizadas e armazenadas na forma de artigos, blogs, jornais, e-mails, livros, mensagens instantâneas, redes sociais, entre outros, 
- a tarefa de organizar, indexar e buscar esses tipos de informações torna-se uma tarefa fundamental para os usuários que precisam manipulá-las em um processo de tomada de decisão. 
+ Com o acúmulo cada vez mais crescente de informações digitalizadas e armazenadas na forma de artigos, blogs, jornais, e-mails, livros, mensagens instantâneas, redes sociais, entre outros, 
+ a tarefa de organizar, indexar e buscar esses tipos de informações torna-se fundamental para os usuários que precisam manipulá-las em um processo de tomada de decisão. 
  
- Para se ter como exemplo, pesquisas apontam que em 2017 uma média de 269 bilhões de e-mails serão enviados e recebidos diariamente, e espera-se continuar a crescer a uma taxa média de 4.4\% ao ano nos próximos quatro anos, atingindo 319.6 bilhões ao final de 2021 como mostra a Tabela \ref{tb_email} \cite{radicati2017}.
+ Para se ter como um exemplo do volume de dados textuais com potencial de uso em processos de tomadas de decisão, pesquisas apontam que em 2017 uma média de 269 bilhões de e-mails serão enviados e recebidos diariamente, e espera-se continuar a crescer a uma taxa média de 4.4\% ao ano nos próximos quatro anos, atingindo 319.6 bilhões ao final de 2021 como mostra a Tabela \ref{tb_email} \cite{radicati2017}.
 
 \begin{table}[H]
   \centering
@@ -93,8 +93,7 @@ Considerando a quantidade de dados que se gera na atualidade e, que desse volume
 \end{table}
 
 A taxa de crescimento da quantidade de mensagens enviadas e recebidas impressiona, não só por se tratar de uma técnologia dos anos 70,
-mas principalmente pela forte adoção de novos recursos de comunicação como: mensagem instantânea, redes sociais, videoconferência, chat, etc. A comunicação via e-mail permanece sólida principalmente em empresas,
-estas, por sua vez, tem a necessidade de aplicar a Inteligência nos Negócios (ou BI, de \textit{Business Intelligence}) para manter-se competitivas. O BI deve ser utilizado não só em escopos diretamente relacionados ao negócio,
+mas principalmente pela forte adoção de novos recursos de comunicação como: mensagem instantânea, redes sociais, videoconferência, chat e etc. A comunicação via e-mail permanece sólida principalmente em empresas, as quais tem a necessidade de aplicar técncias de Inteligência nos Negócios (ou BI, de \textit{Business Intelligence}) para manter-se competitivas e o uso de informações intrínsecas em e-mail pode ser uma fonte importante em processos decisórios. O BI deve ser utilizado não só em escopos diretamente relacionados ao negócio,
 como clientes, produtos, etc. mas também nos indiretos, como colaboradores, buscando obter insights, melhoria dos processos e otimização.
 Frequentemente, e-mails são deixados fora da equação pela falta de ferramentas específicas e complexidade em tratar dados não estruturados,
  
@@ -112,8 +111,8 @@ Frequentemente, e-mails são deixados fora da equação pela falta de ferramenta
 
  O trabalho de \citeonline{mikolov2013efficient}, por exemplo, possibilita em um grande volume de documentos, fornecer funcionalidades como sugestões de termos de pesquisa baseados na ordem das palavras digitadas, além de extensão de busca utilizando termos similares.
 
-Ambos os métodos têm a capacidade de uso na interação com os documentos, no entanto há uma lacuna quando se deseja explorar documentos por meio de temas de interesse específico,
- visualizar as palavras mais relevantes em cada tema e explorar os documentos com a usabilidade de um mapa, com possibilidade de ampliar a visualização com uso de zoom, além de visualizar a relação entre documentos de uma maneira intuitiva como pela proximidade. Estes exemplos de uso podem ser uma forma complementar ao métodos de links ou busca. E ainda, estes exemplos de aplicação podem ser feitos em qualquer corpus.
+Ambos os métodos, link e busca, têm a capacidade de uso na interação com os documentos, no entanto, há uma lacuna quando se deseja explorar documentos por meio de temas de interesse específico,
+ visualizar as palavras mais relevantes em cada tema e explorar os documentos com a usabilidade de um mapa, com possibilidade de ampliar a visualização com uso de zoom, além de visualizar a relação entre documentos de uma maneira intuitiva como pela proximidade. Estes exemplos de uso podem ser uma forma complementar ao métodos de links ou busca. E ainda, estes exemplos de aplicação podem ser feitos em qualquer corpus, idependente do contexto do documento.
  
  %, no entanto, como exemplo,
  %vamos demonstrar como aplicação em um corpus contendo documentos de e-mail. E-mails possuem informações que podem aprimorar ainda mais a experiência de exploração,
@@ -121,15 +120,15 @@ Ambos os métodos têm a capacidade de uso na interação com os documentos, no 
 
 \subsection{OBJETIVOS} \label{sec:objetivo}
 
-Neste trabalho propõe-se como objetivo o uso de um algoritmo chamado Latent Dirichlet Allocation (LDA) \cite{blei2003latent} para modelagem de tópicos e melhoria de sua visualização. A proposta consite em um aprimoramento da aplicação LDAVis de \citeonline{sievert2014ldavis} para explorar documentos e suas relações. O estudo de caso será feito em uma base de dados de e-mails e, após descoberta de tópicos, realizar a busca aprimorada de documentos, além de identificar  comunidades de redes de sociais através de interesse comum segundo os tópicos criados pelo modelo LDA. Além das técnicas de processamento e visualização de conhecimento, como objetivo secundário propõe-se realizar análise exploratória do conjunto de dados para obter informações relevantes e que possam ser utilizadas na compreensão do negócio da empresa.
+Neste trabalho propõe-se como objetivo o uso de um algoritmo chamado Latent Dirichlet Allocation (LDA) \cite{blei2003latent} para a descoberta de tópicos em uma base textual, a partir de uma análise exploratória visual. Portanto, a proposta consite em um aprimoramento da aplicação chamada LDAVis  \cite{sievert2014ldavis}, que amplia o uso do LDA para visualização de dados, com a finalidade de explorar documentos e suas relações. O estudo de caso será feito em uma base de dados de e-mails e, após descoberta de tópicos, as explorações visuais propostas consistem em novas descobertas como busca aprimorada de documentos e identificação de  comunidades de redes de sociais através de interesse comum segundo os tópicos criados pelo modelo LDA. Além das técnicas de processamento e visualização de conhecimento, como objetivo secundário propõe-se realizar análise exploratória do conjunto de dados para obter informações relevantes como volume de mensagem agregado por granularidade de tempo (dia, mês ou ano) ou por tipo de tópicoe que podem ser utéis na compreensão do negócio de uma empresa que deseja usar as informações de e-mail como fonte de dados em um processo de tomada de decisão.
 
 
 \subsection{ORGANIZAÇÃO DO TRABALHO} \label{sec:organizacao}
 
  A estrutura organizacional dessa dissertação consiste em 5 capítulos. O capítulo 1, segue com uma breve introdução e organização do trabalho. 
-  No capítulo 2, justificamos a elaboração do trabalho demonstrando que a visualização de modelos de tópicos é uma das áreas em carência de pesquisa atualmente, 
-  e como esse trabalho busca contribuir com o campo de \textit{Information Retrival} para modelos de tópicos. No capítulo 3, discorremos sobre o referencial teórico presente, 
-  é detalhado o funcionamento do modelo probabilístico LDA além da apresentação do algoritmo K-Means como base de comparação. No capítulo 4, mostramos a metodologia adotada, 
+  No capítulo 2, justificamos a elaboração do trabalho demonstrando que a visualização de modelos de tópicos, a qual é uma área com problemas de pesquisa ainda em aberto, 
+  e com esse trabalho procura-se  contribuir com o campo de \textit{Information Retrival} para modelos de tópicos. No capítulo 3, discorremos sobre o referencial teórico presente, 
+  é detalhado o funcionamento do modelo probabilístico LDA, além da apresentação do algoritmo K-Means como base de comparação. No capítulo 4, mostramos a metodologia adotada, 
   a arquitetura, o processo de mineração de dados, as justificativas de adoção de cada parâmetro livre na criação do modelo além das funcionalidades propostas para
   aplicação de busca. Por fim, no capítulo 5, apresentamos o cronograma com as tarefas pendentes para a conclusão do trabalho.
 
