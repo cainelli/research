@@ -35,7 +35,7 @@ aprovação no exame de Qualificação.}\\
 \strut}
 \vskip 3.0cm
 \textbf{\normalsize Orientador: Prof. Dr. Leandro Augusto da Silva}\\
-\vskip 2.0cm
+\vskip 1.5cm
 \begin{center}
 São Paulo\\
 2017\\
@@ -423,11 +423,11 @@ Na Tabela \ref{tab-base-de-dados} vemos a descrição das bases utilizadas neste
 
  A Figura \ref{fig-framework-lda} ilustra o fluxo do processo deste trabalho, desde a coleta das mensagens na origem até a criação do modelo e armazenamento dos resultados no Elasticsearch.
 
- \begin{figure}[H]
+\begin{figure}[H]
 	\centering
-    \includegraphics[height=6cm]{images/figure_11.jpg}
-    \caption{Arquitetura e fluxo para criação do modelo.}
-    \label{fig-framework-lda}
+  \includegraphics[height=6cm]{images/figure_11.jpg}
+  \caption{Arquitetura e fluxo para criação do modelo.}
+  \label{fig-framework-lda}
 \end{figure}
 
 Notamos na Figura \ref{fig-framework-lda} os principais componentes envolvidos na criação do modelo. A primeira caixa representa o servidor de 
@@ -439,7 +439,8 @@ Notamos na Figura \ref{fig-framework-lda} os principais componentes envolvidos n
  %% ELASTICSEARCH
 \subsection{ELASTICSEARCH} \label{sec:elasticsearch}
 
-O Elasticsearch é um dos motores de busca open-source mais adotados atualmente. O projeto possui mais de 900 contribuidores, 29.000
+O Elasticsearch é um dos motores de busca open-source mais adotados atualmente (Figura \ref{fig-search-ranking}). 
+ O projeto possui mais de 900 contribuidores, 29.000
  contribuições e 200 versões. É um sistema de busca distribuido  e de NRT, ou \textit{Near Realtime}, possuí latência normalmente de um segundo
  do momento que é indexado um documento ao momento que se torna disponível para busca. É capaz de resolver uma variedade de problemas que requerem ou não escala,
  possui diversas maneiras de implementação, \textit{single-server} ou em cluster, em núvem, como serviço, em servidores físicos, virtuais ou como containers.
@@ -449,6 +450,13 @@ Possui uma API RESTful de busca e análise e diversos métodos de ingestão, via
  Java, C\#, Python , JavaScript, PHP, .Net, Groovy, Perl e Ruby. Pode ser integrado à \textit{pipelines} de \textit{Big Data} através
  de um conector para Haddop, um popular Framework para \textit{Big Data}, fornecendo integrações com outras ferramentas conhecidas como Spark, Spark Streeming, Spark SQL,
  Hive, Pig, Storm, Cascading e MapReduce. Neste trabalho foi utilizado a versão 5.6 do Elasticsearch em container pela sua facilidade de implementação e utilização e o SDK em Python como cliente para interagir com o componente. 
+
+\begin{figure}[H]
+	\centering
+  \includegraphics[height=9cm]{images/figure_12.png}
+  \caption{DB-Engines ranking de motores de busca. \cite{db-engines}}
+  \label{fig-search-ranking}
+\end{figure}
 
 Abaixo, alguns conceitos importantes do Elasticsearch que devem ser abordados:
 
@@ -901,21 +909,20 @@ Com o uso do Elasticsearch e com o desenvolvimento de aplicações que integram-
 \section{CRONOGRAMA} \label{sec:cronograma}
 
 \begin{center}
-  \begin{tabular}{llllllllll}
-                           & Out                    & Nov                    & Dez                      & Jan                    & Fev                    & Mar                     & Abr                    & Mai                     & Jun \\
-                           \hline
-  Estudo: EM               &\cellcolor[gray]{0.9}   &                        &                          &                        &                        &                         &                        &                         &                        \\
-  Qualificação             &                        &\cellcolor[gray]{0.9}   &\cellcolor[gray]{0.9}     &                        &                        &                         &                        &                         &                        \\
-  Dev: Modelo              &\cellcolor[gray]{0.9}   &                        &                          &                        &                        &                         &                        &                         &                        \\
-  Dev: Buscador            &                        &\cellcolor[gray]{0.9}   &                          &                        &                        &                         &                        &                         &                        \\
-  Dev: Expl. Comunidades   &                        &                        &\cellcolor[gray]{0.9}     &                        &                        &                         &                        &                         &                        \\
-  Dev: Análise Expl.       &                        &                        &                          &\cellcolor[gray]{0.9}   &                        &                         &                        &                         &                        \\
-  Depósito Dissertação     &                        &                        &                          &                        &\cellcolor[gray]{0.9}   &                         &                        &                         &                        \\
-  Artigo                   &                        &                        &                          &                        &                        &\cellcolor[gray]{0.9}    &\cellcolor[gray]{0.9}   &\cellcolor[gray]{0.9}    &\cellcolor[gray]{0.9}   \\
+  \begin{tabular}{lllllllll}
+                                         & Nov                    & Dez                      & Jan                    & Fev                    & Mar                     & Abr                    & Mai                     & Jun \\
+  \hline                         
+  Qualificação                           &\cellcolor[gray]{0.9}   &\cellcolor[gray]{0.9}     &                        &                        &                         &                        &                         &                        \\
+  Revisão do Texto                       &                        &\cellcolor[gray]{0.9}     &                        &                        &                         &                        &                         &                        \\
+  Portar Buscador para LDAVis            &\cellcolor[gray]{0.9}   &                          &                        &                        &                         &                        &                         &                        \\
+  Portar Expl. Comunidades para LDAVis   &                        &\cellcolor[gray]{0.9}     &                        &                        &                         &                        &                         &                        \\
+  Escrita do Artigo                      &                        &                          &\cellcolor[gray]{0.9}   &                        &                         &                        &                         &                        \\
+  Submissão do Artigo                    &                        &                          &                        &\cellcolor[gray]{0.9}   &                         &                        &                         &                        \\
+  Escrita da Dissertação                 &                        &                          &                        &                        &\cellcolor[gray]{0.9}    &\cellcolor[gray]{0.9}   &                         &                        \\
+  Depósito Dissertação                   &                        &                          &                        &                        &                         &\cellcolor[gray]{0.9}   &                         &                        \\
   \hline
   \end{tabular}
 \end{center}
-
 
 \def\refname{REFERÊNCIAS BIBLIOGRÁFICAS}
 \bibliography{biblproj}
