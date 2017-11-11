@@ -23,7 +23,7 @@
 \textbf{\large Fernando Cainelli Tolentino}\\
 \vskip 4.0cm
 \setlength{\baselineskip}{1.5\baselineskip}
-\textbf{\large Latent Dirichlet Allocation: Visualizando e Explorando Documentos modelo generativo probabilístico}\\
+\textbf{\large Latent Dirichlet Allocation: Descoberta e exploração de tópicos, documentos e comunidades em dados textuais.}\\
 \vskip 4.5cm
 \end{center}
 \hfill{\vbox{\hsize=8.5cm\noindent\strut
@@ -99,7 +99,7 @@ Frequentemente, e-mails são deixados fora da equação pela falta de ferramenta
  
  
  Retomando a discussão para a possibilidade de usuários navegar por grande volume de dados e encontrar a informação desejada, utiliza-se atualmente dois métodos principais:
- links e busca. 
+ links e busca, \citeonline{blei2012probabilistic}. 
  
  Os Links correlatam trechos de um documento a outro, sendo úteis pela possibilidade de permitir uma extensão da leitura e aprofundamento do conhecimento,
  direcionando o leitor a termos ou assuntos relacionados de alguma forma ao documento original. Apesar de ser uma maneira eficiente de fornecer conteúdo diretamente relacionado,
@@ -867,6 +867,35 @@ Na Figura \ref{fig-search-filtered} pode-se ver que o termo ``autenticidade'' fo
 Na Tabela  \ref{tab-nich-documents3} pode-se perceber um possível resultado de busca e que pode gerar as conexões presentes na Figura \ref{fig-search-filtered}.
  Com esse conceito, é possível identificar comunidades em diferentes níveis, uma vez que os usuários não necessáriamente precisam ter trocado mensagens entre sí. Tais 
  comunidades são encontradas por termos, tópicos de interesse, e outros critérios de busca mencionados neste capítulo.
+
+\section{CONCLUSÕES PRELIMINARES} \label{sec:conclusoes-preliminares}
+
+Vimos que a classificação de uma grande base de dados textual pode ser realizado com o uso do Latent Dirichlet Allocation, e que,
+ métodos probabilisticos fazem uma análise mais aprofundada das relações entre palavras e documentos para extrair variáveis
+ latentes, que por sua vez possibilitam descrever um corpus. Usando a medida de coerência, encontrou-se
+ o número de tópicos ideal para cada base de dados utilizada. Quando determinado esse número de tópicos, 
+ o LDA produziu resultados mais precisos quando esse conjunto de dados é classificado, segundo a própria medida de coerência.
+
+A visualização e exploração de corpus, ainda se tratando de modelos probabilísticos, é uma das áreas que demandam estudos 
+ e técnicas aprimoradas, \cite{blei2012probabilistic}, LDAVis contribui para a visualização e exploração de tópicos e palavras,
+ baseando-se na saída do LDA, este trabalho pretende contribuir adicionando capabilidades de visualização
+ e exploração a nível de documentos, que é outra saída do modelo, ao LDAVis, além da possibilidade de exploração de redes
+ e comunidades em conjunto de dados que possuem essa característica como: e-mail, artigos científicos, forums, entre outros.
+
+Abaixo apresenta-se as propostas de aprimoramento da aplicação LDAVis, mencionados com detalhes no Capítulo \ref{sec:experimentos}.
+
+\begin{enumerate}
+  \item Busca de documentos.
+  \item Visualização de comunidades.
+  \item Análise exploratória.
+\end{enumerate}
+
+
+Com o uso do Elasticsearch e com o desenvolvimento de aplicações que integram-se à sua API, demonstramos ser possível 
+ a entrega dos itens propostos como objetivo do trabalho. Para conclusão do trabalho deve-se portar as duas aplicações
+ desenvolvidas como prova de conceito para o LDAVis. A complexidade para isso é relativamnete baixa dado que  
+ no do desenvolvismento dos conceitos teve-se o cuidado de adotar tecnologias em comum com LDAVis, todas são desenvolvidas
+ na linguagem JavaScript com uso do D3.js.
 
 %% CRONOGRAMA
 \section{CRONOGRAMA} \label{sec:cronograma}
