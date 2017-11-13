@@ -51,15 +51,33 @@ São Paulo\\
 \end{center}
 \renewcommand{\baselinestretch}{0.6666666}
 
-Considerando a quantidade de dados que se gera na atualidade e, que desse volume, grande parte está em formato de texto como, por exemplo, em e-mail, mensagens intântaneas, mídias sociais, websites e etc, há um crescente interesse  em nível tecnológico na interpretação desse tipo informação  que está disponível em um formato não estruturado. A interpretação consiste na elaboração estratégica para a descoberta de informação relevante nesse tipo de dado para uso em tomada de decisões. Uma abordagem para esta descoberta é com o uso do Latent Dirichlet Allocation (LDA), o qual consiste de um modelo generativo probabilístico que sumariza uma coleção de documentos em tópicos além de apresentar a relevância de cada tópico a cada
- documento. A interpretação e exploração de uma coleção de documentos pelo LDA podem ser feitas a nível de tópico, palavra ou documento. LDAvis, por outro lado, consiste de uma estensão do LDA, cuja proposta é a de um sistema para
+Considerando a quantidade de dados que se gera na atualidade e, que desse volume, grande parte está em formato de texto como, por exemplo, em e-mail, mensagens intantâneas, mídias sociais, websites e etc, há um crescente interesse  em nível tecnológico na interpretação desse tipo informação  que está disponível em um formato não estruturado. A interpretação consiste na elaboração estratégica para a descoberta de informação relevante nesse tipo de dado para uso em tomada de decisões. Uma abordagem para esta descoberta é com o uso do Latent Dirichlet Allocation (LDA), o qual consiste de um modelo generativo probabilístico que sumariza uma coleção de documentos em tópicos além de apresentar a relevância de cada tópico a cada
+ documento. A interpretação e exploração de uma coleção de documentos pelo LDA podem ser feitas a nível de tópico, palavra ou documento. LDAvis, por outro lado, consiste de uma extensão do LDA, cuja proposta é a de um sistema para
  exploração visual de tópicos e palavras resultantes do modelo LDA. Este trabalho tem como objetivo ampliar as  funcionalidades do LDAVis para exploração do modelo a nível de documento e criação de relações de redes em mensagens de e-mail,
  promovendo uma ferramenta de busca aprimorada em um corpus.
 
+ \begin{flushleft}
+  {\bf Palavras-chave:} {\it Latent Dirichlet Allocation, modelos de tópico, visualização, exploração de documentos.}
+  \end{flushleft}
 
-% \begin{flushleft}
-% {\bf Palavras-chave:} {\it apresentação, separada por vírgulas, de três a seis unitermos significativos para o trabalho.}
-% \end{flushleft}
+ % ABSTRACT
+\newpage
+\thispagestyle{plain}
+\pagenumbering{roman}
+\begin{center}
+\large
+\textbf{ABSTRACT}
+\end{center}
+\renewcommand{\baselinestretch}{0.6666666}
+
+Considering the amount of data that is generated today, and from this volume, much is in text format such as e-mail, instant messages, social media, websites, etc., there is a growing interest in the interpretation of such information which is usually available in an unstructured format. The interpretation consists of the strategic elaboration for the discovery of relevant information in this type of data for use in decision making. An approach to this discovery is the use of Latent Dirichlet Allocation (LDA), which consists of a generative probabilistic model that summarizes a collection of documents in topics and presents the relevance of each topic to each
+ document. The interpretation and exploration of a collection of documents by LDA can be done at the topic, word or document level. LDAvis, on the other hand, consists of an extension of the LDA, whose proposal is a system for
+ visual exploration of topics and words resulting from the LDA model. This work aims to extend the LDAVis functionalities for document-level model exploration and creation of network relationships in e-mail messages,
+ promoting an improved search tool in a corpus.
+
+\begin{flushleft}
+{\bf Keywords:} {\it Latent Dirichlet Allocation, topic models, visualization, documents exploration.}
+\end{flushleft}
 
 % SUMÁRIO
 \newpage
@@ -93,7 +111,7 @@ Considerando a quantidade de dados que se gera na atualidade e, que desse volume
 \end{table}
 
 A taxa de crescimento da quantidade de mensagens enviadas e recebidas impressiona, não só por se tratar de uma técnologia dos anos 70,
-mas principalmente pela forte adoção de novos recursos de comunicação como: mensagem instantânea, redes sociais, videoconferência, chat e etc. A comunicação via e-mail permanece sólida principalmente em empresas, as quais tem a necessidade de aplicar técncias de Inteligência nos Negócios (ou BI, de \textit{Business Intelligence}) para manter-se competitivas e o uso de informações intrínsecas em e-mail pode ser uma fonte importante em processos decisórios. O BI deve ser utilizado não só em escopos diretamente relacionados ao negócio,
+mas principalmente pela forte adoção de novos recursos de comunicação como: mensagem instantânea, redes sociais, videoconferência, chat e etc. A comunicação via e-mail permanece sólida principalmente em empresas, as quais têm a necessidade de aplicar técnicas de Inteligência nos Negócios (ou BI, de \textit{Business Intelligence}) para manter-se competitivas e o uso de informações intrínsecas em e-mail pode ser uma fonte importante em processos decisórios. O BI deve ser utilizado não só em escopos diretamente relacionados ao negócio,
 como clientes, produtos, etc, mas também nos indiretos, como colaboradores, buscando obter insights, melhoria dos processos e otimização.
 Frequentemente, e-mails são deixados fora da equação pela falta de ferramentas específicas e complexidade em tratar dados não estruturados,
  
@@ -107,12 +125,12 @@ Frequentemente, e-mails são deixados fora da equação pela falta de ferramenta
  
  A busca, por outro lado,
  requer um processo que pode ser automatizado de forma efetiva, pois quando informações presentes nos documentos são indexadas, possibilita ao usuário procurar um documento por palavra chave ou metadados presentes no mesmo.
- Esse processo é muito disseminado na área de recuperção de informação, e os motores de busca utilizam de técnicas combinadas como ranqueamento de resultados, aprendizagem de máquina e similaridade de palavras para melhorar a efetividade na busca de informações relevantes.
+ Esse processo é muito disseminado na área de recuperação de informação, e os motores de busca utilizam de técnicas combinadas como ranqueamento de resultados, aprendizagem de máquina e similaridade de palavras para melhorar a efetividade na busca de informações relevantes.
 
  O trabalho de \citeonline{mikolov2013efficient}, por exemplo, possibilita em um grande volume de documentos, fornecer funcionalidades como sugestões de termos de pesquisa baseados na ordem das palavras digitadas, além de extensão de busca utilizando termos similares.
 
 Ambos os métodos, link e busca, têm a capacidade de uso na interação com os documentos. No entanto, há uma lacuna nesses métodos que é quando se deseja explorar documentos por meio de temas de interesse específico,
- visualizar as palavras mais relevantes em cada tema e explorar os documentos com a usabilidade de um mapa, com possibilidade de ampliar a visualização com uso de zoom, além de visualizar a relação entre documentos de uma maneira intuitiva como pela proximidade. Estes exemplos de uso podem ser uma forma complementar ao métodos de links ou busca. E ainda, estes exemplos de aplicação podem ser feitos em qualquer corpus, idependente do contexto do documento.
+ visualizar as palavras mais relevantes em cada tema e explorar os documentos com a usabilidade de um mapa, com possibilidade de ampliar a visualização com uso de zoom, além de visualizar a relação entre documentos de uma maneira intuitiva como pela proximidade. Estes exemplos de uso podem ser uma forma complementar ao métodos de links ou busca. E ainda, estes exemplos de aplicação podem ser feitos em qualquer corpus, independente do contexto do documento.
  
  %, no entanto, como exemplo,
  %vamos demonstrar como aplicação em um corpus contendo documentos de e-mail. E-mails possuem informações que podem aprimorar ainda mais a experiência de exploração,
@@ -120,7 +138,7 @@ Ambos os métodos, link e busca, têm a capacidade de uso na interação com os 
 
 \subsection{OBJETIVOS} \label{sec:objetivo}
 
-No trabalho dos autores \citeonline{blei2003latent} foi proposto um algoritmo chamado Latent Dirichlet Allocation (LDA) \cite{blei2003latent} que possibilita descobrir tópicos intrinsicamente presentes em uma base de dados textual, a partir da sumarização de palavras relevantes. Em complemento ao LDA, os autores  \citeonline{sievert2014ldavis} propõem o LDAVis como uma proposta de visualizar os tópicos descobertos em uma base textual e as palavras que os descrevem. 
+No trabalho dos autores \citeonline{blei2003latent} foi proposto um algoritmo chamado Latent Dirichlet Allocation (LDA) \cite{blei2003latent} que possibilita descobrir tópicos intrinsecamente presentes em uma base de dados textual, a partir da sumarização de palavras relevantes. Em complemento ao LDA, os autores  \citeonline{sievert2014ldavis} propõem o LDAVis como uma proposta de visualizar os tópicos descobertos em uma base textual e as palavras que os descrevem. 
 
 O objetivo deste trabalho, portanto, é usar o LDA como algoritmo de descoberta de tópicos e estender a plataforma resultante da proposta LDAVis com a finalidade de suprir a lacuna citada acima de explorar documentos por temas de interesse e com a possibilidade de explorar as palavras relevantes em cada tema, descobrindo por fim a relação entre os documentos.
 
@@ -129,9 +147,9 @@ Como objetivo secundário, propõe-se a partir de um estudo de caso em uma base 
 
 \subsection{ORGANIZAÇÃO DO TRABALHO} \label{sec:organizacao}
 
- A estrutura organizacional dessa dissertação consiste em 6 capítulos. O Capítulo \ref{sec:introducao}, segue com uma breve introdução, organização do trabalho e justificamos a elaboração do trabalho
+ A estrutura organizacional desta dissertação consiste em 6 capítulos. O Capítulo \ref{sec:introducao}, segue com uma breve introdução, organização do trabalho e justificamos a elaboração do trabalho
   demonstrando que a visualização de modelos de tópicos é uma área com problemas de pesquisa ainda em aberto, e com esse trabalho procura-se contribuir com o aprimorando ferramentas existentes. 
-  No capítulo \ref{sec:lda}, discorremos sobre o referencial teórico presente, fazemos uma breve revisão dos principais métodos probabilísticos e não probabilísticos no campo de \textit{Information Retrival}
+  No capítulo \ref{sec:lda}, discorremos sobre o referencial teórico presente, fazemos uma breve revisão dos principais métodos probabilísticos e não probabilísticos no campo de \textit{Information Retrieval}
   e é detalhado o funcionamento do modelo generativo probabilístico LDA. No capítulo \ref{sec:metodologia}, mostramos a metodologia adotada, 
   a arquitetura e seus componentes, o processo de mineração de dados, as justificativas de adoção de cada parâmetro livre na criação do modelo além das funcionalidades propostas para
   aplicação de busca. No capítulo \ref{sec:experimentos}, apresentamos os resultados iniciais atingidos no trabalho, e por fim, concluímos com os Capítulos \ref{sec:conclusoes-preliminares} e \ref{sec:cronograma}
@@ -190,7 +208,7 @@ O objetivo do algoritmo LDA é encontrar o modelo probabilístico de um conjunto
 
 %Antes de nos aprofundarmos na descrição do algoritmo, façamos uma introdução da terminologia formal e notações usada nesta seção.
 
-\subsection{METÓDOS ANALÍTICOS PARA MODELAGEM DE TÓPICOS} \label{sec:trabalhos-relacionados}
+\subsection{MÉTODOS ANALÍTICOS PARA MODELAGEM DE TÓPICOS} \label{sec:trabalhos-relacionados}
 
 Diversos métodos probabilísticos e não-probabilísticos foram propostos para resolver o problema de modelagem de texto. O objetivo
  principal de ambos os métodos é o de encontrar uma maneira de classificar cada documento, utilizando descrições curtas que preservem
@@ -215,8 +233,8 @@ Em uma análise textual, que é mais ampla a análise de  tópicos, uma $palavra
 
  O LDA assume que documentos são criados via um processo generativo. Primeiro, um vetor de pesos de tópicos é extraído, o qual determina
  quais tópicos são mais prováveis de aparecer em um documento. Em seguida, para cada palavra que aparece em um documento, escolhe-se um tópico
- único do vetor de pesos de tópicos. Para gerar a palavra, a distribuição de probabilidade condicinada ao tópico escolhido deve ser extraída.
- Desse processo, pode-se perceber que cada palavra em um documento é gerada por um tópico diferente, escolhido randômicamente \cite{hu2009latent}.
+ único do vetor de pesos de tópicos. Para gerar a palavra, a distribuição de probabilidade condicionada ao tópico escolhido deve ser extraída.
+ Desse processo, pode-se perceber que cada palavra em um documento é gerada por um tópico diferente, escolhido randomicamente \cite{hu2009latent}.
 
  Por exemplo, dado um conjunto de documentos que podem ser classificados em quatro tópicos: Esportes, Animais, Tecnologia e Artes. 
  Cada tópico poderá ser definido pela seguinte lista de palavras:
@@ -230,7 +248,7 @@ Em uma análise textual, que é mais ampla a análise de  tópicos, uma $palavra
   \item \textbf{ Artes:} cinema, dança, música, canção, pintura, cores, movimento, instrumento.
 \end{itemize}
 
-O processo generativo consiste em uma mistura de tópicos com base em uma parametrização feita pelo usuário. No caso do exemplo acima, suponha-se que há um desejo em gerar um novo documento que contenha os seguintes tópicos nas respctivas proporções: 75\% Artes e 25\% Esporte. A geração inicia-se com a parametrização do tamanho do documento a ser gerado pelo número de palavras. Consequentemente, para cada tópico escolhido na mistura, seleciona-se as palavras de cada tópico proporcionalmente, gerando um novo documento.
+O processo generativo consiste em uma mistura de tópicos com base em uma parametrização feita pelo usuário. No caso do exemplo acima, suponha-se que há um desejo em gerar um novo documento que contenha os seguintes tópicos nas respectivas proporções: 75\% Artes e 25\% Esporte. A geração inicia-se com a parametrização do tamanho do documento a ser gerado pelo número de palavras. Consequentemente, para cada tópico escolhido na mistura, seleciona-se as palavras de cada tópico proporcionalmente, gerando um novo documento.
 
  O LDA usa esse conceito de processo generativo de forma reversa para determinar a distribuição de tópicos por documento e a distribuição de palavras por um tópico específico. 
  O processo generativo permite diferentes graus de relevância de uma palavra em um tópico, e um tópico em um documento. Na teoria da probabilidade isso é chamado como permutabilidade,
@@ -294,13 +312,13 @@ o $M$ denota o número de documentos que é associado ao prato externo e o inter
    \label{fig-plate}
 \end{figure}
 
-O hiper parâmetro $\alpha$ é um vetor de dimensão $K$ com itens \(\alpha _i>0\) e é uma distribuição Dirichlet apriori da distribuição de tópicos por documento,
-o hiper parâmetro $\beta$ é uma distribuição Dirichlet apriori da distribuição de palavras por tópicos. $\theta _d$ é a distribuição de tópicos para o documento $d$. $Z_{dn}$ e $W_{dn}$ são as variáveis a nível de palavras e são amostradas uma vez para cada palavra em cada documento.
+O hiper parâmetro $\alpha$ é um vetor de dimensão $K$ com itens \(\alpha _i>0\) e é uma distribuição Dirichlet a priori da distribuição de tópicos por documento,
+o hiper parâmetro $\beta$ é uma distribuição Dirichlet a priori da distribuição de palavras por tópicos. $\theta _d$ é a distribuição de tópicos para o documento $d$. $Z_{dn}$ e $W_{dn}$ são as variáveis a nível de palavras e são amostradas uma vez para cada palavra em cada documento.
 
 
 %% INFERÊNCIA
 \subsection{INFERÊNCIA} \label{sec:inferencia}
-A Eq.(3) baseia-se nos hiper parâmetros apriori $\alpha$ e $\beta$, neste subcapítulo, descreve-se o procedimento para inferência com o LDA.
+A Eq.(3) baseia-se nos hiper parâmetros a priori $\alpha$ e $\beta$, neste subcapítulo, descreve-se o procedimento para inferência com o LDA.
 
 O problema de inferência principal a se resolver é o de  computar a distribuição posteriori das distribuições latentes:
 
@@ -418,7 +436,7 @@ Para os experimentos realizados no Capítulo \ref{sec:experimentos} a base total
   \label{tab-base-de-dados}
 \end{table}
 
-Na Tabela \ref{tab-base-de-dados} vemos a descrição das bases utilizadas neste trabalho. A $Amostra\ Reduzida$ extraída da base $Total$ foi utilizada para determiar o número ideal de tópicos
+Na Tabela \ref{tab-base-de-dados} vemos a descrição das bases utilizadas neste trabalho. A $Amostra\ Reduzida$ extraída da base $Total$ foi utilizada para determinar o número ideal de tópicos
  descrita no Capítulo \ref{sec:n-topicos} uma vez que é necessário rodar o algoritmo diversas vezes para se encontrar o número de tópicos otimizado para 
  o corpus. A base $Amostra\ Departamento\ de\ T.I$ são documentos de e-mail de remetentes ou destinatários apenas desse departamento dentro da empresa provedora
  de serviços. Essa abordagem foi proposta, pois o autor possui domínio sobre o conteúdo desse subconjunto de dado para a análise de dados é importante trabalhar próximo ao especialista
@@ -446,14 +464,14 @@ Notamos na Figura \ref{fig-framework-lda} os principais componentes envolvidos n
 
 O Elasticsearch é um dos motores de busca open-source mais adotados atualmente (Figura \ref{fig-search-ranking}). 
  O projeto possui mais de 900 contribuidores, 29.000
- contribuições e 200 versões. É um sistema de busca distribuido  e de NRT, ou \textit{Near Realtime}, possuí latência normalmente de um segundo
+ contribuições e 200 versões. É um sistema de busca distribuído  e de NRT, ou \textit{Near Realtime}, possui latência normalmente de um segundo
  do momento que é indexado um documento ao momento que se torna disponível para busca. É capaz de resolver uma variedade de problemas que requerem ou não escala,
- possui diversas maneiras de implementação, \textit{single-server} ou em cluster, em núvem, como serviço, em servidores físicos, virtuais ou como containers.
+ possui diversas maneiras de implementação, \textit{single-server} ou em cluster, em nuvem, como serviço, em servidores físicos, virtuais ou como containers.
  Além de suportar diversos sistemas operacionais como Windows e Linux.
 
 Possui uma API RESTful de busca e análise e diversos métodos de ingestão, via API ou SDKs suportadas em diversas linguagens:
  Java, C\#, Python , JavaScript, PHP, .Net, Groovy, Perl e Ruby. Pode ser integrado à \textit{pipelines} de \textit{Big Data} através
- de um conector para Haddop, um popular Framework para \textit{Big Data}, fornecendo integrações com outras ferramentas conhecidas como Spark, Spark Streeming, Spark SQL,
+ de um conector para Hadoop, um popular Framework para \textit{Big Data}, fornecendo integrações com outras ferramentas conhecidas como Spark, Spark Streaming, Spark SQL,
  Hive, Pig, Storm, Cascading e MapReduce. Neste trabalho foi utilizado a versão 5.6 do Elasticsearch em container pela sua facilidade de implementação e utilização e o SDK em Python como cliente para interagir com o componente. 
 
 \begin{figure}[H]
@@ -677,7 +695,7 @@ A proposta deste trabalho é estender a aplicação e funcionalidades descritas 
   \end{enumerate}
 \end{enumerate}
 
-Os documentos são indexados e armazenados no Elasticsearch como descrito no Capítulo \ref{sec:coletor}, a própria ferramenta oferece mecanismos de consulta descritos no Capítulo \ref{sec:elasticsearch}, que possibilitam realizar diferentes tipos de busca e a implementação dos filtros propostos, bem como apresentar os dados quantitativos para análise exploratória e criação de comunidades, relacionando destinatários e remetentes a seus tópicos frequêntes e relevantes.
+Os documentos são indexados e armazenados no Elasticsearch como descrito no Capítulo \ref{sec:coletor}, a própria ferramenta oferece mecanismos de consulta descritos no Capítulo \ref{sec:elasticsearch}, que possibilitam realizar diferentes tipos de busca e a implementação dos filtros propostos, bem como apresentar os dados quantitativos para análise exploratória e criação de comunidades, relacionando destinatários e remetentes a seus tópicos frequentes e relevantes.
 
 \subsection{NÚMERO DE TÓPICOS} \label{sec:n-topicos}
 
@@ -687,7 +705,7 @@ O LDA não faz descoberta automática  sobre o número de tópicos existente no 
 
 Rodamos o algoritmo com $K=4,\ 8,\ 16,\ 32\ e\ 64$ e $\eta=\frac{1}{K}$ e os resultados presentes na Figura \ref{fig-cm-4-to-64}
  mostram que a maior coerência é encontrada quando o valor de $K$ é 8. No entanto, isso implica apenas que o verdadeiro 
- valor otimizado está no intervalo de 4 à 16, podendo, mas não necessáriamente ser 8.
+ valor otimizado está no intervalo de 4 à 16, podendo, mas não necessariamente ser 8.
 
 \begin{figure}[H]
 	\centering
@@ -708,7 +726,7 @@ Rodando o algoritmo, agora com valores de $K$ no intervalo entre 4 e 16, nota-se
 
 Essa mesma metodologia foi utilizado por \citeonline{ozcaglar2008classification} em seu trabalho também para encontrar o melhor valor de K. Isso otimiza
  o processo para se encontrar o valor otimizado, do contrário a complexidade seria linear de acordo com o range desejado para avaliação de
- tópicos. No exemplo acima rodamos o modelo 21 vezes, ao invés de 64, para obtermos o número ótimizado de $K$.
+ tópicos. No exemplo acima rodamos o modelo 21 vezes, ao invés de 64, para obtermos o número otimizado de $K$.
 
 \subsection{RESULTADOS INICIAIS}
 
@@ -758,7 +776,7 @@ Outro experimento realizado foi com a base $Amostra\ Departamento\ de\ T.I$. Qua
 \end{table}
 
 As distribuições de palavras por tópico ($\phi$) amostrada na tabela acima é coerente quando observamos por exemplo, um documento classificado com maior
- probabilidade de pertencer ao tópico rotulado como ``Monitoração''. Nota-se que as palavras contidas no documento ilustrado na Figura \ref{mo} tem muita relevância a esse tópico.
+ probabilidade de pertencer ao tópico rotulado como ``Monitoração''. Nota-se que as palavras contidas no documento ilustrado na Figura \ref{mo} tem muita relevância a este tópico.
 
 
 \begin{figure}[H]
@@ -878,13 +896,13 @@ Na Figura \ref{fig-search-filtered} pode-se ver que o termo ``autenticidade'' fo
 \end{table}
 
 Na Tabela  \ref{tab-nich-documents3} pode-se perceber um possível resultado de busca e que pode gerar as conexões presentes na Figura \ref{fig-search-filtered}.
- Com esse conceito, é possível identificar comunidades em diferentes níveis, uma vez que os usuários não necessáriamente precisam ter trocado mensagens entre sí. Tais 
+ Com esse conceito, é possível identificar comunidades em diferentes níveis, uma vez que os usuários não necessariamente precisam ter trocado mensagens entre sí. Tais 
  comunidades são encontradas por termos, tópicos de interesse, e outros critérios de busca mencionados neste capítulo.
 
 \section{CONCLUSÕES PRELIMINARES} \label{sec:conclusoes-preliminares}
 
 Vimos que a classificação de uma grande base de dados textual pode ser realizado com o uso do Latent Dirichlet Allocation, e que,
- métodos probabilisticos fazem uma análise detallhada das relações entre palavras e documentos para extrair variáveis
+ métodos probabilísticos fazem uma análise detalhada das relações entre palavras e documentos para extrair variáveis
  latentes, que por sua vez possibilitam descrever um corpus. Usando a medida de coerência, encontrou-se
  o número de tópicos ideal para cada base de dados utilizada. Quando determinado esse número de tópicos, 
  o LDA produziu resultados mais precisos quando esse conjunto de dados é classificado, segundo a própria medida de coerência.
@@ -895,12 +913,12 @@ A visualização e exploração de corpus, ainda se tratando de modelos probabil
  
  A proposta deste trabalho é contribuir ao LDAVis, adicionando capabilidades de visualização
  e exploração a nível de documentos, como uma outra saída da ferramenta, além da possibilidade de exploração de redes
- e comunidades em conjunto de dados que possuem essa característica como: e-mail, artigos científicos, forums, entre outros.
+ e comunidades em conjunto de dados que possuem essa característica como: e-mail, artigos científicos, fóruns, entre outros.
 
 Abaixo apresenta-se as propostas de aprimoramento da aplicação LDAVis, mencionados com detalhes no Capítulo \ref{sec:experimentos}.
 
 \begin{enumerate}
-  \item Busca de documentos: possibilita fazer a pesquisa a nível de visualizaçao, com o complemento de se ter em uma mesma interface as palavras mais relevantes;
+  \item Busca de documentos: possibilita fazer a pesquisa a nível de visualização, com o complemento de se ter em uma mesma interface as palavras mais relevantes;
   \item Visualização de comunidades: 
    como cada mensagem é formada por um conjunto de tópico e esse, por sua vez, tem as palavras mais relevantes, os documentos podem ser organizados de tal forma que se possa organizá-los como uma rede social, assim como os usuários proprietários dos documentos.
   \item Análise exploratória: em complemento a saber unicamente o número de mensagens trocadas em alguma unidade de tempo (hora, dia, mês e etc), as sumarizações poderão ser feitas a nível de tópicos. Assim, pode-se descobrir padrões baseados em tópicos que podem gerar algum valor estratégico para tomada de decisão. 
@@ -909,8 +927,8 @@ Abaixo apresenta-se as propostas de aprimoramento da aplicação LDAVis, mencion
 
 Com o uso do Elasticsearch e com o desenvolvimento de aplicações que integram-se à sua API, pode-se constatar com os experimentos exploratórios iniciais ser possível 
  a entrega dos itens propostos como objetivo do trabalho. Para conclusão do trabalho deve-se portar as duas aplicações
- desenvolvidas como prova de conceito para o LDAVis. A complexidade para isso é relativamnete baixa dado que  
- no do desenvolvismento dos conceitos teve-se o cuidado de adotar tecnologias em comum com LDAVis, todas são desenvolvidas
+ desenvolvidas como prova de conceito para o LDAVis. A complexidade para isso é relativamente baixa dado que  
+ no do desenvolvimento dos conceitos teve-se o cuidado de adotar tecnologias em comum com LDAVis, todas são desenvolvidas
  na linguagem JavaScript com uso do D3.js.
 
 %% CRONOGRAMA
