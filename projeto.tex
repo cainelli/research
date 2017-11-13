@@ -23,7 +23,7 @@
 \textbf{\large Fernando Cainelli Tolentino}\\
 \vskip 4.0cm
 \setlength{\baselineskip}{1.5\baselineskip}
-\textbf{\large Latent Dirichlet Allocation: Descoberta e exploração de tópicos, documentos e comunidades em dados textuais.}\\
+\textbf{\large Descoberta e exploração de tópicos, documentos e comunidades em dados textuais com uso de Latent Dirichlet Allocation}\\
 \vskip 4.5cm
 \end{center}
 \hfill{\vbox{\hsize=8.5cm\noindent\strut
@@ -51,7 +51,7 @@ São Paulo\\
 \end{center}
 \renewcommand{\baselinestretch}{0.6666666}
 
-Considerando a quantidade de dados que se gera na atualidade e, que desse volume, grande parte está em formato de texto como e-mail, mensagens intântaneas, mídias sociais, websites e etc, há um crescente interesse  em nível tecnológico na interpretação desse tipo informação  que está disponível em um formato não estruturado. A interpretação consiste na elaboração estratégica para a descoberta de informação relevante nesse tipo de dado para uso em tomada de decisões. Uma abordagem para esta descoberta é com o uso do Latent Dirichlet Allocation (LDA), o qual consiste de um modelo generativo probabilístico que sumariza uma coleção de documentos em tópicos além de apresentar a relevância de cada tópico a cada
+Considerando a quantidade de dados que se gera na atualidade e, que desse volume, grande parte está em formato de texto como, por exemplo, em e-mail, mensagens intântaneas, mídias sociais, websites e etc, há um crescente interesse  em nível tecnológico na interpretação desse tipo informação  que está disponível em um formato não estruturado. A interpretação consiste na elaboração estratégica para a descoberta de informação relevante nesse tipo de dado para uso em tomada de decisões. Uma abordagem para esta descoberta é com o uso do Latent Dirichlet Allocation (LDA), o qual consiste de um modelo generativo probabilístico que sumariza uma coleção de documentos em tópicos além de apresentar a relevância de cada tópico a cada
  documento. A interpretação e exploração de uma coleção de documentos pelo LDA podem ser feitas a nível de tópico, palavra ou documento. LDAvis, por outro lado, consiste de uma estensão do LDA, cuja proposta é a de um sistema para
  exploração visual de tópicos e palavras resultantes do modelo LDA. Este trabalho tem como objetivo ampliar as  funcionalidades do LDAVis para exploração do modelo a nível de documento e criação de relações de redes em mensagens de e-mail,
  promovendo uma ferramenta de busca aprimorada em um corpus.
@@ -94,12 +94,12 @@ Considerando a quantidade de dados que se gera na atualidade e, que desse volume
 
 A taxa de crescimento da quantidade de mensagens enviadas e recebidas impressiona, não só por se tratar de uma técnologia dos anos 70,
 mas principalmente pela forte adoção de novos recursos de comunicação como: mensagem instantânea, redes sociais, videoconferência, chat e etc. A comunicação via e-mail permanece sólida principalmente em empresas, as quais tem a necessidade de aplicar técncias de Inteligência nos Negócios (ou BI, de \textit{Business Intelligence}) para manter-se competitivas e o uso de informações intrínsecas em e-mail pode ser uma fonte importante em processos decisórios. O BI deve ser utilizado não só em escopos diretamente relacionados ao negócio,
-como clientes, produtos, etc. mas também nos indiretos, como colaboradores, buscando obter insights, melhoria dos processos e otimização.
+como clientes, produtos, etc, mas também nos indiretos, como colaboradores, buscando obter insights, melhoria dos processos e otimização.
 Frequentemente, e-mails são deixados fora da equação pela falta de ferramentas específicas e complexidade em tratar dados não estruturados,
  
  
  Retomando a discussão para a possibilidade de usuários navegar por grande volume de dados e encontrar a informação desejada, utiliza-se atualmente dois métodos principais:
- links e busca, \citeonline{blei2012probabilistic}. 
+ links e busca  \cite{blei2012probabilistic}. 
  
  Os Links correlatam trechos de um documento a outro, sendo úteis pela possibilidade de permitir uma extensão da leitura e aprofundamento do conhecimento,
  direcionando o leitor a termos ou assuntos relacionados de alguma forma ao documento original. Apesar de ser uma maneira eficiente de fornecer conteúdo diretamente relacionado,
@@ -111,7 +111,7 @@ Frequentemente, e-mails são deixados fora da equação pela falta de ferramenta
 
  O trabalho de \citeonline{mikolov2013efficient}, por exemplo, possibilita em um grande volume de documentos, fornecer funcionalidades como sugestões de termos de pesquisa baseados na ordem das palavras digitadas, além de extensão de busca utilizando termos similares.
 
-Ambos os métodos, link e busca, têm a capacidade de uso na interação com os documentos, no entanto, há uma lacuna quando se deseja explorar documentos por meio de temas de interesse específico,
+Ambos os métodos, link e busca, têm a capacidade de uso na interação com os documentos. No entanto, há uma lacuna nesses métodos que é quando se deseja explorar documentos por meio de temas de interesse específico,
  visualizar as palavras mais relevantes em cada tema e explorar os documentos com a usabilidade de um mapa, com possibilidade de ampliar a visualização com uso de zoom, além de visualizar a relação entre documentos de uma maneira intuitiva como pela proximidade. Estes exemplos de uso podem ser uma forma complementar ao métodos de links ou busca. E ainda, estes exemplos de aplicação podem ser feitos em qualquer corpus, idependente do contexto do documento.
  
  %, no entanto, como exemplo,
@@ -120,7 +120,11 @@ Ambos os métodos, link e busca, têm a capacidade de uso na interação com os 
 
 \subsection{OBJETIVOS} \label{sec:objetivo}
 
-Neste trabalho propõe-se como objetivo o uso de um algoritmo chamado Latent Dirichlet Allocation (LDA) \cite{blei2003latent} para a descoberta de tópicos em uma base textual, a partir de uma análise exploratória visual. Portanto, a proposta consite em um aprimoramento da aplicação chamada LDAVis  \cite{sievert2014ldavis}, que amplia o uso do LDA para visualização de dados, com a finalidade de explorar documentos e suas relações. O estudo de caso será feito em uma base de dados de e-mails e, após descoberta de tópicos, as explorações visuais propostas consistem em novas descobertas como busca aprimorada de documentos e identificação de  comunidades de redes de sociais através de interesse comum segundo os tópicos criados pelo modelo LDA. Além das técnicas de processamento e visualização de conhecimento, como objetivo secundário propõe-se realizar análise exploratória do conjunto de dados para obter informações relevantes como volume de mensagem agregado por granularidade de tempo (dia, mês ou ano) ou por tipo de tópicoe que podem ser utéis na compreensão do negócio de uma empresa que deseja usar as informações de e-mail como fonte de dados em um processo de tomada de decisão.
+No trabalho dos autores \citeonline{blei2003latent} foi proposto um algoritmo chamado Latent Dirichlet Allocation (LDA) \cite{blei2003latent} que possibilita descobrir tópicos intrinsicamente presentes em uma base de dados textual, a partir da sumarização de palavras relevantes. Em complemento ao LDA, os autores  \citeonline{sievert2014ldavis} propõem o LDAVis como uma proposta de visualizar os tópicos descobertos em uma base textual e as palavras que os descrevem. 
+
+O objetivo deste trabalho, portanto, é usar o LDA como algoritmo de descoberta de tópicos e estender a plataforma resultante da proposta LDAVis com a finalidade de suprir a lacuna citada acima de explorar documentos por temas de interesse e com a possibilidade de explorar as palavras relevantes em cada tema, descobrindo por fim a relação entre os documentos.
+
+Como objetivo secundário, propõe-se a partir de um estudo de caso em uma base de dados de e-mails, explorações analíticas visuais que consistem em novas descobertas por meio de busca aprimorada de documentos e identificação de  comunidades como feito em redes  sociais a partir de interesse comum, segundo os tópicos criados pelo modelo LDA. Além das técnicas de processamento e visualização de conhecimento, ainda como objetivo secundário propõe-se realizar análise exploratória do conjunto de dados para obter informações relevantes como o volume de mensagem agregado por granularidade de tempo (dia, mês ou ano) ou por tipo de tópicos, cujas análises podem ser utéis na compreensão do negócio de uma empresa que deseja usar as informações de e-mail como fonte de dados em um processo de tomada de decisão.
 
 
 \subsection{ORGANIZAÇÃO DO TRABALHO} \label{sec:organizacao}
@@ -193,7 +197,7 @@ Diversos métodos probabilísticos e não-probabilísticos foram propostos para 
  seu sentido semântico.
 
 Métodos não probabilísticos como \textit{tf-idf} \cite{salton1983introduction}, por exemplo, utilizam contadores de palavras para descrever um documento.
- Por sua vez, o modelo LSI de \citeonline{Deerwester90indexingby} utiliza a decomposição em valores singulares(\textit{singular-value decomposition, SVD}) da
+ Por sua vez, o modelo LSI de \citeonline{Deerwester90indexingby} utiliza a decomposição em valores singulares (\textit{singular-value decomposition, SVD}) da
  matriz $Palavra \times Documento$ do \textit{tf-idf} para identificar um conjunto de características que captura uma maior variância.
 
 Por outro lado, modelos probabilísticos exploram uma outra abordagem de análise de documentos, caracterizando-se como uma categoria de variáveis latentes, a qual pode ser entendida como uma introdução ao conceito de tópicos. O pLSI, proposto por \citeonline{{hofmann1999probabilistic}}, 
@@ -203,7 +207,7 @@ Por outro lado, modelos probabilísticos exploram uma outra abordagem de anális
  modelo generativo probabilistico representa documentos como uma mistura de tópicos e tópicos como uma mistura de palavras.
 
 Outras variações do modelo geral do LDA vem sendo criadas, é o caso de \citeonline{Rosen-Zvi:2004:AMA:1036843.1036902}
- que incorpora metadados como autores, titulo, localização geográfica, links e etc ao modelo.
+ que incorpora metadados como autores, título, localização geográfica, links e etc ao modelo.
 %% PROCESSO GENERATIVO
 \subsection{PROCESSO GENERATIVO} \label{sec:processo-generativo}
 
@@ -228,7 +232,7 @@ Em uma análise textual, que é mais ampla a análise de  tópicos, uma $palavra
 
 O processo generativo consiste em uma mistura de tópicos com base em uma parametrização feita pelo usuário. No caso do exemplo acima, suponha-se que há um desejo em gerar um novo documento que contenha os seguintes tópicos nas respctivas proporções: 75\% Artes e 25\% Esporte. A geração inicia-se com a parametrização do tamanho do documento a ser gerado pelo número de palavras. Consequentemente, para cada tópico escolhido na mistura, seleciona-se as palavras de cada tópico proporcionalmente, gerando um novo documento.
 
- O LDA usa esse conceito de processo generativo de forma reversa para determinar a distribuição de tópicos por documento e a distribuição de palavras por um tópico. 
+ O LDA usa esse conceito de processo generativo de forma reversa para determinar a distribuição de tópicos por documento e a distribuição de palavras por um tópico específico. 
  O processo generativo permite diferentes graus de relevância de uma palavra em um tópico, e um tópico em um documento. Na teoria da probabilidade isso é chamado como permutabilidade,
  ou \textit{exchangeability} \cite{aldous1985exchangeability}. 
  
@@ -481,7 +485,7 @@ Para cada mensagem processada é aplicado um conjunto de filtros, normatizaçõe
  Para isso, foram aplicados processos adotados em mineração de textos, descritos abaixo:
 
 \begin{enumerate}
-\item \textbf{Pré-processamento:} Nesse passo, utilizou-se a biblioteca Flanker, \citeonline{flanker2017}, para primeira estruturação do documento, fazendo o parsing dos headers de interesse. Nesse passo são extraídos os valores dos headers ‘Subject’, ‘Date’, ‘From’, ‘To’, ‘Cc’, ‘X-Spam-Flag’ essas informações não são utilizadas para a geração do modelo,
+\item \textbf{Pré-processamento:} Nesse passo, utilizou-se a biblioteca Flanker  para primeira estruturação do documento, fazendo o parsing dos headers de interesse \cite{flanker2017}. Nesse passo são extraídos os valores dos headers ‘Subject’, ‘Date’, ‘From’, ‘To’, ‘Cc’, ‘X-Spam-Flag’ essas informações não são utilizadas para a geração do modelo,
  no entanto são informações complementares e serão úteis na análise exploratória e busca dos documentos. Se a mensagem for classificada como spam, ou seja, 
  se o valor do header X-Spam-Flag for igual a ‘YES’ ou o assunto da mensagem conter a palavra ‘spam’, \textit{case insensitive}, a mensagem será descartada e não será utilizada para criação do modelo,
  uma vez que temos interesse apenas em mensagens legítimas. O body do documento é dividido em múltiplas partes, cada parte possui seu próprio content-type,
@@ -708,7 +712,7 @@ Essa mesma metodologia foi utilizado por \citeonline{ozcaglar2008classification}
 
 \subsection{RESULTADOS INICIAIS}
 
-Neste capítulo, os resultados iniciais são apresentados a partir dos conjuntos de dados de amostra(Tabela \ref{tab-base-de-dados}).
+Neste capítulo, os resultados iniciais são apresentados a partir dos conjuntos de dados de amostra (Tabela \ref{tab-base-de-dados}).
  Para cada experimento foram executados todos os processos presentes na metodologia, coleta, armazenamento, indexação, criação do modelo utilizando o valor
  otimizado de $K$ segundo a medida de coerência e por fim atualização dos documentos presentes no Elasticsearch com seus respectivos valores de $\theta_d$.
 
@@ -809,8 +813,8 @@ Os documentos classificados são armazenados no Elasticsearch para exploração 
     \label{fig-documents-over-2015}
 \end{figure}
  
-Notamos um pico em Fevereiro de mensagens classificadas
- com o rótulo ``Monitoração'', isso deve-se devido a um incidente em um dos datacenters da empresa e que resultou em
+Na Figura \ref{fig-documents-over-2015} nota-se um pico em Fevereiro de mensagens classificadas
+ com o rótulo ``Monitoração'', isso deve-se a um incidente em um dos datacenters da empresa e que resultou em
  um envio em massa de mensagens de monitoração sobre falha de serviços.
 
 \subsection{VISUALIZAÇÃO} \label{sec:visualizacao}
@@ -818,16 +822,16 @@ Notamos um pico em Fevereiro de mensagens classificadas
 No experimento inicial, são apresentadas duas aplicações desenvolvidas neste trabalho que serviram de prova de conceito.
  O objetivo final é integrar tais funcionalidades ao trabalho de \citeonline{sievert2014ldavis}.
 
+Conforme ilustrado na Figura \ref{fig-doc-explorer}, a primeira aplicação é utilizada para navegação e leitura dos documentos
+ indexados. Essa funcionalidade não existe no trabalho de \citeonline{sievert2014ldavis} e é útil para exploração e navegação do corpus.
+ Ao final do trabalho, os documentos resultantes das buscas serão apresentadas de forma similar e dentro do LDAVis. 
+
 \begin{figure}[H]
   \centering
   \includegraphics[height=9cm]{images/figure_8.png}
   \caption{Aplicação do conceito para navegação de documentos.}
   \label{fig-doc-explorer}
 \end{figure}
-
-Conforme ilustrado na Figura \ref{fig-doc-explorer}, a primeira aplicação é utilizada para navegação e leitura dos documentos
- indexados. Essa funcionalidade não existe no trabalho de \citeonline{sievert2014ldavis} e é útil para exploração e navegação do corpus.
- Ao final do trabalho, os documentos resultantes das buscas serão apresentadas de forma similar e dentro do LDAVis. 
 
 Para a funcionalidade de busca com os critérios propostos no capítulo \ref{sec:experimentos}, foi implementada a segunda aplicação que é uma outra proposta deste trabalho e está ilustrada na Figura \ref{fig-search-all}.
 
@@ -880,27 +884,30 @@ Na Tabela  \ref{tab-nich-documents3} pode-se perceber um possível resultado de 
 \section{CONCLUSÕES PRELIMINARES} \label{sec:conclusoes-preliminares}
 
 Vimos que a classificação de uma grande base de dados textual pode ser realizado com o uso do Latent Dirichlet Allocation, e que,
- métodos probabilisticos fazem uma análise mais aprofundada das relações entre palavras e documentos para extrair variáveis
+ métodos probabilisticos fazem uma análise detallhada das relações entre palavras e documentos para extrair variáveis
  latentes, que por sua vez possibilitam descrever um corpus. Usando a medida de coerência, encontrou-se
  o número de tópicos ideal para cada base de dados utilizada. Quando determinado esse número de tópicos, 
  o LDA produziu resultados mais precisos quando esse conjunto de dados é classificado, segundo a própria medida de coerência.
 
 A visualização e exploração de corpus, ainda se tratando de modelos probabilísticos, é uma das áreas que demandam estudos 
- e técnicas aprimoradas, \cite{blei2012probabilistic}, LDAVis contribui para a visualização e exploração de tópicos e palavras,
- baseando-se na saída do LDA, este trabalho pretende contribuir adicionando capabilidades de visualização
- e exploração a nível de documentos, que é outra saída do modelo, ao LDAVis, além da possibilidade de exploração de redes
+ e técnicas aprimoradas. Nesse sentido que emerge o LDAVis, o qual contribui para a visualização e exploração de tópicos e palavras,
+ baseando-se na saída do LDA. 
+ 
+ A proposta deste trabalho é contribuir ao LDAVis, adicionando capabilidades de visualização
+ e exploração a nível de documentos, como uma outra saída da ferramenta, além da possibilidade de exploração de redes
  e comunidades em conjunto de dados que possuem essa característica como: e-mail, artigos científicos, forums, entre outros.
 
 Abaixo apresenta-se as propostas de aprimoramento da aplicação LDAVis, mencionados com detalhes no Capítulo \ref{sec:experimentos}.
 
 \begin{enumerate}
-  \item Busca de documentos.
-  \item Visualização de comunidades.
-  \item Análise exploratória.
+  \item Busca de documentos: possibilita fazer a pesquisa a nível de visualizaçao, com o complemento de se ter em uma mesma interface as palavras mais relevantes;
+  \item Visualização de comunidades: 
+   como cada mensagem é formada por um conjunto de tópico e esse, por sua vez, tem as palavras mais relevantes, os documentos podem ser organizados de tal forma que se possa organizá-los como uma rede social, assim como os usuários proprietários dos documentos.
+  \item Análise exploratória: em complemento a saber unicamente o número de mensagens trocadas em alguma unidade de tempo (hora, dia, mês e etc), as sumarizações poderão ser feitas a nível de tópicos. Assim, pode-se descobrir padrões baseados em tópicos que podem gerar algum valor estratégico para tomada de decisão. 
 \end{enumerate}
 
 
-Com o uso do Elasticsearch e com o desenvolvimento de aplicações que integram-se à sua API, demonstramos ser possível 
+Com o uso do Elasticsearch e com o desenvolvimento de aplicações que integram-se à sua API, pode-se constatar com os experimentos exploratórios iniciais ser possível 
  a entrega dos itens propostos como objetivo do trabalho. Para conclusão do trabalho deve-se portar as duas aplicações
  desenvolvidas como prova de conceito para o LDAVis. A complexidade para isso é relativamnete baixa dado que  
  no do desenvolvismento dos conceitos teve-se o cuidado de adotar tecnologias em comum com LDAVis, todas são desenvolvidas
@@ -909,18 +916,20 @@ Com o uso do Elasticsearch e com o desenvolvimento de aplicações que integram-
 %% CRONOGRAMA
 \section{CRONOGRAMA} \label{sec:cronograma}
 
+As atividades a serem desenvolvidas após o exame de qualificação e o período a ser executado estão apresentados no cronograma a seguir:
+
 \begin{center}
   \begin{tabular}{lllllllll}
                                          & Nov                    & Dez                      & Jan                    & Fev                    & Mar                     & Abr                    & Mai                     & Jun \\
   \hline                         
-  Qualificação                           &\cellcolor[gray]{0.9}   &\cellcolor[gray]{0.9}     &                        &                        &                         &                        &                         &                        \\
-  Revisão do Texto                       &                        &\cellcolor[gray]{0.9}     &                        &                        &                         &                        &                         &                        \\
-  Portar Buscador para LDAVis            &\cellcolor[gray]{0.9}   &                          &                        &                        &                         &                        &                         &                        \\
-  Portar Expl. Comunidades para LDAVis   &                        &\cellcolor[gray]{0.9}     &                        &                        &                         &                        &                         &                        \\
-  Escrita do Artigo                      &                        &                          &\cellcolor[gray]{0.9}   &                        &                         &                        &                         &                        \\
-  Submissão do Artigo                    &                        &                          &                        &\cellcolor[gray]{0.9}   &                         &                        &                         &                        \\
-  Escrita da Dissertação                 &                        &                          &                        &                        &\cellcolor[gray]{0.9}    &\cellcolor[gray]{0.9}   &                         &                        \\
-  Depósito Dissertação                   &                        &                          &                        &                        &                         &\cellcolor[gray]{0.9}   &                         &                        \\
+  Preparar documento de Qualificação                           &\cellcolor[gray]{0.9}   &\cellcolor[gray]{0.9}     &                        &                        &                         &                        &                         &                        \\
+  Revisar texto após Qualificação                       &                        &\cellcolor[gray]{0.9}     &                        &                        &                         &                        &                         &                        \\
+  Desenvolver buscador para LDAVis            &\cellcolor[gray]{0.9}   &                          &                        &                        &                         &                        &                         &                        \\
+  Explorar comunidades para LDAVis   &                        &\cellcolor[gray]{0.9}     &                        &                        &                         &                        &                         &                        \\
+  Escrever Artigo                      &                        &                          &\cellcolor[gray]{0.9}   &                        &                         &                        &                         &                        \\
+  Submeter Artigo                    &                        &                          &                        &\cellcolor[gray]{0.9}   &                         &                        &                         &                        \\
+  Escrever dissertação                 &                        &                          &                        &                        &\cellcolor[gray]{0.9}    &\cellcolor[gray]{0.9}   &                         &                        \\
+  Depositar dissertação                   &                        &                          &                        &                        &                         &\cellcolor[gray]{0.9}   &                         &                        \\
   \hline
   \end{tabular}
 \end{center}
